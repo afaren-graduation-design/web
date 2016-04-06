@@ -9,8 +9,7 @@ var DashboardStore = Reflux.createStore({
   listenables: DashboardActions,
 
   onGetStatus: function () {
-    var puzzleEnabled;
-    request.get('/api/dashboard')
+    request.get('/dashboard')
         .set('Content-Type', 'application/json')
         .use(errorHandler)
         .end((err, res) => {

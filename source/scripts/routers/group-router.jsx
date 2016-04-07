@@ -105,10 +105,10 @@ function asyncRenderAction(action, callBack) {
       break;
     default:
       require.ensure([
-        "../component/group/group-error.component.jsx"
+        "../component/group/group-homepage.component.jsx"
       ], function (require) {
-        var GroupError = require("../component/group/group-error.component.jsx");
-        element = <GroupError />;
+        var GroupHomepage = require("../component/group/group-homepage.component.jsx");
+        element = <GroupHomepage />;
         callBack(element);
       });
   }

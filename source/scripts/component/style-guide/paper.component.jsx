@@ -14,7 +14,7 @@ var Paper = React.createClass({
   },
   render: function() {
     return (
-        <div className="paper-button col-xs-12">
+        <div className="paper-button col-xs-12 col-md-12 col-sm-12">
             <h3 className="paper-name col-xs-9">
               {this.state.paperName}
             </h3>

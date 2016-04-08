@@ -14,38 +14,58 @@ var PaperAssignment = React.createClass({
 
   getInitialState: function () {
     return {
-      links: [
-        {phoneNumber: '1388686868',paper:'初级智障可以掌握的paper'},
-        {phoneNumber: '1387878787',paper:'中级智障可以掌握的paper'},
-        {phoneNumber: '1869999999',paper:'高级智障可以掌握的paper'}
-      ]
+      links: [],
+      deletedLinks: []
     };
   },
 
-  componentDidUpdate: function () {
-
+  componentDidMount: function () {
+    PaperAssignmentAction.getLinks();
   },
 
-  componentDidMount: function () {
+  handleAddClick: function() {
+    var phoneNumber = this.refs.phoneNumber.value;
+    var paperName = this.refs.papers.value;
 
+    PaperAssignmentAction.addLink({
+      phoneNumber: phoneNumber,
+      paperName: paperName
+    },this.state.links)
+  },
+
+  handleDeleteClick:function(evt) {
+    var deleteIndex = evt.target.id;
+    PaperAssignmentAction.deleteLink({
+      phoneNumber: this.state.links[deleteIndex].phoneNumber,
+      paperName: this.state.links[deleteIndex].paperName
+    },this.state.deletedLinks,deleteIndex)
   },
 
   render: function () {
     var linksHtml = this.state.links.map((link, index) => {
-
-      return (
-          <div className ="link row" key={index}>
-            <div className="col-md-5 drop-little">
-              <span>{link.phoneNumber}</span>
+      if(this.state.deletedLinks.indexOf(index) !== -1){
+        return (
+            <div className="link row" key={index}>
+              <div className="col-md-10 drop-little">
+                <span>已删除</span>
+              </div>
             </div>
-            <div className="col-md-5 drop-little">
-              <span>{link.paper}</span>
+        );
+      } else {
+        return (
+            <div className="link row" key={index}>
+              <div className="col-md-5 drop-little">
+                <span>{link.phoneNumber}</span>
+              </div>
+              <div className="col-md-5 drop-little">
+                <span>{link.paperName}</span>
+              </div>
+              <div className="col-md-1">
+                <i className="fa fa-times fa-2x" id={index} onClick={this.handleDeleteClick}></i>
+              </div>
             </div>
-            <div className="col-md-1">
-              <i className="fa fa-times fa-2x"></i>
-            </div>
-          </div>
-      );
+        );
+      }
     });
 
     return (
@@ -60,18 +80,18 @@ var PaperAssignment = React.createClass({
               {linksHtml}
               <div id="new-links" className ="row">
                 <div className="col-md-5">
-                  <input type="text" className="form-control"/>
+                  <input ref="phoneNumber" type="text" className="form-control"/>
                 </div>
                 <div className="col-md-5">
-                  <select className="form-control" name="papers" id="papers">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
+                  <select className="form-control" ref="papers" name="papers" id="papers">
+                    <option value="初级智障可以掌握的paper">初级智障可以掌握的paper</option>
+                    <option value="中级智障可以掌握的paper">中级智障可以掌握的paper</option>
+                    <option value="高级智障可以掌握的paper">高级智障可以掌握的paper</option>
+                    <option value="智障无法掌握的paper">智障无法掌握的paper</option>
                   </select>
                 </div>
                 <div className="col-md-1 drop-down">
-                  <i className="fa fa-plus-circle fa-2x"></i>
+                  <i className="fa fa-plus-circle fa-2x" onClick={this.handleAddClick}></i>
                 </div>
               </div>
             </div>

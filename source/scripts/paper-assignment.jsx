@@ -6,8 +6,17 @@ var Navigation = require('./component/navigation/navigation.component.jsx');
 var Account = require('./component/reuse/get-account.component.jsx');
 
 var Reflux = require('reflux');
+var validate = require('validate.js');
 var PaperAssignmentAction = require('./actions/paper-assignment/paper-assignment-actions');
 var PaperAssignmentStore = require('./store/paper-assignment/paper-assignment-store.js');
+var constraint = require('../../mixin/register-constraint');
+
+function getError(validateInfo, field) {
+  if (validateInfo && validateInfo[field] && validateInfo[field].length > 0) {
+    return validateInfo[field][0];
+  }
+  return '';
+}
 
 var PaperAssignment = React.createClass({
   mixins: [Reflux.connect(PaperAssignmentStore)],
@@ -15,22 +24,43 @@ var PaperAssignment = React.createClass({
   getInitialState: function () {
     return {
       links: [],
-      deletedLinks: []
+      papers: [
+        {paperName:'初级智障可以掌握的paper'},
+        {paperName:'中级智障可以掌握的paper'},
+        {paperName:'高级智障可以掌握的paper'},
+        {paperName:'智障完全无法掌握的paper'}
+      ],
+      phoneNumberError:''
     };
   },
 
   componentDidMount: function () {
     PaperAssignmentAction.getLinks();
+    PaperAssignmentAction.getPaperName();
+  },
+
+  validate: function () {
+    var phoneNumber = this.refs.phoneNumber.value.trim();
+    var valObj = {};
+    valObj.mobilePhone = phoneNumber;
+    var result = validate(valObj, constraint);
+    var error = getError(result, 'mobilePhone');
+
+    this.setState({phoneNumberError: error});
   },
 
   handleAddClick: function() {
     var phoneNumber = this.refs.phoneNumber.value;
     var paperName = this.refs.papers.value;
 
-    PaperAssignmentAction.addLink({
-      phoneNumber: phoneNumber,
-      paperName: paperName
-    },this.state.links)
+    this.validate();
+
+    if(!this.state.phoneNumberError){
+      PaperAssignmentAction.addLink({
+        phoneNumber: phoneNumber,
+        paperName: paperName
+      },this.state.links)
+    }
   },
 
   handleDeleteClick:function(evt) {
@@ -38,12 +68,12 @@ var PaperAssignment = React.createClass({
     PaperAssignmentAction.deleteLink({
       phoneNumber: this.state.links[deleteIndex].phoneNumber,
       paperName: this.state.links[deleteIndex].paperName
-    },this.state.deletedLinks,deleteIndex)
+    },this.state.links,deleteIndex)
   },
 
   render: function () {
     var linksHtml = this.state.links.map((link, index) => {
-      if(this.state.deletedLinks.indexOf(index) !== -1){
+      if(link.delete === true){
         return (
             <div className="link row" key={index}>
               <div className="col-md-10 drop-little">
@@ -68,6 +98,12 @@ var PaperAssignment = React.createClass({
       }
     });
 
+    var papersHtml = this.state.papers.map((paper, index) => {
+        return (
+            <option key={index} value={paper.paperName}>{paper.paperName}</option>
+        );
+    });
+
     return (
         <div>
           <header>
@@ -80,14 +116,12 @@ var PaperAssignment = React.createClass({
               {linksHtml}
               <div id="new-links" className ="row">
                 <div className="col-md-5">
-                  <input ref="phoneNumber" type="text" className="form-control"/>
+                  <input ref="phoneNumber" type="text" className="form-control" onBlur={this.validate} />
+                  <div className={'lose' + (this.state.phoneNumberError === '' ? ' hide' : '')}>{this.state.phoneNumberError}</div>
                 </div>
                 <div className="col-md-5">
                   <select className="form-control" ref="papers" name="papers" id="papers">
-                    <option value="初级智障可以掌握的paper">初级智障可以掌握的paper</option>
-                    <option value="中级智障可以掌握的paper">中级智障可以掌握的paper</option>
-                    <option value="高级智障可以掌握的paper">高级智障可以掌握的paper</option>
-                    <option value="智障无法掌握的paper">智障无法掌握的paper</option>
+                    {papersHtml}
                   </select>
                 </div>
                 <div className="col-md-1 drop-down">

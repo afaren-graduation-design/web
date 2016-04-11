@@ -5,7 +5,8 @@ var Reflux = require('reflux');
 var PaperAssignmentAction = Reflux.createActions([
   'addLink',
   'getLinks',
-  'deleteLink'
+  'deleteLink',
+  'getPaperName'
 ]);
 
 module.exports = PaperAssignmentAction;

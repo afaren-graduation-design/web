@@ -32,17 +32,25 @@ var PaperAssignmentStore = Reflux.createStore({
         });
   },
 
-  onDeleteLink:function(link,deletedLinks,deleteIndex) {
+  onDeleteLink:function(link,links,deleteIndex) {
     request.del('/api/paper-assignment')
         .set('Content-Type', 'application/json')
         .query(link)
         .use(errorHandler)
         .end((err, res) => {
           if(res.status === constant.httpCode.OK){
-            console.log(res.body);
-            deletedLinks.push(parseInt(deleteIndex));
-            this.trigger({deletedLinks: deletedLinks});
+            links[deleteIndex].delete = true;
+            this.trigger({links: links});
           }
+        });
+  },
+
+  onGetPaperName:function(){
+    request.get('/api/paper-assignment/papers')
+        .set('Content-Type', 'application/json')
+        .use(errorHandler)
+        .end((err, res) => {
+          this.trigger({papers: res.body.papers})
         });
   }
 });

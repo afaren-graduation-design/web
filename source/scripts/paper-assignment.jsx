@@ -91,7 +91,7 @@ var PaperAssignment = React.createClass({
                 <span>{link.paperName}</span>
               </div>
               <div className="col-md-1">
-                <i className="fa fa-times fa-2x" id={index} onClick={this.handleDeleteClick}></i>
+                <i id={index} onClick={this.handleDeleteClick}>删除</i>
               </div>
             </div>
         );
@@ -125,7 +125,7 @@ var PaperAssignment = React.createClass({
                   </select>
                 </div>
                 <div className="col-md-1 drop-down">
-                  <i className="fa fa-plus-circle fa-2x" onClick={this.handleAddClick}></i>
+                  <i onClick={this.handleAddClick}>增加</i>
                 </div>
               </div>
             </div>

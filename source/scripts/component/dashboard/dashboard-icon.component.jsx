@@ -18,7 +18,7 @@ var DashboardIcon = React.createClass({
   },
 
   render() {
-    var PuzzleHref = (this.state.puzzleEnabled === true ? 'start.html' : '#');
+    var PuzzleHref = (this.state.puzzleEnabled === true ? 'start.html?sectionId=1' : '#');
     var homeworkHref = (this.state.homeworkEnabled === true ? 'homework.html' : '#');
     homeworkHref = this.state.isOverTime || this.state.isFinished ? 'deadline.html': homeworkHref;
     var puzzleDisable = (this.state.puzzleEnabled === true ? 'enable' : 'disable');

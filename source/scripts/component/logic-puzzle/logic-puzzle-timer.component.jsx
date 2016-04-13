@@ -10,11 +10,13 @@ var LogicPuzzleTimer = React.createClass({
   mixins: [Reflux.connect(TimerStore)],
 
   componentDidMount: function () {
-    TimerActions.getRemainTime();
+    var sectionId = location.search.split('=')[1];
+    TimerActions.getRemainTime(sectionId);
     this.countDown();
   },
 
   countDown: function(){
+    var sectionId = location.search.split('=')[1];
     setInterval(() => {
       if(this.state.remainTime){
         var remainTime = this.state.remainTime - 1;
@@ -28,7 +30,7 @@ var LogicPuzzleTimer = React.createClass({
         });
 
         if(remainTime % (constant.time.SECONDS_PER_MINUTE * 2) === 1){
-          TimerActions.getRemainTime();
+          TimerActions.getRemainTime(sectionId);
         }
       }
     }, constant.time.MILLISECOND_PER_SECONDS);

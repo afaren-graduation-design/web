@@ -6,7 +6,8 @@ var page = require('page');
 var StartInfo = React.createClass({
 
   start: function () {
-    page('logic-puzzle.html');
+    var url = 'logic-puzzle.html'+ location.search;
+    page(url);
   },
 
   render() {

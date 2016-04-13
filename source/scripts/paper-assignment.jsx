@@ -24,13 +24,8 @@ var PaperAssignment = React.createClass({
   getInitialState: function () {
     return {
       links: [],
-      papers: [
-        {paperName:'初级智障可以掌握的paper'},
-        {paperName:'中级智障可以掌握的paper'},
-        {paperName:'高级智障可以掌握的paper'},
-        {paperName:'智障完全无法掌握的paper'}
-      ],
-      phoneNumberError:''
+      papers: [],
+      phoneNumberError: ''
     };
   },
 
@@ -49,59 +44,65 @@ var PaperAssignment = React.createClass({
     this.setState({phoneNumberError: error});
   },
 
-  handleAddClick: function() {
+  handleAddClick: function () {
     var phoneNumber = this.refs.phoneNumber.value;
     var paperName = this.refs.papers.value;
 
     this.validate();
 
-    if(!this.state.phoneNumberError){
+    if (!this.state.phoneNumberError) {
       PaperAssignmentAction.addLink({
         phoneNumber: phoneNumber,
         paperName: paperName
-      },this.state.links)
+      }, this.state.links)
     }
   },
 
-  handleDeleteClick:function(evt) {
+  handleDeleteClick: function (evt) {
     var deleteIndex = evt.target.id;
     PaperAssignmentAction.deleteLink({
       phoneNumber: this.state.links[deleteIndex].phoneNumber,
       paperName: this.state.links[deleteIndex].paperName
-    },this.state.links,deleteIndex)
+    }, this.state.links, deleteIndex)
   },
 
   render: function () {
     var linksHtml = this.state.links.map((link, index) => {
-      if(link.delete === true){
+      if (link.delete === true) {
         return (
-            <div className="link row" key={index}>
-              <div className="col-md-10 drop-little">
-                <span>已删除</span>
-              </div>
-            </div>
+            <tr key={index}>
+              <td className="drop-little">
+                <span>{link.phoneNumber}</span>
+              </td>
+              <td className="drop-little">
+                <span>{link.paperName}</span>
+              </td>
+              <td>
+                <span id={index}>已删除</span>
+              </td>
+            </tr>
         );
       } else {
         return (
-            <div className="link row" key={index}>
-              <div className="col-md-5 drop-little">
+            <tr key={index}>
+              <td className="drop-little">
                 <span>{link.phoneNumber}</span>
-              </div>
-              <div className="col-md-5 drop-little">
+              </td>
+              <td className="drop-little">
                 <span>{link.paperName}</span>
-              </div>
-              <div className="col-md-1">
+              </td>
+              <td>
                 <i id={index} onClick={this.handleDeleteClick}>删除</i>
-              </div>
-            </div>
+              </td>
+            </tr>
         );
       }
     });
 
     var papersHtml = this.state.papers.map((paper, index) => {
-        return (
-            <option key={index} value={paper.paperName}>{paper.paperName}</option>
-        );
+      return (
+          <option key={index} value={paper.paperName}>{paper.paperName}</option>
+      );
     });
 
     return (
@@ -113,26 +114,38 @@ var PaperAssignment = React.createClass({
           </header>
           <div className="row">
             <div className="col-md-8 col-md-offset-2 center-content">
-              {linksHtml}
-              <div id="new-links" className ="row">
-                <div className="col-md-5">
-                  <input ref="phoneNumber" type="text" className="form-control" onBlur={this.validate} />
-                  <div className={'lose' + (this.state.phoneNumberError === '' ? ' hide' : '')}>{this.state.phoneNumberError}</div>
-                </div>
-                <div className="col-md-5">
-                  <select className="form-control" ref="papers" name="papers" id="papers">
-                    {papersHtml}
-                  </select>
-                </div>
-                <div className="col-md-1 drop-down">
-                  <i onClick={this.handleAddClick}>增加</i>
-                </div>
-              </div>
+              <table className="table table-bordered">
+                <thead>
+                <tr>
+                  <th>预置手机号码</th>
+                  <th>对应试卷</th>
+                  <th>对应操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {linksHtml}
+                <tr>
+                  <td>
+                    <input ref="phoneNumber" type="text" className="form-control" onBlur={this.validate}/>
+                    <div
+                        className={'lose' + (this.state.phoneNumberError === '' ? ' hide' : '')}>{this.state.phoneNumberError}
+                    </div>
+                  </td>
+                  <td>
+                    <select className="form-control" ref="papers" name="papers" id="papers">
+                      {papersHtml}
+                    </select>
+                  </td>
+                  <td>
+                    <i onClick={this.handleAddClick}>增加</i>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
     );
   }
 });
-
 ReactDom.render(<PaperAssignment />, document.getElementById('assignment-container'));

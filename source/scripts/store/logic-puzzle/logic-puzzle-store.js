@@ -81,7 +81,7 @@ var LogicPuzzleStore = Reflux.createStore({
     });
   },
 
-  onSubmitPaper: function () {
+  onSubmitPaper: function (sectionId) {
 
     async.waterfall([
       (callback) => {
@@ -89,6 +89,7 @@ var LogicPuzzleStore = Reflux.createStore({
       },(res,callback) =>{
         superAgent.post('/api/logic-puzzle')
             .set('Content_Type', 'application/json')
+            .query({sectionId: sectionId})
             .use(errorHandler)
             .end(callback);
       }

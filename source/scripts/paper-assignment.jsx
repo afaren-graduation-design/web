@@ -46,13 +46,16 @@ var PaperAssignment = React.createClass({
 
   handleAddClick: function () {
     var phoneNumber = this.refs.phoneNumber.value;
-    var paperName = this.refs.papers.value;
+    var paperId = this.refs.papers.value;
+    var options = this.refs.papers.options;
+    var paperName = options[options.selectedIndex].text;
 
     this.validate();
 
     if (!this.state.phoneNumberError) {
       PaperAssignmentAction.addLink({
         phoneNumber: phoneNumber,
+        paperId: paperId,
         paperName: paperName
       }, this.state.links)
     }
@@ -101,7 +104,7 @@ var PaperAssignment = React.createClass({
 
     var papersHtml = this.state.papers.map((paper, index) => {
       return (
-          <option key={index} value={paper.paperName}>{paper.paperName}</option>
+          <option key={index} value={paper.id}>{paper.paperName}</option>
       );
     });
 

@@ -9,16 +9,16 @@ var DashboardStore = Reflux.createStore({
   listenables: DashboardActions,
 
   onGetStatus: function () {
-    request.get('/dashboard')
+    request.get('/api/dashboard')
         .set('Content-Type', 'application/json')
         .use(errorHandler)
         .end((err, res) => {
-          var puzzleEnabled = res.body.isPaperCommited ? false : true;
-          if (!puzzleEnabled) {
+          var puzzleUnable = res.body.isPaperCommited;
+          if (puzzleUnable) {
             this.submitPaper();
           }
           this.trigger({
-            puzzleEnabled: puzzleEnabled,
+            puzzleEnabled: !puzzleUnable,
             homeworkEnabled: res.body.isPaperCommited,
             isOverTime: res.body.isOverTime,
             isFinished: res.body.isFinished

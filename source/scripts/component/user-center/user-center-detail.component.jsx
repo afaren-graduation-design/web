@@ -174,11 +174,11 @@ var UserDetail = React.createClass({
                 <label htmlFor='inputSchoolInfo' className='col-sm-4 col-md-4 control-label'>学校所在地<span className="error alert alert-danger">*</span></label>
                 <div className='form-group'>
                   <div id="element_id" className="col-sm-4 col-md-4 school-info" onBlur={this.validate}>
-                    <div className="col-md-6">
+                    <div className="col-md-6 col-xs-6">
                       <select className={"form-control province" + (this.state.schoolProvinceError === '' ? '' : ' select')} name="schoolProvince"
                               value={this.state.schoolProvince} onChange={this.handleChange} />
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-6 col-xs-6">
                       <select className={"form-control city" + (this.state.schoolCityError === '' ? '' : ' select')} name="schoolCity"
                             value={this.state.schoolCity} onChange={this.handleChange} />
                     </div>
@@ -258,7 +258,7 @@ var UserDetail = React.createClass({
                   <div className={'error alert alert-danger' + (this.state.degreeError === '' ? ' hide' : '')}
                        role='alert'>
                     <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'/>
-                    请选择学历
+                    {this.state.degreeError}
                   </div>
                 </div>
 

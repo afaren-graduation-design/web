@@ -141,7 +141,7 @@ var RegisterForm = React.createClass({
           <form action='user-center.html' onSubmit={this.register}>
             <div className="form-group">
               <input className="form-control" type="text" placeholder="请输入手机号" name="mobilePhone" ref="mobilePhone"
-                     onBlur={this.validate} />
+                     onBlur={this.validate} disabled={this.props.isDisabled} />
 
               <div
                   className={'lose' + (this.state.mobilePhoneError === '' ? ' hide' : '')}>{this.state.mobilePhoneError}</div>
@@ -149,7 +149,7 @@ var RegisterForm = React.createClass({
 
             <div className="form-group">
               <input className="form-control" type="text" placeholder="请输入邮箱" name="email" ref="email"
-                     onBlur={this.validate} />
+                     onBlur={this.validate} disabled={this.props.isDisabled} />
 
               <div
                   className={'lose' + (this.state.emailError === '' ? ' hide' : '')}>{this.state.emailError}</div>
@@ -161,7 +161,7 @@ var RegisterForm = React.createClass({
 
             <div className="checkbox">
               <label>
-                <input type="checkbox" className="agree-check" onClick={this.changeAgreeState}/> 同意
+                <input type="checkbox" className="agree-check" onClick={this.changeAgreeState} disabled={this.props.isDisabled}/> 同意
               </label>
               <a id="agreement" data-toggle="modal" data-target="#registerAgreement">注册协议</a>
               <span>和</span>
@@ -169,7 +169,8 @@ var RegisterForm = React.createClass({
             </div>
 
             <button type="submit" id="register-btn" ref="register"
-             className="btn btn-lg btn-block btn-primary" disabled={this.state.clickable}>注册
+             className="btn btn-lg btn-block btn-primary" disabled={this.state.clickable}
+                    disabled={this.props.isDisabled}>注册
               <i className={'fa fa-spinner fa-spin' + (this.state.clickable ? '' : ' hide')}/>
             </button>
           </form>

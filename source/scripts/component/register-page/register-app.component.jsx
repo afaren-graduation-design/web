@@ -39,12 +39,6 @@ var RegisterApp = React.createClass({
   },
 
   render() {
-    //alert(this.state.isDisabled);
-    //if (this.state.isDisabled) {
-    //  this.checkOpenRegister();
-    //} else {
-    //  this.closeOpenRegister();
-    //}
     return (
       <div className="row">
         <RegisterForm isDisabled={this.state.isDisabled}>

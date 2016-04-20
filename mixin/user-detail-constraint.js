@@ -35,6 +35,14 @@ var constraint = {
 
   degree: {
     presence: {message: '^请选择学历'}
+  },
+
+  schoolProvince: {
+    presence: {message: '^请选择学校所在地'}
+  },
+
+  schoolCity: {
+    presence: {message: '^请选择学校所在地'}
   }
 };
 module.exports = constraint;

@@ -115,7 +115,7 @@ var RegisterStore = Reflux.createStore({
   },
 
   onOpenRegister: function () {
-    request.get('/api/register/open-register')
+    request.get('/api/register/close-register')
       .set('Content-Type', 'application/json')
       .use(errorHandler)
       .end((err, res) => {
@@ -123,8 +123,9 @@ var RegisterStore = Reflux.createStore({
           return;
         } else if (res.status === constant.httpCode.OK) {
           this.trigger({
-            isDisabled: res.body.isOpenRegister
+            isDisabled: res.body.isCloseRegister
           });
+
         }
       });
   }

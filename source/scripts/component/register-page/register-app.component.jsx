@@ -14,19 +14,41 @@ var RegisterApp = React.createClass({
 
   getInitialState: function () {
     return {
-      isDisabled: true
+      isDisabled: false
     }
   },
 
-  componentDidMount: function () {
+  componentWillMount: function () {
     RegisterAction.openRegister();
   },
 
+  componentDidUpdate: function () {
+    this.checkOpenRegister();
+  },
+
+  checkOpenRegister: function () {
+    if (this.state.isDisabled) {
+      $('#open-register-check').modal('show');
+    }
+  },
+
+  closeOpenRegister: function () {
+    if (!this.state.isDisabled) {
+      $('#open-register-check').modal('hide');
+    }
+  },
+
   render() {
+    //alert(this.state.isDisabled);
+    //if (this.state.isDisabled) {
+    //  this.checkOpenRegister();
+    //} else {
+    //  this.closeOpenRegister();
+    //}
     return (
       <div className="row">
         <RegisterForm isDisabled={this.state.isDisabled}>
-          <RegisterPassword isDisabled={this.state.isDisabled} />
+          <RegisterPassword isDisabled={this.state.isDisabled}/>
         </RegisterForm>
         <LoginForm/>
         <LoginInfo/>

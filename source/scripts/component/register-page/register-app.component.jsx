@@ -33,12 +33,6 @@ var RegisterApp = React.createClass({
     }
   },
 
-  closeOpenRegister: function () {
-    if (!this.state.isDisabled) {
-      $('#open-register-check').modal('hide');
-    }
-  },
-
   render() {
     return (
         <div className="row">

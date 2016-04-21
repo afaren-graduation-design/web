@@ -17,7 +17,7 @@ var constraint = {
     length: {
       minimum: 8,
       maximum: 16,
-      message: '^密码错误'
+      message: '^请输入合法密码'
     }
   }
 };

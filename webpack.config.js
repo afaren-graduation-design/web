@@ -25,6 +25,7 @@ var config = {
     "password-reset": './source/scripts/password-reset.jsx',
     "homework-details": './source/scripts/homework-details.jsx',
     "paper-assignment": './source/scripts/paper-assignment.jsx',
+    "admin": './source/scripts/admin.jsx',
     "vendors": ['jquery', 'bootstrap.css', 'font-awesome', 'react', 'react-dom', 'bootstrap.js']
   },
   output: {
@@ -132,5 +133,6 @@ config.plugins.push(htmlwebpackPluginBuilder('deadline.html', ['deadline.css', '
 config.plugins.push(htmlwebpackPluginBuilder('style-guide.html', ['style-guide.css', 'vendors', 'style-guide']));
 config.plugins.push(htmlwebpackPluginBuilder('group.html', ['group.css', 'vendors', 'group']));
 config.plugins.push(htmlwebpackPluginBuilder('paper-assignment.html', ['paper-assignment.css', 'vendors', 'paper-assignment']));
+config.plugins.push(htmlwebpackPluginBuilder('admin.html', ['admin.css', 'vendors', 'admin']));
 
 module.exports = config;

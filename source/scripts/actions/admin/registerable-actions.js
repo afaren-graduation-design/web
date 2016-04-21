@@ -3,7 +3,8 @@
 var Reflux = require('reflux');
 
 var RegisterableAction = Reflux.createActions([
-    'loadRegisterableState'
+  'loadRegisterableState',
+  'changeRegisterableState'
 ]);
 
 module.exports = RegisterableAction;

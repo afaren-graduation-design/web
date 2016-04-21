@@ -19,7 +19,6 @@ var Channel = React.createClass({
   },
 
   componentDidUpdate: function() {
-    ChannelAction.getLinks();
   },
 
   handleAddClick: function () {
@@ -47,7 +46,7 @@ var Channel = React.createClass({
                 <span>{link.name}</span>
               </td>
               <td className="drop-little">
-                <span>{link._id}</span>
+                <span>{'http://thoughtinside.com/register.html?channel='+link._id}</span>
               </td>
               <td>
                 <span id={index}>已删除</span>
@@ -77,7 +76,7 @@ var Channel = React.createClass({
             <h3>管理渠道</h3>
             <hr/>
           </div>
-          <table className="table table-bordered">
+          <table className="table table-hover">
             <thead>
             <tr>
               <th>渠道名称</th>

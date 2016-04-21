@@ -16,7 +16,7 @@ var ChannelStore = Reflux.createStore({
         .use(errorHandler)
         .end((err, res) => {
           if(!res.body){
-            this.trigger({links:links});
+            this.onGetLinks();
           }
         });
   },

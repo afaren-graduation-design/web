@@ -46,7 +46,9 @@ var RegisterApp = React.createClass({
             <RegisterPassword isDisabled={this.state.isDisabled}/>
             <Captcha />
           </RegisterForm>
-          <LoginForm/>
+          <LoginForm>
+            <Captcha />
+          </LoginForm>
           <LoginInfo/>
           <RegisterAgreement/>
         </div>

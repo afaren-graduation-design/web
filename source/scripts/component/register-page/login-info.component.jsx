@@ -6,9 +6,9 @@ var Reflux = require('reflux');
 function listener() {
   var state = location.hash.substr(1);
 
-  if(state === 'login') {
+  if (state === 'login') {
     LoginActions.changeState(false);
-  }else {
+  } else {
     LoginActions.changeState(true);
   }
 }
@@ -20,12 +20,12 @@ window.onpopstate = function () {
 var LoginInfo = React.createClass({
   mixins: [Reflux.connect(LoginStore)],
 
-  getInitialState: function (){
+  getInitialState: function () {
     return {
       isLoginState: false
     };
   },
-  componentWillMount: function() {
+  componentWillMount: function () {
     listener();
   },
   toggleState: function () {

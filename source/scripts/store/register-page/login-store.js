@@ -11,31 +11,41 @@ var errorHandler = require('../../../../tools/error-handler.jsx');
 var LoginStore = Reflux.createStore({
   listenables: LoginActions,
 
-  onLogin: function (phoneEmail, loginPassword){
+  onLogin: function (phoneEmail, loginPassword, captcha) {
     request.post('/api/login')
         .set('Content-Type', 'application/json')
         .send({
           account: phoneEmail,
-          password: loginPassword
+          password: loginPassword,
+          captcha: captcha
         })
         .use(errorHandler)
         .end((err, req) => {
+
           var data = JSON.parse(req.text);
           if (data.status === constant.httpCode.OK) {
             this.trigger({
-              loginFailed : false
+              loginFailed: false
             });
             page('dashboard.html');
-          } else {
+          } else if (data.status === constant.httpCode.FORBIDDEN) {
             this.trigger({
               clickable: false,
-              loginFailed : true
+              loginFailed: true,
+              captchaError: '验证码输入错误'
             });
           }
+          else {
+            this.trigger({
+              clickable: false,
+              loginFailed: true
+            });
+          }
+
         });
   },
 
-  onChangeState: function (isLoginState){
+  onChangeState: function (isLoginState) {
     this.trigger({
       isLoginState: !isLoginState,
       agree: false,

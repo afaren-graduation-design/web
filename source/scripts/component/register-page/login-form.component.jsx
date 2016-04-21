@@ -4,6 +4,8 @@
 var validate = require('validate.js');
 var LoginActions = require('../../actions/register-page/login-actions');
 var LoginStore = require('../../store/register-page/login-store');
+var RegisterStore = require('../../store/register-page/register-store');
+
 var Reflux = require('reflux');
 var constraint = require('../../../../mixin/login-constraint');
 var constant = require('../../../../mixin/constant');
@@ -16,7 +18,7 @@ function getError(validateInfo, field) {
 }
 
 var LoginForm = React.createClass({
-  mixins: [Reflux.connect(LoginStore)],
+  mixins: [Reflux.connect(LoginStore), Reflux.connect(RegisterStore)],
 
   getInitialState: function () {
     return {
@@ -26,7 +28,9 @@ var LoginForm = React.createClass({
       loginFailed: false,
       clickable: false,
       email: '',
-      loginPassword: ''
+      loginPassword: '',
+      captcha: '',
+      captchaError: ''
     };
   },
 
@@ -67,7 +71,7 @@ var LoginForm = React.createClass({
     }
   },
 
-  checkLoginData:function(loginData) {
+  checkLoginData: function (loginData) {
     var passCheck = true;
 
     var stateObj = {};
@@ -91,30 +95,52 @@ var LoginForm = React.createClass({
         result = validate(valObj, constraint);
         error = getError(result, name);
       }
-      if(error !== '') {
+
+      if (name === 'captcha' && value.length === 0) {
+        error = '请输入验证码';
         passCheck = false;
       }
+
+      if (error !== '') {
+        passCheck = false;
+      }
+
+
       stateObj[name + 'Error'] = error;
+
       this.setState(stateObj);
     });
+
     return passCheck;
   },
 
   login: function (evt) {
     evt.preventDefault();
 
+    if (this.state.emailError !== '' || this.state.captchaError !== '') {
+      return false;
+    }
+
+
     var email = ReactDOM.findDOMNode(this.refs.email);
     var loginPassword = ReactDOM.findDOMNode(this.refs.loginPassword);
     var data = [];
-    data.push(email, loginPassword);
 
-    if(!this.checkLoginData(data)) {
+    var captcha = {
+      name: 'captcha',
+      value: this.state.captcha
+    };
+
+    data.push(email, loginPassword, captcha);
+
+
+    if (!this.checkLoginData(data)) {
       return false;
-    }else {
+    } else {
       this.setState({
         clickable: true
       });
-      LoginActions.login(email.value.trim(), loginPassword.value.trim());
+      LoginActions.login(email.value.trim(), loginPassword.value.trim(), captcha.value.trim());
     }
   },
 
@@ -124,7 +150,7 @@ var LoginForm = React.createClass({
         <div id="logon" className={classString}>
           <h4 className="welcome">欢迎登录思沃学院</h4>
           <div className={'lose' + (this.state.loginFailed === false ? ' hide' : '')} name="loginFailed">用户名或密码错误</div>
-          <form action="dashboard.html"  onSubmit={this.login}>
+          <form action="dashboard.html" onSubmit={this.login}>
             <div className="form-group">
               <input className="form-control" type="text" placeholder="请输入邮箱或手机号" name="email"
                      onBlur={this.validate}
@@ -140,8 +166,11 @@ var LoginForm = React.createClass({
                   className={'lose' + (this.state.loginPasswordError === '' ? ' hide' : '')}>{this.state.loginPasswordError}
               </div>
             </div>
+            <div className="form-group">
+              {this.props.children}
+            </div>
             <button type="submit" id="login-btn" disabled={this.state.clickable}
-                  className="btn btn-lg btn-block btn-primary">登录
+                    className="btn btn-lg btn-block btn-primary">登录
               <i className={'fa fa-spinner fa-spin loading' + (this.state.clickable ? '' : ' hide')}/>
             </button>
           </form>

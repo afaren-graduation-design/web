@@ -2,12 +2,15 @@
 
 var Input = require('react-bootstrap/lib/Input');
 var UserCenterActions = require('../../actions/user-center/user-center-actions');
-var RegisterActions = require('../../actions/register-page/register-actions');
 var UserCenterStore = require('../../store/user-center/user-center-store');
 var Reflux = require('reflux');
 var validate = require('validate.js');
 var constraint = require('../../../../mixin/user-detail-constraint');
 var getError = require('../../../../mixin/get-error');
+
+var $ = jQuery;
+require('../../libs/jquery.cxselect.js');
+var data = require('../../libs/cityData.js');
 
 var UserDetail = React.createClass({
   mixins: [Reflux.connect(UserCenterStore)],
@@ -28,11 +31,14 @@ var UserDetail = React.createClass({
       mobilePhoneError: '',
       emailError: '',
       currentState: 'userDetail',
+      schoolProvince: '',
+      schoolCity: '',
+      schoolProvinceError: '',
+      schoolCityError: ''
     };
   },
 
   componentDidUpdate: function (prevProps, prevState) {
-
     if (prevState.currentState !== this.state.currentState) {
       this.setState({
         school: '',
@@ -44,12 +50,32 @@ var UserDetail = React.createClass({
         gender: 'M',
         degree: '',
         degreeError: '',
+        schoolProvince: '',
+        schoolCity: '',
+        schoolProvinceError: '',
+        schoolCityError: ''
       });
     }
+    if(prevState.schoolProvince !== '' && prevState.schoolProvince !== this.state.schoolProvince) {
+      this.setState({
+        schoolCity: ''
+      })
+    }
   },
-
   componentDidMount: function () {
     UserCenterActions.loadUserDetail();
+
+    var cityData = data();
+
+    $('#element_id').cxSelect({
+      selects: ['province', 'city'],
+      url: cityData
+    });
+
+    setTimeout(() => {
+      $('.province').trigger('change');
+      $('.city').val(this.state.schoolCity);
+    }, 500);
   },
 
   handleChange: function (evt) {
@@ -79,10 +105,12 @@ var UserDetail = React.createClass({
     var name = {name: this.state.name};
     var major = {major: this.state.major};
     var degree = {degree: this.state.degree};
+    var schoolProvince = {schoolProvince: this.state.schoolProvince};
+    var schoolCity = {schoolCity: this.state.schoolCity};
 
     var userInfo = [];
 
-    userInfo.push(school, name, major, degree);
+    userInfo.push(school, name, major, degree, schoolProvince, schoolCity);
     var pass = false;
     var stateObj = {};
 
@@ -109,13 +137,15 @@ var UserDetail = React.createClass({
       gender: this.state.gender,
       major: this.state.major,
       degree: this.state.degree,
+      schoolProvince: this.state.schoolProvince,
+      schoolCity: this.state.schoolCity
     };
-
     if (this.checkInfo()) {
       return;
     } else if (this.state.gender === '') {
       return;
     }
+    console.log(userData);
     UserCenterActions.updateUserDetail(userData);
   },
 
@@ -136,8 +166,27 @@ var UserDetail = React.createClass({
                   </div>
                   <div className={'error alert alert-danger' + (this.state.schoolError === '' ? ' hide' : '')}
                        role='alert'>
-                    <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
+                    <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'/>
                     {this.state.schoolError}
+                  </div>
+                </div>
+
+                <label htmlFor='inputSchoolInfo' className='col-sm-4 col-md-4 control-label'>学校所在地<span className="error alert alert-danger">*</span></label>
+                <div className='form-group'>
+                  <div id="element_id" className="col-sm-4 col-md-4 school-info" onBlur={this.validate}>
+                    <div className="col-md-6 col-xs-6">
+                      <select className={"form-control province" + (this.state.schoolProvinceError === '' ? '' : ' select')} name="schoolProvince"
+                              value={this.state.schoolProvince} onChange={this.handleChange} />
+                    </div>
+                    <div className="col-md-6 col-xs-6">
+                      <select className={"form-control city" + (this.state.schoolCityError === '' ? '' : ' select')} name="schoolCity"
+                            value={this.state.schoolCity} onChange={this.handleChange} />
+                    </div>
+                  </div>
+                  <div className={'error alert alert-danger' + (this.state.schoolProvinceError === '' && this.state.schoolCityError === '' ? ' hide' : '')}
+                       role='alert'>
+                    <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'/>
+                    {this.state.schoolProvinceError || this.state.schoolCityError}
                   </div>
                 </div>
 
@@ -151,7 +200,7 @@ var UserDetail = React.createClass({
                   </div>
                   <div className={'error alert alert-danger' + (this.state.nameError === '' ? ' hide' : '')}
                        role='alert'>
-                    <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
+                    <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'/>
                     {this.state.nameError}
                   </div>
                 </div>
@@ -187,7 +236,7 @@ var UserDetail = React.createClass({
                   </div>
                   <div className={'error alert alert-danger' + (this.state.majorError === '' ? ' hide' : '')}
                        role='alert'>
-                    <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
+                    <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'/>
                     {this.state.majorError}
                   </div>
                 </div>
@@ -208,8 +257,8 @@ var UserDetail = React.createClass({
 
                   <div className={'error alert alert-danger' + (this.state.degreeError === '' ? ' hide' : '')}
                        role='alert'>
-                    <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
-                    请选择学历
+                    <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'/>
+                    {this.state.degreeError}
                   </div>
                 </div>
 

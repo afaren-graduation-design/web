@@ -47,14 +47,16 @@ var RegisterStore = Reflux.createStore({
         });
   },
 
-  onRegister: function (mobilePhone, email, password) {
+  onRegister: function (mobilePhone, email, password, captcha) {
     request
+
         .post('/api/register')
         .set('Content-Type', 'application/json')
         .send({
           mobilePhone: mobilePhone,
           email: email,
-          password: password
+          password: password,
+          captcha: captcha
         })
         .use(errorHandler)
         .end((err, req) => {
@@ -62,12 +64,15 @@ var RegisterStore = Reflux.createStore({
           if (info.status === constant.httpCode.OK) {
             this.onInitialUserQuiz();
           } else {
+
             var emailExist = info.data.isEmailExist ? '该邮箱已被注册' : '';
             var mobilePhoneExist = info.data.isMobilePhoneExist ? '该手机号已被注册' : '';
+            var captchaError = info.data.isCaptchaError ? '验证码错误' : '';
 
             this.trigger({
               mobilePhoneError: mobilePhoneExist,
               emailError: emailExist,
+              captchaError: captchaError,
               clickable: false
             });
           }
@@ -90,7 +95,7 @@ var RegisterStore = Reflux.createStore({
             });
       }
     }, function (err, data) {
-      if(data.initializeQuizzes) {
+      if (data.initializeQuizzes) {
         page('user-center.html');
       } else {
         console.log(err);
@@ -112,6 +117,22 @@ var RegisterStore = Reflux.createStore({
 
   onCheckData: function (stateObj) {
     this.trigger(stateObj);
+  },
+
+  onOpenRegister: function () {
+    request.get('/api/register/close-register')
+        .set('Content-Type', 'application/json')
+        .use(errorHandler)
+        .end((err, res) => {
+          if (!res.body) {
+            return;
+          } else if (res.status === constant.httpCode.OK) {
+            this.trigger({
+              isDisabled: res.body.isCloseRegister
+            });
+
+          }
+        });
   }
 });
 

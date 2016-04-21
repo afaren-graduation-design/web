@@ -10,11 +10,19 @@ var RegisterStore = require('../../store/register-page/register-store');
 var LoginStore = require('../../store/register-page/login-store');
 
 var asyncContainersFunc = {
-  email: function (value, done){
+  email: function (value, done) {
     RegisterActions.checkEmail(value, done);
   },
-  mobilePhone: function (value, done){
-    RegisterActions.checkMobilePhone(value,done);
+  mobilePhone: function (value, done) {
+    RegisterActions.checkMobilePhone(value, done);
+  },
+  captcha: function (value, done) {
+    if (value.length !== 4) {
+      done({captchaError: '验证码位数错误'})
+    }
+    if (value.length === 0) {
+      done({captchaError: '请输入验证码'})
+    }
   }
 };
 
@@ -27,28 +35,29 @@ function getError(validateInfo, field) {
 
 
 var RegisterForm = React.createClass({
-  mixins: [Reflux.connect(RegisterStore),Reflux.connect(LoginStore)],
+  mixins: [Reflux.connect(RegisterStore), Reflux.connect(LoginStore)],
 
   getInitialState: function () {
     return {
       isLoginState: false,
       mobilePhoneError: '',
       emailError: '',
+      captchaError: '',
       agree: false,
       clickable: false,
       password: ''
     };
   },
 
-  componentDidUpdate:function(prevProps, prevState){
-    if(!this.state.isLoginState && prevState.isLoginState) {
+  componentDidUpdate: function (prevProps, prevState) {
+    if (!this.state.isLoginState && prevState.isLoginState) {
       this.setState({
         mobilePhoneError: '',
         emailError: ''
       });
       this.refs.mobilePhone.value = '';
       this.refs.email.value = '';
-    };
+    }
   },
 
   validate: function (event) {
@@ -96,11 +105,18 @@ var RegisterForm = React.createClass({
       var result = validate(valObj, constraint);
 
       var error = getError(result, name);
+
+      if (name === 'captcha' && value.length === 0) {
+        error = '请输入验证码';
+      }
+
       if (error !== '') {
         passCheck = false;
       }
+
       stateObj[name + 'Error'] = error;
     });
+
     RegisterActions.checkData(stateObj);
     return passCheck;
   },
@@ -108,18 +124,20 @@ var RegisterForm = React.createClass({
   register: function (evt) {
     evt.preventDefault();
 
-    if (this.state.mobilePhoneError !== '' || this.state.emailError !== '') {
+    if (this.state.mobilePhoneError !== '' || this.state.emailError !== '' || this.state.captchaError !== '') {
       return false;
     }
     var registerData = [];
     var mobilePhone = ReactDOM.findDOMNode(this.refs.mobilePhone);
     var email = ReactDOM.findDOMNode(this.refs.email);
+    var captcha = ReactDOM.findDOMNode(this.refs.captcha);
+
     var password = {
       name: 'password',
       value: this.state.password
     };
 
-    registerData.push(mobilePhone, email, password);
+    registerData.push(mobilePhone, email, password, captcha);
 
     if (!this.checkRegisterData(registerData)) {
       return false;
@@ -127,7 +145,8 @@ var RegisterForm = React.createClass({
       this.setState({
         clickable: true
       });
-      RegisterActions.register(mobilePhone.value.trim(), email.value.trim(), password.value.trim());
+
+      RegisterActions.register(mobilePhone.value.trim(), email.value.trim(), password.value.trim(), captcha.value.trim());
     }
   },
 
@@ -141,7 +160,8 @@ var RegisterForm = React.createClass({
           <form action='user-center.html' onSubmit={this.register}>
             <div className="form-group">
               <input className="form-control" type="text" placeholder="请输入手机号" name="mobilePhone" ref="mobilePhone"
-                     onBlur={this.validate} />
+                     onBlur={this.validate} disabled={this.props.isDisabled}/>
+
 
               <div
                   className={'lose' + (this.state.mobilePhoneError === '' ? ' hide' : '')}>{this.state.mobilePhoneError}</div>
@@ -149,27 +169,44 @@ var RegisterForm = React.createClass({
 
             <div className="form-group">
               <input className="form-control" type="text" placeholder="请输入邮箱" name="email" ref="email"
-                     onBlur={this.validate} />
+                     onBlur={this.validate} disabled={this.props.isDisabled}/>
 
-              <div
-                  className={'lose' + (this.state.emailError === '' ? ' hide' : '')}>{this.state.emailError}</div>
+              <div className={'lose' + (this.state.emailError === '' ? ' hide' : '')}>{this.state.emailError}</div>
             </div>
 
             <div className="form-group">
               {this.props.children}
             </div>
 
+            <div className="form-group">
+              <div className="captcha-input">
+                <input className="form-control" type="text" placeholder="请输入验证码" name="captcha"
+                       ref="captcha"
+                       onBlur={this.validate}/>
+              </div>
+              <div className="pull-right captcha-img">
+                <img src="http://192.168.99.100:8888/api/captcha.jpg"/>
+              </div>
+              <div
+                  className={' lose-captcha' + (this.state.captchaError === '' ? ' hide' : '')}>{this.state.captchaError}</div>
+
+            </div>
+
             <div className="checkbox">
               <label>
-                <input type="checkbox" className="agree-check" onClick={this.changeAgreeState}/> 同意
+                <input type="checkbox" className="agree-check" onClick={this.changeAgreeState}
+                       disabled={this.props.isDisabled}/> 同意
               </label>
               <a id="agreement" data-toggle="modal" data-target="#registerAgreement">注册协议</a>
               <span>和</span>
               <a id="agreement" data-toggle="modal" data-target="#securityAgreement">保密协议</a>
             </div>
 
+
             <button type="submit" id="register-btn" ref="register"
-             className="btn btn-lg btn-block btn-primary" disabled={this.state.clickable}>注册
+                    className="btn btn-lg btn-block btn-primary" disabled={this.state.clickable}
+                    disabled={this.props.isDisabled}>注册
+
               <i className={'fa fa-spinner fa-spin' + (this.state.clickable ? '' : ' hide')}/>
             </button>
           </form>

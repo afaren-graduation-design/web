@@ -15,15 +15,31 @@ var style = {
 };
 var showUnder = 600;
 
+var Index = React.createClass({
+  componentWillMount:function() {
+    var channel;
+    var url = location.search;
+    var index = 9;
 
-ReactDom.render(
-    <div>
-      <Account />
-      <ScrollToTop showUnder={showUnder} style={style}>
-        <div id="scroll-button">
-          <i className="fa fa-angle-double-up fa-2x"></i>
+    if(url.indexOf('channel') > 0) {
+      channel = url.substr(index);
+    }else {
+      channel = '';
+    }
+    document.cookie = 'channel=' + channel;
+  },
+  render: function() {
+    return (
+        <div>
+          <Account />
+          <ScrollToTop showUnder={showUnder} style={style}>
+            <div id="scroll-button">
+              <i className="fa fa-angle-double-up fa-2x"></i>
+            </div>
+          </ScrollToTop>
         </div>
-      </ScrollToTop>
-    </div>,
-    document.getElementById('head-right')
-);
+    )
+  }
+});
+
+ReactDom.render(<Index />, document.getElementById('head-right'));

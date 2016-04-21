@@ -3,6 +3,7 @@
 body {
   background: @nice-white;
 }
+
 #register-div {
   color: @grey;
   .form-control {
@@ -14,7 +15,7 @@ body {
     margin-top: 80px;
     margin-bottom: 45px;
     color: @black;
-    span{
+    span {
       margin-left: -10px;
       color: @blue;
     }
@@ -30,6 +31,17 @@ body {
       color: #333;
       margin: 15px 0;
     }
+    .captcha-input {
+      width: 75%;
+      display: inline-block;
+      padding: 0;
+    }
+    .captcha-img {
+      img {
+        padding: 0;
+      }
+      display: inline-block;
+    }
     .lose {
       float: right;
       width: 130px;
@@ -37,6 +49,18 @@ body {
       background: @red;
       margin-top: -27px;
       margin-right: 10px;
+      text-align: center;
+      border-radius: 5%;
+      color: @white;
+      opacity: 0.6;
+    }
+    .lose-captcha {
+      float: left;
+      width: 130px;
+      height: 20px;
+      margin-top: -27px;
+      margin-left: 175px;
+      background: @red;
       text-align: center;
       border-radius: 5%;
       color: @white;
@@ -59,7 +83,7 @@ body {
         background-color: @green;
       }
       .toggle {
-        float:right;
+        float: right;
         margin-top: 5px;
         cursor: pointer;
       }
@@ -75,12 +99,13 @@ body {
         color: @white;
         text-align: center;
       }
-    }  }
+    }
+  }
   .logon-form-container {
     .register-form-container;
   }
   .register-form-right {
-    .password-retrieve{
+    .password-retrieve {
       margin-top: 20px;
     }
     .link {
@@ -135,10 +160,12 @@ body {
     }
   }
 }
+
 #agree-info {
   text-align: center;
   font-size: 15px;
 }
+
 a {
-  cursor:pointer;
+  cursor: pointer;
 }

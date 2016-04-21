@@ -13,7 +13,8 @@ var Captcha = React.createClass({
 
   getInitialState: function () {
     return {
-      captchaError: ''
+      captchaError: '',
+      isImgloaded: false
     };
   },
 
@@ -26,6 +27,15 @@ var Captcha = React.createClass({
     return '';
   },
 
+
+  componentWillMount: function () {
+    var img = new Image();
+    img.onload = () => {
+      this.setState({isImgloaded: true});
+      this.refs.img.src = img.src;
+    };
+    img.src = "http://192.168.99.100:8888/api/captcha.jpg";
+  },
   validate: function (event) {
     var target = event.target;
     var value = target.value;
@@ -55,11 +65,11 @@ var Captcha = React.createClass({
                    onBlur={this.validate}/>
           </div>
           <div className="pull-right captcha-img">
-            <img src="http://192.168.99.100:8888/api/captcha.jpg"/>
+            <img ref="img" className={(this.state.isImgloaded ? '' : ' hide')}/>
+            <i className={'fa fa-spinner fa-spin loading captcha-loading' + (this.state.isImgloaded ? ' hide' : '')}/>
           </div>
           <div
               className={' lose-captcha' + (this.state.captchaError === '' ? ' hide' : '')}>{this.state.captchaError}</div>
-
         </div>
     );
   }

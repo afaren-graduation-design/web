@@ -47,7 +47,8 @@ var RegisterForm = React.createClass({
       agree: false,
       clickable: false,
       password: '',
-      captcha: ''
+      captcha: '',
+      registerable: false
     };
   },
 
@@ -162,57 +163,55 @@ var RegisterForm = React.createClass({
     var classString = 'col-md-7 logon-form-container' + (this.state.isLoginState ? ' hide' : '');
 
     return (
-        <div id="register" className={classString}>
-          <div className="col-md-12">
-            <label className="open-register">注册已关闭</label>
-            <h4 className="welcome">欢迎注册思沃学院</h4>
+      <div id="register" className={classString}>
+        <label className={'registerable' + (this.state.registerable ? '' : ' hide')}>注册已关闭</label>
+        <h4 className="welcome">欢迎注册思沃学院</h4>
+
+        <form action='user-center.html' onSubmit={this.register}>
+          <div className="form-group">
+            <input className="form-control" type="text" placeholder="请输入手机号" name="mobilePhone" ref="mobilePhone"
+                   onBlur={this.validate} disabled={this.props.isDisabled}/>
+
+
+            <div
+              className={'lose' + (this.state.mobilePhoneError === '' ? ' hide' : '')}>{this.state.mobilePhoneError}</div>
           </div>
 
-          <form action='user-center.html' onSubmit={this.register}>
-            <div className="form-group">
-              <input className="form-control" type="text" placeholder="请输入手机号" name="mobilePhone" ref="mobilePhone"
-                     onBlur={this.validate} disabled={this.props.isDisabled}/>
+          <div className="form-group">
+            <input className="form-control" type="text" placeholder="请输入邮箱" name="email" ref="email"
+                   onBlur={this.validate} disabled={this.props.isDisabled}/>
+
+            <div className={'lose' + (this.state.emailError === '' ? ' hide' : '')}>{this.state.emailError}</div>
+          </div>
+
+          <div className="form-group">
+            {this.props.children[0]}
+          </div>
+
+          <div className="form-group">
+            {this.props.children[1]}
+          </div>
 
 
-              <div
-                  className={'lose' + (this.state.mobilePhoneError === '' ? ' hide' : '')}>{this.state.mobilePhoneError}</div>
-            </div>
-
-            <div className="form-group">
-              <input className="form-control" type="text" placeholder="请输入邮箱" name="email" ref="email"
-                     onBlur={this.validate} disabled={this.props.isDisabled}/>
-
-              <div className={'lose' + (this.state.emailError === '' ? ' hide' : '')}>{this.state.emailError}</div>
-            </div>
-
-            <div className="form-group">
-              {this.props.children[0]}
-            </div>
-
-            <div className="form-group">
-              {this.props.children[1]}
-            </div>
+          <div className="checkbox">
+            <label>
+              <input type="checkbox" className="agree-check" onClick={this.changeAgreeState}
+                     disabled={this.props.isDisabled}/> 同意
+            </label>
+            <a id="agreement" data-toggle="modal" data-target="#registerAgreement">注册协议</a>
+            <span>和</span>
+            <a id="agreement" data-toggle="modal" data-target="#securityAgreement">保密协议</a>
+          </div>
 
 
-            <div className="checkbox">
-              <label>
-                <input type="checkbox" className="agree-check" onClick={this.changeAgreeState}
-                       disabled={this.props.isDisabled}/> 同意
-              </label>
-              <a id="agreement" data-toggle="modal" data-target="#registerAgreement">注册协议</a>
-              <span>和</span>
-              <a id="agreement" data-toggle="modal" data-target="#securityAgreement">保密协议</a>
-            </div>
+          <button type="submit" id="register-btn" ref="register"
+                  className="btn btn-lg btn-block btn-primary" disabled={this.state.clickable}
+                  disabled={this.props.isDisabled}>注册
 
-
-            <button type="submit" id="register-btn" ref="register"
-                    className="btn btn-lg btn-block btn-primary" disabled={this.state.clickable}
-                    disabled={this.props.isDisabled}>注册
-
-              <i className={'fa fa-spinner fa-spin' + (this.state.clickable ? '' : ' hide')}/>
-            </button>
-          </form>
-        </div>
+            <i className={'fa fa-spinner fa-spin' + (this.state.clickable ? '' : ' hide')}/>
+          </button>
+        </form>
+      </div>
     );
   }
 });

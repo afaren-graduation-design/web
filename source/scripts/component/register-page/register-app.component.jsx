@@ -20,19 +20,8 @@ var RegisterApp = React.createClass({
   },
 
   componentWillMount: function () {
-    RegisterAction.openRegister();
+    RegisterAction.registerable();
   },
-
-  componentDidUpdate: function () {
-    this.checkOpenRegister();
-  },
-
-  checkOpenRegister: function () {
-    if (this.state.isDisabled) {
-      $('#open-register-check').modal('show');
-    }
-  },
-
   render() {
     return (
         <div className="row">

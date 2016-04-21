@@ -49,34 +49,34 @@ var RegisterStore = Reflux.createStore({
 
   onRegister: function (mobilePhone, email, password, captcha) {
     request
+      .post('/api/register')
+      .set('Content-Type', 'application/json')
+      .send({
+        mobilePhone: mobilePhone,
+        email: email,
+        password: password
+      })
+      .use(errorHandler)
+      .end((err, req) => {
+        var info = req.body;
+        if (info.status === constant.httpCode.FORBIDDEN) {
+          this.trigger({
+            isDisabled: info.registerable
+          })
+        }
+        if (info.status === constant.httpCode.OK) {
+          this.onInitialUserQuiz();
+        } else {
+          var emailExist = info.data.isEmailExist ? '该邮箱已被注册' : '';
+          var mobilePhoneExist = info.data.isMobilePhoneExist ? '该手机号已被注册' : '';
 
-        .post('/api/register')
-        .set('Content-Type', 'application/json')
-        .send({
-          mobilePhone: mobilePhone,
-          email: email,
-          password: password,
-          captcha: captcha
-        })
-        .use(errorHandler)
-        .end((err, req) => {
-          var info = req.body;
-          if (info.status === constant.httpCode.OK) {
-            this.onInitialUserQuiz();
-          } else {
-
-            var emailExist = info.data.isEmailExist ? '该邮箱已被注册' : '';
-            var mobilePhoneExist = info.data.isMobilePhoneExist ? '该手机号已被注册' : '';
-            var captchaError = info.data.isCaptchaError ? '验证码错误' : '';
-
-            this.trigger({
-              mobilePhoneError: mobilePhoneExist,
-              emailError: emailExist,
-              captchaError: captchaError,
-              clickable: false
-            });
-          }
-        });
+          this.trigger({
+            mobilePhoneError: mobilePhoneExist,
+            emailError: emailExist,
+            clickable: false
+          });
+        }
+      });
   },
 
 
@@ -123,20 +123,21 @@ var RegisterStore = Reflux.createStore({
     this.trigger(stateObj);
   },
 
-  onOpenRegister: function () {
-    request.get('/api/register/close-register')
-        .set('Content-Type', 'application/json')
-        .use(errorHandler)
-        .end((err, res) => {
-          if (!res.body) {
-            return;
-          } else if (res.status === constant.httpCode.OK) {
-            this.trigger({
-              isDisabled: res.body.isCloseRegister
-            });
+  onRegisterable: function () {
+    request.get('/api/register/registerable')
+      .set('Content-Type', 'application/json')
+      .use(errorHandler)
+      .end((err, res) => {
+        if (!res.body) {
+          return;
+        } else if (res.status === constant.httpCode.OK) {
+          this.trigger({
+            isDisabled: !res.body.registerable,
+            registerable: !res.body.registerable
+          });
 
-          }
-        });
+        }
+      });
   }
 });
 

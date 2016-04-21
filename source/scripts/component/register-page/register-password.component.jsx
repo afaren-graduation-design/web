@@ -10,15 +10,6 @@ var Reflux = require('reflux');
 var constraint = require('../../../../mixin/register-constraint');
 var validate = require('validate.js');
 
-var asyncContainersFunc = {
-  email: function (value, done) {
-    RegisterActions.checkEmail(value, done);
-  },
-  mobilePhone: function (value, done) {
-    RegisterActions.checkMobilePhone(value, done);
-  }
-};
-
 function getError(validateInfo, field) {
   if (validateInfo && validateInfo[field] && validateInfo[field].length > 0) {
     return validateInfo[field][0];
@@ -105,14 +96,7 @@ var RegisterPassword = React.createClass({
     var error = getError(result, name);
     var stateObj = {};
     stateObj[name + 'Error'] = error;
-
     this.setState(stateObj);
-
-    if ('' === error && name !== 'password') {
-      asyncContainersFunc[name](value, (stateObj) => {
-        this.setState(stateObj);
-      });
-    }
   },
 
   render: function () {

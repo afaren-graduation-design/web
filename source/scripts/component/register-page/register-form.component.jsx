@@ -23,6 +23,7 @@ var asyncContainersFunc = {
     if (value.length === 0) {
       done({captchaError: '请输入验证码'})
     }
+    done({captchaError: ''})
   }
 };
 
@@ -45,7 +46,8 @@ var RegisterForm = React.createClass({
       captchaError: '',
       agree: false,
       clickable: false,
-      password: ''
+      password: '',
+      captcha: ''
     };
   },
 
@@ -108,6 +110,7 @@ var RegisterForm = React.createClass({
 
       if (name === 'captcha' && value.length === 0) {
         error = '请输入验证码';
+        passCheck = false;
       }
 
       if (error !== '') {
@@ -124,17 +127,22 @@ var RegisterForm = React.createClass({
   register: function (evt) {
     evt.preventDefault();
 
+
     if (this.state.mobilePhoneError !== '' || this.state.emailError !== '' || this.state.captchaError !== '') {
       return false;
     }
     var registerData = [];
     var mobilePhone = ReactDOM.findDOMNode(this.refs.mobilePhone);
     var email = ReactDOM.findDOMNode(this.refs.email);
-    var captcha = ReactDOM.findDOMNode(this.refs.captcha);
 
     var password = {
       name: 'password',
       value: this.state.password
+    };
+
+    var captcha = {
+      name: 'captcha',
+      value: this.state.captcha
     };
 
     registerData.push(mobilePhone, email, password, captcha);
@@ -175,22 +183,13 @@ var RegisterForm = React.createClass({
             </div>
 
             <div className="form-group">
-              {this.props.children}
+              {this.props.children[0]}
             </div>
 
             <div className="form-group">
-              <div className="captcha-input">
-                <input className="form-control" type="text" placeholder="请输入验证码" name="captcha"
-                       ref="captcha"
-                       onBlur={this.validate}/>
-              </div>
-              <div className="pull-right captcha-img">
-                <img src="http://192.168.99.100:8888/api/captcha.jpg"/>
-              </div>
-              <div
-                  className={' lose-captcha' + (this.state.captchaError === '' ? ' hide' : '')}>{this.state.captchaError}</div>
-
+              {this.props.children[1]}
             </div>
+
 
             <div className="checkbox">
               <label>

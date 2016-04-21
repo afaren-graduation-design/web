@@ -115,6 +115,10 @@ var RegisterStore = Reflux.createStore({
     });
   },
 
+  onInputCaptcha: function (captcha) {
+    this.trigger(captcha);
+  },
+
   onCheckData: function (stateObj) {
     this.trigger(stateObj);
   },

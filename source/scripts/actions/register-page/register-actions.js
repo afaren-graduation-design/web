@@ -11,7 +11,7 @@ var RegisterActions = Reflux.createActions([
   'inputPassword',
   'inputCaptcha',
   'checkData',
-  'openRegister'
+  'registerable'
 ]);
 
 module.exports = RegisterActions;

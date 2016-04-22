@@ -8,6 +8,8 @@ var Reflux = require('reflux');
 var constraint = require('../../../../mixin/register-constraint');
 var validate = require('validate.js');
 
+var captchaLoaded = false;
+
 var Captcha = React.createClass({
   mixins: [Reflux.connect(RegisterStore), Reflux.connect(LoginStore)],
 
@@ -27,15 +29,39 @@ var Captcha = React.createClass({
     return '';
   },
 
+  loadCaptcha: function () {
+    if (captchaLoaded) {
+      return;
+    }
 
-  componentWillMount: function () {
-    var img = new Image();
+    var img = this.refs.img;
     img.onload = () => {
-      this.setState({isImgloaded: true});
-      this.refs.img.src = img.src;
+      this.setState({
+        isImgloaded: true
+      });
     };
-    img.src = "http://192.168.99.100:8888/api/captcha.jpg";
+
+    captchaLoaded = true;
+
+    var hash = ('' + Math.random()).substr(3, 8);
+    img.src = "http://192.168.99.100:8888/api/captcha.jpg?_" + hash;
   },
+
+
+  componentDidMount: function () {
+
+    this.loadCaptcha();
+  },
+
+  reloadCaptcha: function () {
+    captchaLoaded = false;
+    this.setState({
+      isImgloaded: false
+    });
+
+    this.loadCaptcha();
+  },
+
   validate: function (event) {
     var target = event.target;
     var value = target.value;
@@ -65,7 +91,11 @@ var Captcha = React.createClass({
                    onBlur={this.validate}/>
           </div>
           <div className="pull-right captcha-img">
-            <img ref="img" className={(this.state.isImgloaded ? '' : ' hide')}/>
+
+            <img ref="img" title="点击刷新验证码"
+                 className={(this.state.isImgloaded ? '' : ' hide')}
+                 onClick={this.reloadCaptcha}
+            />
             <i className={'fa fa-spinner fa-spin loading captcha-loading' + (this.state.isImgloaded ? ' hide' : '')}/>
           </div>
           <div

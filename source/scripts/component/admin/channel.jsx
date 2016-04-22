@@ -46,7 +46,7 @@ var Channel = React.createClass({
                 <span>{link.name}</span>
               </td>
               <td className="drop-little">
-                <span>{'http://thoughtinside.com/register.html?channel='+link._id}</span>
+                <span>{'http://thoughtinside.com?channel='+link._id}</span>
               </td>
               <td>
                 <span id={index}>已删除</span>
@@ -60,7 +60,7 @@ var Channel = React.createClass({
                 <span>{link.name}</span>
               </td>
               <td className="drop-little">
-                <span>{'http://thoughtinside.com/register.html?channel='+link._id}</span>
+                <span>{'http://thoughtinside.com?channel='+link._id}</span>
               </td>
               <td>
                 <i id={index} onClick={this.handleDeleteClick}>删除</i>

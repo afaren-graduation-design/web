@@ -136,5 +136,7 @@ config.plugins.push(htmlwebpackPluginBuilder('group.html', ['group.css', 'vendor
 config.plugins.push(htmlwebpackPluginBuilder('qa-page.html', ['qa-page.css', 'vendors', 'qa-page']));
 config.plugins.push(htmlwebpackPluginBuilder('paper-assignment.html', ['paper-assignment.css', 'vendors', 'paper-assignment']));
 config.plugins.push(htmlwebpackPluginBuilder('admin.html', ['admin.css', 'vendors', 'admin']));
+config.plugins.push(htmlwebpackPluginBuilder('403.html', ['vendors']));
+
 
 module.exports = config;

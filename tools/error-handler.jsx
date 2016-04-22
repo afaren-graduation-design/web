@@ -2,11 +2,14 @@
 
 var constant = require('../mixin/constant');
 var ReactDom = require('react-dom');
+var page = require('page');
 
 var errorHandler = function(req) {
   req.on('response', function (res) {
     if(res.statusCode === constant.httpCode.INTERNAL_SERVER_ERROR || res.status === constant.httpCode.INTERNAL_SERVER_ERROR){
       addErrorMessage();
+    } else if(res.statusCode === constant.httpCode.FORBIDDEN || res.status === constant.httpCode.FORBIDDEN){
+      page('403.html');
     }
   });
 };
@@ -27,6 +30,8 @@ function addErrorMessage() {
       document.getElementById('alert')
   );
 }
+
+
 
 errorHandler.showError = addErrorMessage;
 

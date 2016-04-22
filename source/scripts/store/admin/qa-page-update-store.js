@@ -9,9 +9,10 @@ var errorHandler = require('../../../../tools/error-handler.jsx');
 var QAPageUpdateStore = Reflux.createStore({
   listenables: QAPageUpdateAction,
 
-  onUpdateQAPage: function () {
+  onUpdateQAPage: function (url) {
     request.put('/api/qa/update')
         .set('Content-Type', 'application/json')
+        .send({QAInfoAddress: url})
         .use(errorHandler)
         .end((err,res) => {
           this.trigger({

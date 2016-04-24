@@ -15,24 +15,34 @@ var RegisterApp = React.createClass({
 
   getInitialState: function () {
     return {
-      isDisabled: false
+      isDisabled: false,
+      loginState: false
     }
+  },
+
+  handleStateChange: function (val) {
+    this.setState({
+      loginState: val
+    });
   },
 
   componentWillMount: function () {
     RegisterAction.registerable();
   },
+
   render() {
+    var formHtml = this.state.loginState ?
+        (<LoginForm><Captcha/></LoginForm>) :
+        (<RegisterForm isDisabled={this.state.isDisabled}>
+          <RegisterPassword isDisabled={this.state.isDisabled}/>
+          <Captcha isDisabled={this.state.isDisabled}/>
+        </RegisterForm>);
     return (
         <div className="row">
-          <RegisterForm isDisabled={this.state.isDisabled}>
-            <RegisterPassword isDisabled={this.state.isDisabled}/>
-            <Captcha />
-          </RegisterForm>
-          <LoginForm>
-            <Captcha />
-          </LoginForm>
-          <LoginInfo/>
+          {formHtml}
+          <LoginInfo
+              isLoginState={this.state.loginState}
+              onStateChange={this.handleStateChange}/>
           <RegisterAgreement/>
         </div>
     );

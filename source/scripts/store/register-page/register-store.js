@@ -135,8 +135,7 @@ var RegisterStore = Reflux.createStore({
             return;
           } else if (res.status === constant.httpCode.OK) {
             this.trigger({
-              isDisabled: !res.body.registerable,
-              registerable: !res.body.registerable
+              isDisabled: !res.body.registerable
             });
 
           }

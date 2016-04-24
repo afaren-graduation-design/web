@@ -12,6 +12,7 @@ var LoginStore = Reflux.createStore({
   listenables: LoginActions,
 
   onLogin: function (phoneEmail, loginPassword, captcha) {
+
     request.post('/api/login')
         .set('Content-Type', 'application/json')
         .send({
@@ -31,7 +32,6 @@ var LoginStore = Reflux.createStore({
           } else if (data.status === constant.httpCode.FORBIDDEN) {
             this.trigger({
               clickable: false,
-              loginFailed: true,
               captchaError: '验证码输入错误'
             });
           }
@@ -45,13 +45,12 @@ var LoginStore = Reflux.createStore({
         });
   },
 
-  onChangeState: function (isLoginState) {
+  onSetCaptchaError: function (error) {
     this.trigger({
-      isLoginState: !isLoginState,
-      agree: false,
-      isShowToggle: false
-    });
+      captchaError: error
+    })
   }
+
 });
 
 module.exports = LoginStore;

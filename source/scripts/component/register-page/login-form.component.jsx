@@ -22,7 +22,6 @@ var LoginForm = React.createClass({
 
   getInitialState: function () {
     return {
-      isLoginState: false,
       emailError: '',
       loginPasswordError: '',
       loginFailed: false,
@@ -59,18 +58,6 @@ var LoginForm = React.createClass({
     this.setState(stateObj);
   },
 
-  componentDidUpdate: function (prevProps, prevState) {
-    if (this.state.isLoginState && !prevState.isLoginState) {
-      this.refs.email.value = '';
-      this.refs.loginPassword.value = '';
-      this.setState({
-        emailError: '',
-        loginPasswordError: '',
-        loginFailed: false
-      });
-    }
-  },
-
   checkLoginData: function (loginData) {
     var passCheck = true;
 
@@ -97,7 +84,9 @@ var LoginForm = React.createClass({
       }
 
       if (name === 'captcha' && value.length === 0) {
+
         error = '请输入验证码';
+        LoginActions.setCaptchaError(error);
         passCheck = false;
       }
 
@@ -117,7 +106,7 @@ var LoginForm = React.createClass({
   login: function (evt) {
     evt.preventDefault();
 
-    if (this.state.emailError !== '' || this.state.captchaError !== '') {
+    if (this.state.emailError !== '' || this.state.captchaError !== '' || this.state.loginPasswordError !== '') {
       return false;
     }
 
@@ -145,7 +134,7 @@ var LoginForm = React.createClass({
   },
 
   render: function () {
-    var classString = 'col-md-7 logon-form-container' + (this.state.isLoginState ? '' : ' hide');
+    var classString = 'col-md-7 logon-form-container';
     return (
         <div id="logon" className={classString}>
           <h4 className="welcome">欢迎登录思沃学院</h4>

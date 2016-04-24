@@ -8,15 +8,16 @@ var Reflux = require('reflux');
 var constraint = require('../../../../mixin/register-constraint');
 var validate = require('validate.js');
 
-var captchaLoaded = false;
 
 var Captcha = React.createClass({
   mixins: [Reflux.connect(RegisterStore), Reflux.connect(LoginStore)],
 
+  captchaLoaded: false,
+
   getInitialState: function () {
     return {
       captchaError: '',
-      isImgloaded: false
+      isLoding: true
     };
   },
 
@@ -30,33 +31,32 @@ var Captcha = React.createClass({
   },
 
   loadCaptcha: function () {
-    if (captchaLoaded) {
+
+    if (this.state.captchaLoaded) {
       return;
     }
+    this.captchaLoaded = true;
 
     var img = this.refs.img;
     img.onload = () => {
       this.setState({
-        isImgloaded: true
+        isLoding: false
       });
     };
-
-    captchaLoaded = true;
 
     var hash = ('' + Math.random()).substr(3, 8);
     img.src = "http://192.168.99.100:8888/api/captcha.jpg?_" + hash;
   },
 
-
   componentDidMount: function () {
-
     this.loadCaptcha();
   },
 
   reloadCaptcha: function () {
-    captchaLoaded = false;
+
+    this.captchaLoaded = false;
     this.setState({
-      isImgloaded: false
+      isLoding: false
     });
 
     this.loadCaptcha();
@@ -79,24 +79,22 @@ var Captcha = React.createClass({
 
     RegisterActions.inputCaptcha(stateObj);
   },
-
   render: function () {
 
     return (
-
         <div>
           <div className="captcha-input">
             <input className="form-control" type="text" placeholder="请输入验证码" name="captcha"
-                   ref="captcha"
+                   ref="captcha" disabled={this.props.isDisabled}
                    onBlur={this.validate}/>
           </div>
           <div className="pull-right captcha-img">
 
             <img ref="img" title="点击刷新验证码"
-                 className={(this.state.isImgloaded ? '' : ' hide')}
+                 className={(this.state.isLoding ? ' hide' : '')}
                  onClick={this.reloadCaptcha}
             />
-            <i className={'fa fa-spinner fa-spin loading captcha-loading' + (this.state.isImgloaded ? ' hide' : '')}/>
+            <i className={'fa fa-spinner fa-spin loading captcha-loading' + (this.state.isLoding ? '' : ' hide')}/>
           </div>
           <div
               className={' lose-captcha' + (this.state.captchaError === '' ? ' hide' : '')}>{this.state.captchaError}</div>

@@ -27,6 +27,8 @@ var RegisterApp = React.createClass({
   },
 
   componentWillMount: function () {
+    var url = window.location.href;
+    url.split('#')[1] === 'login' ? this.setState({loginState: true}) : '';
     RegisterAction.registerable();
   },
 

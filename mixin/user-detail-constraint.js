@@ -43,6 +43,10 @@ var constraint = {
 
   schoolCity: {
     presence: {message: '^请选择学校所在地'}
+  },
+
+  entranceYear: {
+    presence: {message: '^请选择入学年份'}
   }
 };
 module.exports = constraint;

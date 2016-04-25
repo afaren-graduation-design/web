@@ -6,7 +6,9 @@ var UserCenterStore = require('../../store/user-center/user-center-store');
 var Reflux = require('reflux');
 var validate = require('validate.js');
 var constraint = require('../../../../mixin/user-detail-constraint');
+var constant = require('../../../../mixin/constant');
 var getError = require('../../../../mixin/get-error');
+var moment = require('moment');
 
 var $ = jQuery;
 require('../../libs/jquery.cxselect.js');
@@ -18,23 +20,25 @@ var UserDetail = React.createClass({
   getInitialState: function () {
     return {
       school: '',
+      schoolProvince: '',
+      schoolCity: '',
       name: '',
       mobilePhone: '',
       email: '',
       gender: 'M',
       major: '',
       degree: '',
+      entranceYear: '',
       schoolError: '',
+      schoolProvinceError: '',
+      schoolCityError: '',
       nameError: '',
+      emailError: '',
+      mobilePhoneError: '',
       majorError: '',
       degreeError: '',
-      mobilePhoneError: '',
-      emailError: '',
-      currentState: 'userDetail',
-      schoolProvince: '',
-      schoolCity: '',
-      schoolProvinceError: '',
-      schoolCityError: ''
+      entranceYearError: '',
+      currentState: 'userDetail'
     };
   },
 
@@ -53,10 +57,12 @@ var UserDetail = React.createClass({
         schoolProvince: '',
         schoolCity: '',
         schoolProvinceError: '',
-        schoolCityError: ''
+        schoolCityError: '',
+        entranceYear: '',
+        entranceYearError: ''
       });
     }
-    if(prevState.schoolProvince !== '' && prevState.schoolProvince !== this.state.schoolProvince) {
+    if (prevState.schoolProvince !== '' && prevState.schoolProvince !== this.state.schoolProvince) {
       this.setState({
         schoolCity: ''
       })
@@ -107,10 +113,11 @@ var UserDetail = React.createClass({
     var degree = {degree: this.state.degree};
     var schoolProvince = {schoolProvince: this.state.schoolProvince};
     var schoolCity = {schoolCity: this.state.schoolCity};
+    var entranceYear = {entranceYear: this.state.entranceYear};
 
     var userInfo = [];
 
-    userInfo.push(school, name, major, degree, schoolProvince, schoolCity);
+    userInfo.push(school, name, major, degree, schoolProvince, schoolCity, entranceYear);
     var pass = false;
     var stateObj = {};
 
@@ -122,6 +129,7 @@ var UserDetail = React.createClass({
         pass = true;
       }
       stateObj[Object.keys(item) + 'Error'] = error;
+
       this.setState(stateObj);
     });
     return pass;
@@ -138,25 +146,44 @@ var UserDetail = React.createClass({
       major: this.state.major,
       degree: this.state.degree,
       schoolProvince: this.state.schoolProvince,
-      schoolCity: this.state.schoolCity
+      schoolCity: this.state.schoolCity,
+      entranceYear: this.state.entranceYear
     };
+
     if (this.checkInfo()) {
       return;
     } else if (this.state.gender === '') {
       return;
     }
-    console.log(userData);
+
     UserCenterActions.updateUserDetail(userData);
   },
 
   render: function () {
     var classString = (this.state.currentState === 'userDetail' ? '' : '  hide');
+    var endEntranceYear = moment.unix(new Date() / constant.time.MILLISECOND_PER_SECONDS).format('YYYY');
+
+    var indents = [];
+    for (var i = 0; i < 12; i++) {
+      indents.push(<option key={i} value={endEntranceYear-i}>{endEntranceYear - i}</option>);
+    }
+
+    var entranceYear =
+        <select ref='entranceYear' placeholder='入学年份' name='entranceYear' value={this.state.entranceYear}
+                onChange={this.handleChange}
+                className={'form-control' + (this.state.entranceYearError === '' ? '' : ' select')}>
+
+          <option value=''>请选择</option>
+          {indents}
+        </select>;
+
     return (
         <div className={'col-md-9 col-sm-9 col-xs-12' + classString}>
           <div className='content'>
             <form className='form-horizontal form-top-height' onSubmit={this.update} action='user-center.html'>
               <div id='account-info'>
-                <label htmlFor='inputSchool' className='col-sm-4 col-md-4 control-label'>学校<span className="error alert alert-danger">*</span></label>
+                <label htmlFor='inputSchool' className='col-sm-4 col-md-4 control-label'>学校<span
+                    className="error alert alert-danger">*</span></label>
                 <div className={'form-group has-' + (this.state.schoolError === '' ? '' : 'error')}>
                   <div className='col-sm-4 col-md-4'>
                     <input type='text' className='form-control' id='inputSchool' aria-describedby='helpBlock2'
@@ -171,26 +198,32 @@ var UserDetail = React.createClass({
                   </div>
                 </div>
 
-                <label htmlFor='inputSchoolInfo' className='col-sm-4 col-md-4 control-label'>学校所在地<span className="error alert alert-danger">*</span></label>
+                <label htmlFor='inputSchoolInfo' className='col-sm-4 col-md-4 control-label'>学校所在地<span
+                    className="error alert alert-danger">*</span></label>
                 <div className='form-group'>
                   <div id="element_id" className="col-sm-4 col-md-4 school-info" onBlur={this.validate}>
                     <div className="col-md-6 col-xs-6">
-                      <select className={"form-control province" + (this.state.schoolProvinceError === '' ? '' : ' select')} name="schoolProvince"
-                              value={this.state.schoolProvince} onChange={this.handleChange} />
+                      <select
+                          className={"form-control province" + (this.state.schoolProvinceError === '' ? '' : ' select')}
+                          name="schoolProvince"
+                          value={this.state.schoolProvince} onChange={this.handleChange}/>
                     </div>
                     <div className="col-md-6 col-xs-6">
-                      <select className={"form-control city" + (this.state.schoolCityError === '' ? '' : ' select')} name="schoolCity"
-                            value={this.state.schoolCity} onChange={this.handleChange} />
+                      <select className={"form-control city" + (this.state.schoolCityError === '' ? '' : ' select')}
+                              name="schoolCity"
+                              value={this.state.schoolCity} onChange={this.handleChange}/>
                     </div>
                   </div>
-                  <div className={'error alert alert-danger' + (this.state.schoolProvinceError === '' && this.state.schoolCityError === '' ? ' hide' : '')}
-                       role='alert'>
+                  <div
+                      className={'error alert alert-danger' + (this.state.schoolProvinceError === '' && this.state.schoolCityError === '' ? ' hide' : '')}
+                      role='alert'>
                     <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'/>
                     {this.state.schoolProvinceError || this.state.schoolCityError}
                   </div>
                 </div>
 
-                <label htmlFor='inputName' className='col-sm-4 col-md-4 control-label'>姓名<span className="error alert alert-danger">*</span></label>
+                <label htmlFor='inputName' className='col-sm-4 col-md-4 control-label'>姓名<span
+                    className="error alert alert-danger">*</span></label>
                 <div className={'form-group has-' + (this.state.nameError === '' ? '' : 'error')}>
                   <div className='col-sm-4 col-md-4'>
                     <input type='text' className='form-control' id='inputName' aria-describedby='helpBlock2'
@@ -205,7 +238,8 @@ var UserDetail = React.createClass({
                   </div>
                 </div>
 
-                <label htmlFor='inputMobilePhone' className='col-sm-4 col-md-4 control-label'>手机<span className="error alert alert-success">*</span></label>
+                <label htmlFor='inputMobilePhone' className='col-sm-4 col-md-4 control-label'>手机<span
+                    className="error alert alert-success">*</span></label>
                 <div className='form-group'>
                   <div className='col-sm-4 col-md-4'>
                     <input type='text' className='form-control' id='inputMobilePhone' placeholder='手机'
@@ -213,7 +247,8 @@ var UserDetail = React.createClass({
                   </div>
                 </div>
 
-                <label htmlFor='inputEmail' className='col-sm-4 col-md-4 control-label'>邮箱<span className="error alert alert-success">*</span></label>
+                <label htmlFor='inputEmail' className='col-sm-4 col-md-4 control-label'>邮箱<span
+                    className="error alert alert-success">*</span></label>
                 <div className='form-group'>
                   <div className='col-sm-4 col-md-4'>
                     <input type='text' className='form-control' id='inputEmail' placeholder='邮箱'
@@ -221,12 +256,14 @@ var UserDetail = React.createClass({
                   </div>
                 </div>
 
-                <label htmlFor='inputGender' className='col-sm-4 col-md-4 control-label'>性别<span className="error alert alert-danger">*</span></label>
+                <label htmlFor='inputGender' className='col-sm-4 col-md-4 control-label'>性别<span
+                    className="error alert alert-danger">*</span></label>
                 <div className='form-group'>
                   {this.props.children}
                 </div>
 
-                <label htmlFor='inputMajor' className='col-sm-4 col-md-4 control-label'>专业<span className="error alert alert-danger">*</span></label>
+                <label htmlFor='inputMajor' className='col-sm-4 col-md-4 control-label'>专业<span
+                    className="error alert alert-danger">*</span></label>
                 <div className={'form-group has-' + (this.state.majorError === '' ? '' : 'error')}>
                   <div className='col-sm-4 col-md-4'>
                     <input type='text' className='form-control' id='inputMajor' aria-describedby='helpBlock2'
@@ -241,7 +278,8 @@ var UserDetail = React.createClass({
                   </div>
                 </div>
 
-                <label htmlFor='inputDegree' className='col-sm-4 col-md-4 control-label'>学历学位<span className="error alert alert-danger">*</span></label>
+                <label htmlFor='inputDegree' className='col-sm-4 col-md-4 control-label'>学历学位<span
+                    className="error alert alert-danger">*</span></label>
                 <div className='form-group'>
                   <div className='col-sm-4 col-md-4' onBlur={this.validate}>
                     <select ref='degree' placeholder='学历学位' name='degree' value={this.state.degree}
@@ -259,6 +297,21 @@ var UserDetail = React.createClass({
                        role='alert'>
                     <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'/>
                     {this.state.degreeError}
+                  </div>
+                </div>
+
+
+                <label htmlFor='inputEntranceYear' className='col-sm-4 col-md-4 control-label'>入学年份<span
+                    className="error alert alert-danger">*</span></label>
+                <div className='form-group'>
+                  <div className='col-sm-4 col-md-4' onBlur={this.validate}>
+                    {entranceYear}
+                  </div>
+
+                  <div className={'error alert alert-danger' + (this.state.entranceYearError === '' ? ' hide' : '')}
+                       role='alert'>
+                    <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'/>
+                    {this.state.entranceYearError}
                   </div>
                 </div>
 

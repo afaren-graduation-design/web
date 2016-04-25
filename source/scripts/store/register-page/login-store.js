@@ -28,7 +28,11 @@ var LoginStore = Reflux.createStore({
             this.trigger({
               loginFailed: false
             });
-            page('dashboard.html');
+            if(data.isSuperAdmin){
+              page('admin.html');
+            } else{
+              page('dashboard.html');
+            }
           } else if (data.status === constant.httpCode.FORBIDDEN) {
             this.trigger({
               clickable: false,

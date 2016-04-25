@@ -103,8 +103,9 @@ var PaperAssignment = React.createClass({
     });
 
     var papersHtml = this.state.papers.map((paper, index) => {
+      var paperId = paper.uri.split('/')[1];
       return (
-          <option key={index} value={paper.id}>{paper.paperName}</option>
+          <option key={index} value={paperId}>{paper.paperName}</option>
       );
     });
 

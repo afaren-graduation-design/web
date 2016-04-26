@@ -15,6 +15,9 @@ var DashboardStore = Reflux.createStore({
         .end((err, resp) => {
           if(resp.body.data === true) {
             page('user-center.html');
+            this.trigger({
+              isGetStatus: false
+            })
           }else {
             this.trigger({
               isGetStatus: true

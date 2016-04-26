@@ -4,10 +4,24 @@ var Reflux = require('reflux');
 var DashboardActions = require('../../actions/dashboard/dashboard-actions');
 var request = require('superagent');
 var errorHandler = require('../../../../tools/error-handler.jsx');
+var page = require('page');
 
 var DashboardStore = Reflux.createStore({
   listenables: DashboardActions,
 
+  onInit: function() {
+    request.get('/api/test/detail')
+        .set('Content-Type', 'application/json')
+        .end((err, resp) => {
+          if(resp.body.data === true) {
+            page('user-center.html');
+          }else {
+            this.trigger({
+              isGetStatus: true
+            });
+          }
+        })
+  },
   onGetStatus: function () {
     request.get('/api/dashboard')
         .set('Content-Type', 'application/json')

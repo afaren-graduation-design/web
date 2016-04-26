@@ -10,7 +10,9 @@ var Dashboard = React.createClass({
   mixins: [Reflux.connect(DashboardStore)],
 
   componentDidMount: function () {
-    DashboardActions.getStatus();
+    if(this.props.isGetStatus) {
+      DashboardActions.getStatus();
+    }
   },
 
   render() {

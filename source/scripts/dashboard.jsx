@@ -8,21 +8,42 @@ require('../less/dashboard.less');
 var Row = require('react-bootstrap/lib/Row');
 var DashboardIcon = require('./component/dashboard/dashboard-icon.component.jsx');
 var Arrow = require('./component/dashboard/arrow.component.jsx');
+var DashboardActions = require('./actions/dashboard/dashboard-actions');
+var DashboardStore = require('./store/dashboard/dashboard-store');
+var Reflux = require('reflux');
 
-ReactDom.render(
-    <div>
-      <header>
-        <Navigation>
-          <Account />
-        </Navigation>
-      </header>
-      <Dashboard>
-        <Row>
-          <DashboardIcon name="logic"/>
-          <Arrow/>
-          <DashboardIcon name="homework"/>
-        </Row>
-      </Dashboard>
-    </div>,
-    document.getElementById('dashboard-container')
-);
+var DashboardApp = React.createClass({
+  mixins: [Reflux.connect(DashboardStore)],
+
+  getInitialState: function() {
+    return {
+      isGetStatus: false
+    }
+  },
+
+  componentDidMount: function() {
+    DashboardActions.init();
+    window.onpopstate = DashboardActions.init;
+  },
+
+  render: function() {
+    return (
+        <div>
+          <header>
+            <Navigation>
+              <Account />
+            </Navigation>
+          </header>
+          <Dashboard isGetStatus={this.state.isGetStatus}>
+            <Row>
+              <DashboardIcon name="logic"/>
+              <Arrow/>
+              <DashboardIcon name="homework"/>
+            </Row>
+          </Dashboard>
+        </div>
+    )
+  }
+});
+
+ReactDom.render(<DashboardApp />,document.getElementById('dashboard-container'));

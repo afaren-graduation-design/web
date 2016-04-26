@@ -5,7 +5,7 @@ var GetAccountActions = require('../../actions/reuse/get-account-actions');
 var request = require('superagent');
 var errorHandler = require('../../../../tools/error-handler.jsx');
 var constant = require('../../../../mixin/constant');
-
+var page = require('page');
 
 var GetAccountStore = Reflux.createStore({
   listenables: [GetAccountActions],
@@ -25,6 +25,14 @@ var GetAccountStore = Reflux.createStore({
             return;
           }
         });
+  },
+  onLogout:function() {
+    request.get('/api/logout')
+        .set('Content-Type', 'application/json')
+        .use(errorHandler)
+        .end((err, res) => {
+          page('register.html');
+        })
   }
 });
 

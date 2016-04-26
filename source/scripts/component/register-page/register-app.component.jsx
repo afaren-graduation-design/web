@@ -13,23 +13,29 @@ var Captcha = require('./captcha.component.jsx');
 var RegisterApp = React.createClass({
   mixins: [Reflux.connect(RegisterStore)],
 
+  getCurrentState: function() {
+    var state = window.location.href.split("#");
+    return "login" === state[1];
+  },
+
   getInitialState: function () {
     return {
       isDisabled: false,
-      loginState: false
+      loginState: this.getCurrentState()
     }
   },
 
-  handleStateChange: function (val) {
-    this.setState({
-      loginState: val
-    });
-  },
-
-  componentWillMount: function () {
-    var url = window.location.href;
-    url.split('#')[1] === 'login' ? this.setState({loginState: true}) : '';
+  componentDidMount: function () {
     RegisterAction.registerable();
+    var _this = this;
+
+    window.onpopstate = function() {
+      console.log(_this.getCurrentState());
+      _this.setState({
+        loginState: _this.getCurrentState()
+      });
+    }
+
   },
 
   render() {

@@ -3,8 +3,8 @@
 var LoginInfo = React.createClass({
 
   toggleState: function () {
-    var newState = !this.props.isLoginState;
-    this.props.onStateChange(newState);
+    // var newState = !this.props.isLoginState;
+    // this.props.onStateChange(newState);
   },
 
   render: function () {

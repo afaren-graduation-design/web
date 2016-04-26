@@ -79,8 +79,8 @@ var Captcha = React.createClass({
 
     RegisterActions.inputCaptcha(stateObj);
   },
-  render: function () {
 
+  render: function () {
     return (
         <div>
           <div className="captcha-input">
@@ -104,4 +104,3 @@ var Captcha = React.createClass({
 });
 
 module.exports = Captcha;
-

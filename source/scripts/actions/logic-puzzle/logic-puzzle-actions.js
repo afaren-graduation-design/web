@@ -3,6 +3,7 @@
 var Reflux = require('reflux');
 
 var LogicPuzzleActions = Reflux.createActions([
+  'init',
   'loadItem',
   'submitAnswer',
   'saveUserAnswer',

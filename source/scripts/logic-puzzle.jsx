@@ -25,29 +25,38 @@ $('#submitModal').on('show.bs.modal', function () {
 function handleTimeOver(){
   LogicPuzzleActions.timeOver();
 }
+var LogicPuzzleApp = React.createClass({
+  componentDidMount: function() {
+    LogicPuzzleActions.init();
+    window.onpopstate = LogicPuzzleActions.init;
+  },
 
-ReactDOM.render(
-    <div>
-      <header>
-        <Navigation>
-          <Account />
-        </Navigation>
-      </header>
-      <LogicPuzzle>
-        <div className="col-md-9 col-sm-8">
-          <LogicPuzzleLeft>
-            <LogicPuzzleBoxes/>
-            <LogicPuzzleChart/>
-            <LogicPuzzleDescription/>
-            <LogicPuzzleAnswerSubmit/>
-          </LogicPuzzleLeft>
+  render:function() {
+    return (
+        <div>
+          <header>
+            <Navigation>
+              <Account />
+            </Navigation>
+          </header>
+          <LogicPuzzle>
+            <div className="col-md-9 col-sm-8">
+              <LogicPuzzleLeft>
+                <LogicPuzzleBoxes/>
+                <LogicPuzzleChart/>
+                <LogicPuzzleDescription/>
+                <LogicPuzzleAnswerSubmit/>
+              </LogicPuzzleLeft>
+            </div>
+            <div className="col-md-3 col-sm-4">
+              <LogicPuzzleSidebar>
+                <LogicPuzzleTimer onTimeOver={handleTimeOver}/>
+              </LogicPuzzleSidebar>
+            </div>
+          </LogicPuzzle>
         </div>
-        <div className="col-md-3 col-sm-4">
-          <LogicPuzzleSidebar>
-            <LogicPuzzleTimer onTimeOver={handleTimeOver}/>
-          </LogicPuzzleSidebar>
-        </div>
-      </LogicPuzzle>
-    </div>,
-    document.getElementById('answer-react')
-);
+    )
+  }
+});
+
+ReactDOM.render(<LogicPuzzleApp />, document.getElementById('answer-react'));

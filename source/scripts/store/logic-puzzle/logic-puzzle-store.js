@@ -15,8 +15,17 @@ var errorHandler = require('../../../../tools/error-handler.jsx');
 var LogicPuzzleStore = Reflux.createStore({
   listenables: [LogicPuzzleActions],
 
-  onLoadItem: function () {
+  onInit: function() {
+    superAgent.get('/api/test/detail')
+        .set('Content-Type', 'application/json')
+        .end(function(err, resp) {
+          if(resp.body.data === true) {
+            page('user-center.html');
+          }
+        })
+  },
 
+  onLoadItem: function () {
     async.waterfall([
       (callback) => {
         this.updateItem(callback);
@@ -111,10 +120,10 @@ var LogicPuzzleStore = Reflux.createStore({
   },
 
   onTimeOver: function (){
-    this.onSubmitPaper();
-    this.trigger({
-      showModal: true
-    });
+    //this.onSubmitPaper();
+    //this.trigger({
+      //showModal: true
+    //});
   }
 
 });

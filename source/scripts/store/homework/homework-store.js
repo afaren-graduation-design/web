@@ -6,6 +6,7 @@ var superAgent = require('superagent');
 var homeworkQuizzesStatus = require('../../../../mixin/constant').homeworkQuizzesStatus;
 var errorHandler = require('../../../../tools/error-handler.jsx');
 var async = require('async');
+var page = require('page');
 
 var pollTimeout;
 var TIMEOUT = 5000;
@@ -34,6 +35,17 @@ var HomeworkSidebarStore = Reflux.createStore({
   onInit: function () {
     async.waterfall([
       (done) => {
+        superAgent.get('/api/test/detail')
+            .set('Content-Type', 'application/json')
+            .end(function(err,resp) {
+              if(resp.body.data === true) {
+              done(true,null);
+              }else {
+                done(null,null);
+              }
+            });
+      },
+      (data, done) => {
         superAgent.get('/api/homework/get-list')
             .set('Content-Type', 'application/json')
             .end(done);
@@ -60,6 +72,9 @@ var HomeworkSidebarStore = Reflux.createStore({
             .end(done);
       }
     ], (err, data) => {
+      if(err === true) {
+        page('user-center.html');
+      }
       if (err) {
         return errorHandler.showError(err);
       }

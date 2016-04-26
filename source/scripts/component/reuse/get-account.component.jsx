@@ -17,14 +17,16 @@ var GetAccount = React.createClass({
   componentDidMount: function () {
     GetAccountActions.loadAccount();
   },
-
+  logout: function() {
+    GetAccountActions.logout();
+  },
   render: function () {
     var userList = (
         <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
           <li><a href="user-center.html">个人中心</a></li>
           <li><a href="dashboard.html">控制台</a></li>
           <li role="separator" className="divider" />
-          <li><a href="api/logout">退出</a></li>
+          <li><a onClick={this.logout}>退出</a></li>
         </ul>
     );
 
@@ -33,7 +35,7 @@ var GetAccount = React.createClass({
           <li><a href="admin.html">管理中心</a></li>
           <li><a href="paper-assignment.html">试卷指定</a></li>
           <li role="separator" className="divider" />
-          <li><a href="api/logout">退出</a></li>
+          <li><a onClick={this.logout}>退出</a></li>
         </ul>
     );
     return (

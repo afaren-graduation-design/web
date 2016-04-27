@@ -13,7 +13,7 @@ var DashboardStore = Reflux.createStore({
     request.get('/api/test/detail')
         .set('Content-Type', 'application/json')
         .end((err, resp) => {
-          if(resp.body.data === true) {
+          if(resp.body.data === false) {
             page('user-center.html');
             this.trigger({
               isGetStatus: false

@@ -38,12 +38,23 @@ var HomeworkSidebarStore = Reflux.createStore({
         superAgent.get('/api/test/detail')
             .set('Content-Type', 'application/json')
             .end(function(err,resp) {
-              if(resp.body.data === true) {
+              if(resp.body.data === false) {
               done(true,null);
               }else {
                 done(null,null);
               }
             });
+      },
+      (data,done) => {
+        superAgent.get('/api/test/isPaperCommitted')
+            .set('Content-Type', 'application/json')
+            .end(function (err, resp) {
+              if(resp.body.isPaperCommitted === false) {
+                done('notCommitted', null);
+              }else {
+                done(null, null);
+              }
+            })
       },
       (data, done) => {
         superAgent.get('/api/homework/get-list')
@@ -74,6 +85,9 @@ var HomeworkSidebarStore = Reflux.createStore({
     ], (err, data) => {
       if(err === true) {
         page('user-center.html');
+      }
+      if(err === 'notCommitted') {
+        page('dashboard.html');
       }
       if (err) {
         return errorHandler.showError(err);

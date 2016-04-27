@@ -16,13 +16,42 @@ var LogicPuzzleStore = Reflux.createStore({
   listenables: [LogicPuzzleActions],
 
   onInit: function() {
-    superAgent.get('/api/test/detail')
-        .set('Content-Type', 'application/json')
-        .end(function(err, resp) {
-          if(resp.body.data === true) {
-            page('user-center.html');
-          }
-        })
+    async.waterfall([
+      (done) => {
+        superAgent.get('/api/test/detail')
+            .set('Content-Type', 'application/json')
+            .end(function(err, resp) {
+              if(resp.body.data === false) {
+               done(true, null);
+              }else {
+                done(null, null);
+              }
+            });
+      },
+      (data, done) => {
+        superAgent.get('/api/test/isPaperCommitted')
+            .set('Content-Type', 'application/json')
+            .end(function (err, resp) {
+              if(resp.body.isPaperCommitted === true) {
+                done('committed', null);
+              }else {
+                done(null, null);
+              }
+            });
+      }
+    ], (err) => {
+      if(err === true) {
+        page('user-center.html')
+      }
+      if(err === 'committed') {
+        page('dashboard.html')
+      }
+      if(err) {
+        return errorHandler.showError(err)
+      }
+    })
+
+
   },
 
   onLoadItem: function () {
@@ -120,10 +149,10 @@ var LogicPuzzleStore = Reflux.createStore({
   },
 
   onTimeOver: function (){
-    //this.onSubmitPaper();
-    //this.trigger({
-      //showModal: true
-    //});
+    this.onSubmitPaper();
+    this.trigger({
+      showModal: true
+    });
   }
 
 });

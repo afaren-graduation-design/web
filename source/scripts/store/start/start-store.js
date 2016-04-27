@@ -14,7 +14,7 @@ var GetAccountStore = Reflux.createStore({
         .set('Content-Type', 'application/json')
         .use(errorHandler)
         .end((err, resp) => {
-          if(resp.body.data === true) {
+          if(resp.body.data === false) {
             page('user-center.html');
           }
         })

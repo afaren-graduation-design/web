@@ -87,6 +87,8 @@ var Captcha = React.createClass({
             <input className="form-control" type="text" placeholder="请输入验证码" name="captcha"
                    ref="captcha" disabled={this.props.isDisabled}
                    onBlur={this.validate}/>
+            <div className={'lose' + (this.state.captchaError === '' ? ' hide' : '')}>{this.state.captchaError}
+            </div>
           </div>
           <div className="pull-right captcha-img">
 
@@ -96,8 +98,7 @@ var Captcha = React.createClass({
             />
             <i className={'fa fa-spinner fa-spin loading captcha-loading' + (this.state.isLoding ? '' : ' hide')}/>
           </div>
-          <div
-              className={' lose-captcha' + (this.state.captchaError === '' ? ' hide' : '')}>{this.state.captchaError}</div>
+
         </div>
     );
   }

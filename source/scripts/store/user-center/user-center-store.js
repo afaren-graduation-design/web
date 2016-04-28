@@ -13,32 +13,32 @@ var UserDetailStore = Reflux.createStore({
 
   onLoadUserDetail: function () {
     request.get('/api/user-detail')
-      .set('Content-Type', 'application/json')
-      .use(errorHandler)
-      .end((err, res) => {
-        if (err) {
-          return;
-        } else if (res.body.status === constant.httpCode.ACCEPTED) {
-          this.trigger({isThirdParty: true});
-        } else if (res.body.status === constant.httpCode.OK) {
-          this.trigger(res.body.data);
-        } else {
-          return;
-        }
-      });
+        .set('Content-Type', 'application/json')
+        .use(errorHandler)
+        .end((err, res) => {
+          if (err) {
+            return;
+          } else if (res.body.status === constant.httpCode.ACCEPTED) {
+            this.trigger({isThirdParty: true});
+          } else if (res.body.status === constant.httpCode.OK) {
+            this.trigger(res.body.data);
+          } else {
+            return;
+          }
+        });
   },
 
-  onLoadResult : function () {
+  onLoadResult: function () {
     request.get('/api/user/feedback-result')
         .set('Content-Type', 'application/json')
         .use(errorHandler)
         .end((err, res) => {
-          if(res.body.httpCode === constant.httpCode.NOT_FOUND){
+          if (res.body.httpCode === constant.httpCode.NOT_FOUND) {
             this.trigger({
               logicPuzzle: '',
               homework: []
             });
-          }else{
+          } else {
             this.trigger({
               logicPuzzle: res.body.logicPuzzle,
               homework: res.body.homework
@@ -49,18 +49,18 @@ var UserDetailStore = Reflux.createStore({
 
   onUpdateUserDetail: function (userData) {
     request.put('/api/user-detail/update')
-      .set('Content-Type', 'application/json')
-      .send({
-        data: userData
-      })
-      .use(errorHandler)
-      .end((err, req) => {
-        if (req.body.status === constant.httpCode.OK) {
-          page('dashboard.html');
-        } else {
-          console.log('update error');
-        }
-      });
+        .set('Content-Type', 'application/json')
+        .send({
+          data: userData
+        })
+        .use(errorHandler)
+        .end((err, req) => {
+          if (req.body.status === constant.httpCode.OK) {
+            page('dashboard.html');
+          } else {
+            console.log('update error');
+          }
+        });
   },
 
   onChangeState: function (state, currentState) {

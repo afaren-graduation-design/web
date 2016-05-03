@@ -45,7 +45,7 @@ var Captcha = React.createClass({
     };
 
     var hash = ('' + Math.random()).substr(3, 8);
-    img.src = "http://192.168.99.100:8888/api/captcha.jpg?_" + hash;
+    img.src = "/api/captcha.jpg?_" + hash;
   },
 
   componentDidMount: function () {

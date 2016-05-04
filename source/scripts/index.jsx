@@ -31,7 +31,7 @@ var Index = React.createClass({
   render: function() {
     return (
         <div>
-          <Account />
+          <Account state="index" />
           <ScrollToTop showUnder={showUnder} style={style}>
             <div id="scroll-button">
               <i className="fa fa-angle-double-up fa-2x"></i>

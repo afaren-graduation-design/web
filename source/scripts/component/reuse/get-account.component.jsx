@@ -15,11 +15,15 @@ var GetAccount = React.createClass({
   },
 
   componentDidMount: function () {
-    GetAccountActions.loadAccount();
+    if("index" !== this.props.state) {
+      GetAccountActions.loadAccount();
+    }
   },
+
   logout: function() {
     GetAccountActions.logout();
   },
+
   render: function () {
     var userList = (
         <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">

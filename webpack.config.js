@@ -119,6 +119,7 @@ function htmlwebpackPluginBuilder(fileName, deps) {
 }
 
 config.plugins.push(htmlwebpackPluginBuilder('index.html', ['index.css', 'vendors', 'index']));
+config.plugins.push(htmlwebpackPluginBuilder('index-00.html', ['index.css']));
 config.plugins.push(htmlwebpackPluginBuilder('register.html', ['register.css', 'vendors', 'register']));
 config.plugins.push(htmlwebpackPluginBuilder('user-center.html', ['user-center.css', 'vendors', 'user-center']));
 config.plugins.push(htmlwebpackPluginBuilder('user-center.html', ['user-center.css', 'vendors', 'user-center']));

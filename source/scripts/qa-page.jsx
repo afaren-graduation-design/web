@@ -48,7 +48,7 @@ var QAPage = React.createClass({
         <div>
           <header>
             <Navigation>
-              <Account />
+              <Account state="index"/>
             </Navigation>
           </header>
           <div>

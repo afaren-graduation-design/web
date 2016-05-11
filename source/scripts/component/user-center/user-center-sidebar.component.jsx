@@ -29,7 +29,6 @@ var UserCenterSide = React.createClass({
     var tags = [
       {mark: 'userDetail', value: '个人信息'},
       {mark: 'password', value: '修改密码'},
-      {mark: 'result', value: '查看结果'}
     ];
 
     var itemHtml = tags.map((item, index) => {
@@ -47,9 +46,7 @@ var UserCenterSide = React.createClass({
     });
 
     return (
-
         <div className="col-md-3 col-sm-3 col-xs-12">
-
           <div className="list-group">
             <div className="list-group-item active">
               <div className="row">

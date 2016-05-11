@@ -27,7 +27,6 @@ ReactDom.render(
         <ChangePassword>
           <NewPassword initialStatus="userDetail"/>
         </ChangePassword>
-        <FeedbackResult/>
       </UserCenterApp>
     </div>,
     document.getElementById('user-center')

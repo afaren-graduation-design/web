@@ -27,6 +27,7 @@ var config = {
     "paper-assignment": './source/scripts/paper-assignment.jsx',
     "admin": './source/scripts/admin.jsx',
     "qa-page": './source/scripts/qa-page.jsx',
+    "index-2016-summer": './source/scripts/index-2016-summer.jsx',
     "vendors": ['jquery', 'bootstrap.css', 'font-awesome', 'react', 'react-dom', 'bootstrap.js']
   },
   output: {
@@ -138,6 +139,7 @@ config.plugins.push(htmlwebpackPluginBuilder('qa-page.html', ['qa-page.css', 've
 config.plugins.push(htmlwebpackPluginBuilder('paper-assignment.html', ['paper-assignment.css', 'vendors', 'paper-assignment']));
 config.plugins.push(htmlwebpackPluginBuilder('admin.html', ['admin.css', 'vendors', 'admin']));
 config.plugins.push(htmlwebpackPluginBuilder('403.html', ['vendors']));
+config.plugins.push(htmlwebpackPluginBuilder('index-2016-summer.html', ['index-2016-summer.css', 'vendors', 'index-2016-summer']));
 
 
 module.exports = config;

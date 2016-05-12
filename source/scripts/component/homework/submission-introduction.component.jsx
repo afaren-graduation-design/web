@@ -8,9 +8,9 @@ var HomeworkActions = require('../../actions/homework/homework-actions');
 var SubmissionIntroductionStore = require('../../store/homework/submission-introduction-store');
 
 var constraint = {
-  githubUrl:{
+  githubUrl: {
     presence: {message: '^请输入仓库地址'},
-    format:{
+    format: {
       pattern: /^(?:https\:\/\/)?(?:github\.com\/)(?:[^ ]+)(?:\/)(?:[^ ]+)$/,
       message: '^仓库地址不正确'
     }
@@ -27,14 +27,14 @@ function getError(validateInfo, field) {
 var SubmissionIntroduction = React.createClass({
   mixins: [Reflux.connect(SubmissionIntroductionStore)],
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
-        'githubUrlError': ''
+      'githubUrlError': ''
     }
   },
 
   handleSubmit: function () {
-    if(this.state.githubUrlError) {
+    if (this.state.githubUrlError) {
       return;
     }
 
@@ -45,12 +45,12 @@ var SubmissionIntroduction = React.createClass({
     });
   },
 
-  handleBranchChange: function(evt) {
+  handleBranchChange: function (evt) {
     var branch = evt.target.value.trim();
     this.props.onBranchUpdate(branch);
   },
 
-  handleRepoChange: function(evt) {
+  handleRepoChange: function (evt) {
     var repo = evt.target.value.trim();
     this.props.onRepoUpdate(repo);
 
@@ -109,19 +109,22 @@ var SubmissionIntroduction = React.createClass({
                 <label className="col-sm-2 control-label">git仓库分支</label>
                 <div className="col-sm-8">
                   <input ref="branch"
-                      className="form-control"
-                      type="text"
-                      onChange={this.handleBranchChange}
-                      value={this.props.quiz.branch}
-                      disabled={submitable ? '':'disabled'}/>
+                         className="form-control"
+                         type="text"
+                         onChange={this.handleBranchChange}
+                         value={this.props.quiz.branch}
+                         disabled={submitable ? '':'disabled'}/>
                 </div>
               </div>
               <div className="form-group">
                 <label className="col-sm-2 control-label"/>
                 <div className="col-sm-4">
                   <button className="btn btn-block btn-primary"
+                          disabled={this.props.quiz.status === constant.homeworkQuizzesStatus.SUCCESS ||
+                                    this.props.quiz.status === constant.homeworkQuizzesStatus.PROGRESS ?
+                                    'disabled':''}
                           onClick={this.handleSubmit}>
-                          提交代码地址
+                    提交代码地址
                   </button>
                 </div>
               </div>

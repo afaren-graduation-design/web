@@ -92,13 +92,8 @@ var config = {
     }),
     new ExtractTextPlugin("[chunkhash:8].[name].css"),
     new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
-    //new webpack.optimize.UglifyJsPlugin({
-    //  compress: {
-    //    warnings: false
-    //  }
-    //})
+
   ],
-  devtool: '#cheap-source-map',
   resolve: {
     alias: {
       'jquery': 'jquery/dist/jquery.min.js',
@@ -118,6 +113,20 @@ function htmlwebpackPluginBuilder(fileName, deps) {
     chunks: deps
   })
 }
+
+(function webpackByEnv() {
+  if (process.env.NODE_ENV === 'production') {
+    config.plugins.push(
+        new webpack.optimize.UglifyJsPlugin({
+          compress: {
+            warnings: false
+          }
+        })
+    );
+  } else {
+    config.devtool = '#cheap-source-map';
+  }
+})();
 
 config.plugins.push(htmlwebpackPluginBuilder('index.html', ['index.css', 'vendors', 'index']));
 config.plugins.push(htmlwebpackPluginBuilder('index-00.html', ['index.css']));

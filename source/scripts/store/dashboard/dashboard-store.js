@@ -31,11 +31,6 @@ var DashboardStore = Reflux.createStore({
         .use(errorHandler)
         .end((err, res) => {
           var puzzleUnable = res.body.isPaperCommited;
-          console.log('isPaperCommitted');
-          console.log(res.body.isPaperCommited);
-          if (!puzzleUnable) {
-            this.submitPaper();
-          }
           this.trigger({
             puzzleEnabled: !puzzleUnable,
             homeworkEnabled: res.body.isPaperCommited,

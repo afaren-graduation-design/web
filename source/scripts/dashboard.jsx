@@ -15,12 +15,6 @@ var Reflux = require('reflux');
 var DashboardApp = React.createClass({
   mixins: [Reflux.connect(DashboardStore)],
 
-  getInitialState: function() {
-    return {
-      isGetStatus: false
-    }
-  },
-
   componentDidMount: function() {
     DashboardActions.init();
     window.onpopstate = DashboardActions.init;
@@ -34,7 +28,7 @@ var DashboardApp = React.createClass({
               <Account />
             </Navigation>
           </header>
-          <Dashboard isGetStatus={this.state.isGetStatus}>
+          <Dashboard>
             <Row>
               <DashboardIcon name="logic"/>
               <Arrow/>

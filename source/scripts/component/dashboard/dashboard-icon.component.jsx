@@ -13,7 +13,7 @@ var DashboardIcon = React.createClass({
       puzzleEnabled: true,
       homeworkEnabled:false,
       isOverTime: false,
-      isFinished: ''
+      isFinished: false
     };
   },
 

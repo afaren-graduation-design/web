@@ -9,7 +9,8 @@ var Info = React.createClass({
 
   getInitialState: function () {
     return {
-      status: ''
+      isOverTime: false,
+      isFinished: false
     };
   },
 
@@ -21,10 +22,10 @@ var Info = React.createClass({
     return (
         <div className="dialog">
           {
-            this.state.status === 'overTime' ?
+            this.state.isOverTime ?
                 <div>
                   <h1>很抱歉,您已经无法答题了!</h1>
-                  <span>当一道编程题超过七天还没有通过的话,我们会认为您没有通过.</span>
+                  <span>当一道编程题超过七天还没有做完的话,我们会认为您没有通过.</span>
                 </div>
                 :
                 <div>

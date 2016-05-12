@@ -99,11 +99,18 @@ var HomeworkSidebarStore = Reflux.createStore({
   },
 
   onCreateTask: function (data) {
+
+    var jsonData = Object.assign({
+      paperId: 1,
+      quizId: this.data.currentQuiz.id,
+      homeworkQuizUri: this.data.currentQuiz.uri,
+    }, data);
+
     async.waterfall([
       (done) => {
-        superAgent.post('/api/homework/save')
+        superAgent.post('/api/homework/scoring')
             .set('Content-Type', 'application/json')
-            .send(data)
+            .send(jsonData)
             .end(done);
       },
 

@@ -15,10 +15,16 @@ var DashboardStore = Reflux.createStore({
         .end((err, resp) => {
           if(resp.body.data === false) {
             page('user-center.html');
+            this.trigger({
+              isGetStatus: false
+            })
+          }else {
+            this.trigger({
+              isGetStatus: true
+            });
           }
         })
   },
-
   onGetStatus: function () {
     request.get('/api/dashboard')
         .set('Content-Type', 'application/json')
@@ -32,7 +38,7 @@ var DashboardStore = Reflux.createStore({
             puzzleEnabled: !puzzleUnable,
             homeworkEnabled: res.body.isPaperCommited,
             isOverTime: res.body.isOverTime,
-            isFinished: res.body.isFinished,
+            isFinished: res.body.isFinished
           });
         });
   },

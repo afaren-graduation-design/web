@@ -6,7 +6,6 @@ var DashboardActions = require('../../actions/dashboard/dashboard-actions');
 var DashboardStore = require('../../store/dashboard/dashboard-store');
 
 var Dashboard = React.createClass({
-
   mixins: [Reflux.connect(DashboardStore)],
 
   componentDidMount: function () {

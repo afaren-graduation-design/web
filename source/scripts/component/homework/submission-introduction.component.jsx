@@ -39,7 +39,6 @@ var SubmissionIntroduction = React.createClass({
     }
 
     HomeworkActions.createTask({
-      orderId: this.props.orderId,
       userAnswerRepo: this.props.quiz.userAnswerRepo,
       branch: this.props.quiz.branch,
       commitSHA: ""
@@ -98,7 +97,7 @@ var SubmissionIntroduction = React.createClass({
                         ref="githubUrl"
                         onChange={this.handleRepoChange}
                         value={this.props.quiz.userAnswerRepo}
-                        placeholder="支持github和oschina，例：https://github.com/abc/def"
+                        placeholder="仅支持github，例：https://github.com/abc/def"
                         disabled={submitable ? '':'disabled'}/>
 
                       <div ref="error" className={'lose' + (this.state.githubUrlError === '' ? ' hide' : '')}>

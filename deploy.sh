@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 set -eo pipefail
-PS4="> "
+PS4="command: "
 set -x
 if [ -z $REMOTE_SERVER_IP ]
 then

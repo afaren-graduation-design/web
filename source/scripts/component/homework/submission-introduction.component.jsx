@@ -37,12 +37,16 @@ var SubmissionIntroduction = React.createClass({
     if (this.state.githubUrlError) {
       return;
     }
-
+    
     HomeworkActions.createTask({
       userAnswerRepo: this.props.quiz.userAnswerRepo,
-      branch: this.props.quiz.branch,
+      branch: this.props.quiz.branch || 'master' ,
       commitSHA: ""
     });
+
+    if(!this.props.quiz.branch){
+      this.props.onBranchUpdate('master');
+    }
   },
 
   handleBranchChange: function (evt) {

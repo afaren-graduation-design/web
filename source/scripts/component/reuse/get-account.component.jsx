@@ -45,7 +45,7 @@ var GetAccount = React.createClass({
     return (
         <div className="header-right">
           <div className={(this.state.isLoged ? 'hide':'') + ' login'}>
-            <a href='register.html#login'>登录</a>/<a href='register.html#register'>注册</a>
+            <a className="register" href='register.html#login'>登录</a><a href='register.html#register'>注册</a>
           </div>
           <div className={this.state.isLoged ? 'dropdown' : 'hide'}>
             <div className="dropdown-style" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"

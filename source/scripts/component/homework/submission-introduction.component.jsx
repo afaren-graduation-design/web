@@ -37,14 +37,14 @@ var SubmissionIntroduction = React.createClass({
     if (this.state.githubUrlError) {
       return;
     }
-    
+
     HomeworkActions.createTask({
       userAnswerRepo: this.props.quiz.userAnswerRepo,
-      branch: this.props.quiz.branch || 'master' ,
+      branch: this.props.quiz.branch || 'master',
       commitSHA: ""
     });
 
-    if(!this.props.quiz.branch){
+    if (!this.props.quiz.branch) {
       this.props.onBranchUpdate('master');
     }
   },
@@ -97,15 +97,15 @@ var SubmissionIntroduction = React.createClass({
                 <label htmlFor="githubUrl" className="col-sm-2 control-label">git仓库地址</label>
                 <div className="col-sm-8">
                   <input type="text"
-                        className="form-control"
-                        ref="githubUrl"
-                        onChange={this.handleRepoChange}
-                        value={this.props.quiz.userAnswerRepo}
-                        placeholder="仅支持github，例：https://github.com/abc/def"
-                        disabled={submitable ? '':'disabled'}/>
+                         className="form-control"
+                         ref="githubUrl"
+                         onChange={this.handleRepoChange}
+                         value={this.props.quiz.userAnswerRepo}
+                         placeholder="仅支持github，例：https://github.com/abc/def"
+                         disabled={submitable ? '':'disabled'}/>
 
-                      <div ref="error" className={'lose' + (this.state.githubUrlError === '' ? ' hide' : '')}>
-                      {this.state.githubUrlError}
+                  <div ref="error" className={'lose' + (this.state.githubUrlError === '' ? ' hide' : '')}>
+                    {this.state.githubUrlError}
                   </div>
                 </div>
               </div>
@@ -117,7 +117,8 @@ var SubmissionIntroduction = React.createClass({
                          type="text"
                          onChange={this.handleBranchChange}
                          value={this.props.quiz.branch}
-                         disabled={submitable ? '':'disabled'}/>
+                         disabled={submitable ? '':'disabled'}
+                         placeholder="请输入分支,不填将默认为master"/>
                 </div>
               </div>
               <div className="form-group">

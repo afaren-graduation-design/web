@@ -1,5 +1,6 @@
 'use strict';
 
+require('es6-shim');
 var Reflux = require('reflux');
 var HomeworkActions = require('../../actions/homework/homework-actions');
 var superAgent = require('superagent');

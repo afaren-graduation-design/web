@@ -4,6 +4,18 @@ require('../less/logic-puzzle.less');
 require('lightbox2/dist/css/lightbox.min.css');
 require('lightbox2/dist/js/lightbox.min.js');
 
+var outdatedBrowserRework = require("outdated-browser-rework");
+require("./libs/outdatedbrowser.min.css");
+outdatedBrowserRework({
+	browserSupport: {
+		'Chrome': 48, // Includes Chrome for mobile devices
+		'IE': 10,
+		'Safari': 7,
+		'Mobile Safari': 7,
+		'Firefox': 32
+	}
+});
+
 var LogicPuzzle = require('./component/logic-puzzle/logic-puzzle-app.jsx');
 var LogicPuzzleLeft = require('./component/logic-puzzle/logic-puzzle-left.component.jsx');
 var LogicPuzzleSidebar = require('./component/logic-puzzle/logic-puzzle-sidebar.component.jsx');

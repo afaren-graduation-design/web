@@ -2,6 +2,18 @@
 
 require('../less/homework.less');
 
+var outdatedBrowserRework = require("outdated-browser-rework");
+require("./libs/outdatedbrowser.min.css");
+outdatedBrowserRework({
+	browserSupport: {
+		'Chrome': 48, // Includes Chrome for mobile devices
+		'IE': 10,
+		'Safari': 7,
+		'Mobile Safari': 7,
+		'Firefox': 32
+	}
+});
+
 var Navigation = require('./component/navigation/navigation.component.jsx');
 var Account = require('./component/reuse/get-account.component.jsx');
 var HomeworkSidebar = require('./component/homework/homework-sidebar.component.jsx');

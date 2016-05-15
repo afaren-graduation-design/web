@@ -51,6 +51,10 @@ var config = {
         }
       },
       {
+        test: /\.json$/,
+        loader: 'json'
+      },
+      {
         test: /\.jsx$/,
         exclude: /(node_modules|bower_components)/,
         loader: 'babel',

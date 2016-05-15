@@ -1,13 +1,15 @@
 'use strict';
 
+require('./libs/outdatedBrowserCheck');
 require('../less/homework.less');
+
 
 var outdatedBrowserRework = require("outdated-browser-rework");
 require("./libs/outdatedbrowser.min.css");
 outdatedBrowserRework({
 	browserSupport: {
 		'Chrome': 48, // Includes Chrome for mobile devices
-		'IE': 10,
+		'IE': 11,
 		'Safari': 7,
 		'Mobile Safari': 7,
 		'Firefox': 32

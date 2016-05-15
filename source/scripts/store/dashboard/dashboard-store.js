@@ -3,6 +3,7 @@
 var Reflux = require('reflux');
 var DashboardActions = require('../../actions/dashboard/dashboard-actions');
 var request = require('superagent');
+var nocache = require('superagent-no-cache');
 var errorHandler = require('../../../../tools/error-handler.jsx');
 var page = require('page');
 
@@ -12,6 +13,7 @@ var DashboardStore = Reflux.createStore({
   onInit: function() {
     request.get('/api/test/detail')
         .set('Content-Type', 'application/json')
+        .use(nocache)
         .end((err, resp) => {
           if(resp.body.data === false) {
             page('user-center.html');

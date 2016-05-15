@@ -25,6 +25,7 @@ var ChannelStore = Reflux.createStore({
     request.get('/api/admin/channel')
         .set('Content-Type', 'application/json')
         .use(errorHandler)
+        .use(nocache)
         .end((err, res) => {
           this.trigger({links: res.body.links})
         });
@@ -35,6 +36,7 @@ var ChannelStore = Reflux.createStore({
         .set('Content-Type', 'application/json')
         .query(link)
         .use(errorHandler)
+        .use(nocache)
         .end((err, res) => {
           if(res.status === constant.httpCode.OK){
             links[deleteIndex].delete = true;

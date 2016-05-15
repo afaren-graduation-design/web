@@ -1,6 +1,7 @@
 'use strict';
 
 require('es6-shim');
+var nocache = require('superagent-no-cache');
 var Reflux = require('reflux');
 var HomeworkActions = require('../../actions/homework/homework-actions');
 var superAgent = require('superagent');
@@ -38,6 +39,7 @@ var HomeworkSidebarStore = Reflux.createStore({
       (done) => {
         superAgent.get('/api/test/detail')
             .set('Content-Type', 'application/json')
+            .use(nocache)
             .end(function(err,resp) {
               if(resp.body.data === false) {
               done(true,null);
@@ -49,6 +51,7 @@ var HomeworkSidebarStore = Reflux.createStore({
       (data,done) => {
         superAgent.get('/api/test/isPaperCommitted')
             .set('Content-Type', 'application/json')
+            .use(nocache)
             .end(function (err, resp) {
               if(resp.body.isPaperCommitted === false) {
                 done('notCommitted', null);
@@ -60,6 +63,7 @@ var HomeworkSidebarStore = Reflux.createStore({
       (data, done) => {
         superAgent.get('/api/homework/get-list')
             .set('Content-Type', 'application/json')
+            .use(nocache)
             .end(done);
       },
 
@@ -80,6 +84,7 @@ var HomeworkSidebarStore = Reflux.createStore({
       (query, done) => {
         superAgent.get('/api/homework/quiz')
             .set('Content-Type', 'application/json')
+            .use(nocache)
             .query(query)
             .end(done);
       }
@@ -111,6 +116,7 @@ var HomeworkSidebarStore = Reflux.createStore({
       (done) => {
         superAgent.post('/api/homework/scoring')
             .set('Content-Type', 'application/json')
+            .use(nocache)
             .send(jsonData)
             .end(done);
       },
@@ -147,6 +153,7 @@ var HomeworkSidebarStore = Reflux.createStore({
       (query, done) => {
         superAgent.get('/api/homework/quiz')
             .set('Content-Type', 'application/json')
+            .use(nocache)
             .query(query)
             .end(done);
       }

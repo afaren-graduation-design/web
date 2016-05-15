@@ -38,6 +38,7 @@
     "lightbox2": "^2.8.2",
     "marked": "^0.3.5",
     "moment": "^2.12.0",
+    "outdated-browser-rework": "^1.0.0",
     "page": "^1.6.4",
     "path": "^0.12.7",
     "react": "^0.14.5",

@@ -35,6 +35,7 @@ var DashboardApp = React.createClass({
             </Navigation>
           </header>
           <Dashboard isGetStatus={this.state.isGetStatus}>
+            <h3 className="tip">请更新并使用最新版本的 Firefox 或 Chrome 浏览器，否则可能导致答题失败！</h3>
             <Row>
               <DashboardIcon name="logic"/>
               <Arrow/>

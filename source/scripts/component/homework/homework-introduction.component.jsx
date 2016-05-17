@@ -13,6 +13,13 @@ marked.setOptions({
 });
 
 var HomeworkIntroduction = React.createClass({
+
+  componentWillUpdate: function(prev) {
+    if(this.props.quiz.id !== prev.quiz.id) {
+      this.refs.container.scrollTop = 0;
+    }
+  },
+
   render() {
     var desc = this.props.quiz.desc || "";
 
@@ -25,7 +32,7 @@ var HomeworkIntroduction = React.createClass({
 
     return (
         <div className="tab">
-          <div className="content">
+          <div ref="container"  className="content">
             <div id="introduction" dangerouslySetInnerHTML={content()}>
             </div>
           </div>

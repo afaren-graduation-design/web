@@ -40,6 +40,7 @@ var HomeworkSidebarStore = Reflux.createStore({
         superAgent.get('/api/test/detail')
             .set('Content-Type', 'application/json')
             .use(nocache)
+            .use(errorHandler)
             .end(function(err,resp) {
               if(resp.body.data === false) {
               done(true,null);
@@ -52,6 +53,7 @@ var HomeworkSidebarStore = Reflux.createStore({
         superAgent.get('/api/test/isPaperCommitted')
             .set('Content-Type', 'application/json')
             .use(nocache)
+            .use(errorHandler)
             .end(function (err, resp) {
               if(resp.body.isPaperCommitted === false) {
                 done('notCommitted', null);
@@ -64,6 +66,7 @@ var HomeworkSidebarStore = Reflux.createStore({
         superAgent.get('/api/homework/get-list')
             .set('Content-Type', 'application/json')
             .use(nocache)
+            .use(errorHandler)
             .end(done);
       },
 
@@ -85,6 +88,7 @@ var HomeworkSidebarStore = Reflux.createStore({
         superAgent.get('/api/homework/quiz')
             .set('Content-Type', 'application/json')
             .use(nocache)
+            .use(errorHandler)
             .query(query)
             .end(done);
       }
@@ -94,9 +98,6 @@ var HomeworkSidebarStore = Reflux.createStore({
       }
       if(err === 'notCommitted') {
         page('dashboard.html');
-      }
-      if (err) {
-        return errorHandler.showError(err);
       }
       this.data.currentQuiz = data.body.quiz;
       this.trigger(this.data);
@@ -109,7 +110,7 @@ var HomeworkSidebarStore = Reflux.createStore({
     var jsonData = Object.assign({
       paperId: 1,
       quizId: this.data.currentQuiz.id,
-      homeworkQuizUri: this.data.currentQuiz.uri,
+      homeworkQuizUri: this.data.currentQuiz.uri
     }, data);
 
     async.waterfall([
@@ -117,6 +118,7 @@ var HomeworkSidebarStore = Reflux.createStore({
         superAgent.post('/api/homework/scoring')
             .set('Content-Type', 'application/json')
             .use(nocache)
+            .use(errorHandler)
             .send(jsonData)
             .end(done);
       },
@@ -128,9 +130,6 @@ var HomeworkSidebarStore = Reflux.createStore({
         done(null, null);
       }
     ], (err, data) => {
-      if (err) {
-        return errorHandler.showError(err);
-      }
       this.trigger(this.data);
       this.pollData();
     });
@@ -154,13 +153,12 @@ var HomeworkSidebarStore = Reflux.createStore({
         superAgent.get('/api/homework/quiz')
             .set('Content-Type', 'application/json')
             .use(nocache)
+            .use(errorHandler)
             .query(query)
             .end(done);
       }
     ], (err, data) => {
-      if (err) {
-        return errorHandler.showError(err);
-      }
+
       this.data.currentQuiz = data.body.quiz;
       this.trigger(this.data);
       this.pollData();

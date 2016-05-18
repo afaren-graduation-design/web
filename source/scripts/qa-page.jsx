@@ -26,7 +26,7 @@ var QAPage = React.createClass({
 
   getInitialState: function () {
     return {
-      QAContent: ''
+      qaContent: ''
     };
   },
 
@@ -35,7 +35,7 @@ var QAPage = React.createClass({
   },
 
   render: function () {
-    var desc = this.state.QAContent || "";
+    var desc = this.state.qaContent || "";
 
     function content() {
       var pattern = /a href=/g;

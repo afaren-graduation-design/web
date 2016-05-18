@@ -17,7 +17,7 @@ var GetAccountStore = Reflux.createStore({
       .end((err, res) => {
         if (err) {return;}
         this.trigger({
-          QAContent: res.body.QAContent
+          qaContent: res.body.qaContent
         });
       });
   }

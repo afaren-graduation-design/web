@@ -5,6 +5,7 @@ var ChannelAction = require('../../actions/admin/channel-actions');
 var request = require('superagent');
 var constant = require('../../../../mixin/constant');
 var errorHandler = require('../../../../tools/error-handler.jsx');
+var nocache = require('superagent-no-cache');
 
 var ChannelStore = Reflux.createStore({
   listenables: ChannelAction,

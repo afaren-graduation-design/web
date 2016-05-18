@@ -10,11 +10,18 @@ var QAPageUpdate = React.createClass({
 
   getInitialState: function () {
     return {
-      updateStatus: ''
+      updateStatus: '',
+      qaResourceUrl: ''
     };
   },
 
   componentDidMount: function () {
+    QAPageUpdateAction.init();
+  },
+
+  componentDidUpdate: function () {
+    this.refs.url.value = this.state.qaResourceUrl;
+    console.log(this.state.qaResourceUrl);
   },
 
   handleClick: function() {

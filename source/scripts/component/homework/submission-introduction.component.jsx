@@ -34,8 +34,20 @@ var SubmissionIntroduction = React.createClass({
   },
 
   handleSubmit: function () {
+    var repo = this.refs.githubUrl.value.trim();
+    var valObj = {
+      'githubUrl': repo
+    };
+    var result = validate(valObj, constraint);
+    this.state.githubUrlError = getError(result, 'githubUrl');
+    this.forceUpdate();
+
     if (this.state.githubUrlError) {
       return;
+    }
+
+    if (!this.props.quiz.branch) {
+      this.props.onBranchUpdate('master');
     }
 
     HomeworkActions.createTask({
@@ -43,10 +55,6 @@ var SubmissionIntroduction = React.createClass({
       branch: this.props.quiz.branch || 'master',
       commitSHA: ""
     });
-
-    if (!this.props.quiz.branch) {
-      this.props.onBranchUpdate('master');
-    }
   },
 
   handleBranchChange: function (evt) {

@@ -1,6 +1,6 @@
 'use strict';
 
-function jumpControl(data) {
+function jumpControl (data) {
   var isLoged = data.isLoged;
   var isPaperCommited = data.isPaperCommited;
   var isDetailed = data.isDetailed;

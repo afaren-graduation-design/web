@@ -3,8 +3,8 @@
 var Reflux = require('reflux');
 
 var QAPageUpdateAction = Reflux.createActions([
-    'updateQAPage',
-    'init'
+  'updateQAPage',
+  'init'
 ]);
 
 module.exports = QAPageUpdateAction;

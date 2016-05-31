@@ -29,7 +29,7 @@ var Info = React.createClass({
                 :
                 <div>
                   <h1>恭喜您,您已经做完所有题目了!</h1>
-                  <span>我们会在之后的几个工作日之内通知您,请注意留意您的邮箱.</span>
+                  <span>这意味着您已经通过了我们的第一轮筛选，我们将会在<b>6月15号</b>通知您下一步的安排,请注意留意您的邮箱.</span>
                 </div>
           }
           <p><a href="dashboard.html">点击返回</a></p>
@@ -39,4 +39,3 @@ var Info = React.createClass({
 });
 
 module.exports = Info;
-

@@ -45,6 +45,7 @@ var RegisterApp = React.createClass({
           <RegisterPassword isDisabled={this.state.isDisabled}/>
           <Captcha isDisabled={this.state.isDisabled}/>
         </RegisterForm>);
+
     return (
         <div className="row">
           {formHtml}

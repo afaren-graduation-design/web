@@ -15,6 +15,7 @@ var asyncContainersFunc = {
   },
   mobilePhone: function (value, done) {
     RegisterActions.checkMobilePhone(value, done);
+
   },
   captcha: function (value, done) {
     if (value.length !== 4) {

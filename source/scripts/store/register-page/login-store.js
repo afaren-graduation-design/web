@@ -7,7 +7,6 @@ var constant = require('../../../../mixin/constant');
 var page = require('page');
 var errorHandler = require('../../../../tools/error-handler.jsx');
 
-
 var LoginStore = Reflux.createStore({
   listenables: LoginActions,
 

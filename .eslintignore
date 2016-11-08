@@ -1,1 +1,4 @@
 spec/*
+public/*
+node_modules/*
+source/scripts/libs/*

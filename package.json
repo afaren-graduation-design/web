@@ -4,6 +4,9 @@
   "description": "",
   "author": "",
   "license": "ISC",
+  "scripts": {
+    "webpack": "webpack"
+  },
   "browser": {
     "onepage-scroll": "./node_modules/onepage-scroll/jquery.onepage-scroll.js",
     "lightbox": "./node_modules/lightbox2/dist/js/lightbox.js"
@@ -29,6 +32,7 @@
     "file-loader": "^0.8.5",
     "font-awesome": "^4.5.0",
     "html-webpack-plugin": "^2.10.0",
+    "ie": "^0.1.0",
     "less-loader": "^2.2.2",
     "reflux": "^0.3.0",
     "style-loader": "^0.13.0",

@@ -103,7 +103,8 @@ var config = {
       'jquery': 'jquery/dist/jquery.min.js',
       'bootstrap.css': 'bootstrap/dist/css/bootstrap.min.css',
       'font-awesome': 'font-awesome/css/font-awesome.min.css',
-      'bootstrap.js': 'bootstrap/dist/js/bootstrap.min.js'
+      'bootstrap.js': 'bootstrap/dist/js/bootstrap.min.js',
+      'ie': 'component-ie'
     }
   }
 };

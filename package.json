@@ -5,14 +5,12 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "webpack": "webpack"
+    "webpack": "webpack",
+    "eslint": "eslint ."
   },
   "browser": {
     "onepage-scroll": "./node_modules/onepage-scroll/jquery.onepage-scroll.js",
     "lightbox": "./node_modules/lightbox2/dist/js/lightbox.js"
-  },
-  "scripts": {
-	  "eslint": "eslint ."
   },
   "devDependencies": {
     "babel-core": "^6.3.21",

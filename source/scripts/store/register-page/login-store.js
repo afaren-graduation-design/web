@@ -29,8 +29,10 @@ var LoginStore = Reflux.createStore({
             });
             if(data.isSuperAdmin){
               page('admin.html');
-            } else{
+            } else if (data.isFinishedDetail){
               page('dashboard.html');
+            } else {
+              page('user-center.html');
             }
           } else if (data.status === constant.httpCode.FORBIDDEN) {
             this.trigger({

@@ -32,12 +32,15 @@ var DashboardStore = Reflux.createStore({
         .set('Content-Type', 'application/json')
         .use(errorHandler)
         .end((err, res) => {
+          if(!res.body.isFinishedDetail){
+            page('user-center.html');
+          }
           var puzzleUnable = res.body.isPaperCommited;
           this.trigger({
             puzzleEnabled: !puzzleUnable,
             homeworkEnabled: res.body.isPaperCommited,
             isOverTime: res.body.isOverTime,
-            isFinished: res.body.isFinished
+            isFinished: res.body.isFinished,
           });
         });
   },

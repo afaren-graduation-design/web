@@ -56,7 +56,7 @@ var UserDetailStore = Reflux.createStore({
         .use(errorHandler)
         .end((err, req) => {
           if (req.body.status === constant.httpCode.OK) {
-            page('dashboard.html');
+            page('paper-list.html');
           } else {
             console.log('update error');
           }

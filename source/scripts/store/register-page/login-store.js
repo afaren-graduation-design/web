@@ -30,7 +30,7 @@ var LoginStore = Reflux.createStore({
             if(data.isSuperAdmin){
               page('admin.html');
             } else if (data.isFinishedDetail){
-              page('dashboard.html');
+              page('paper-list.html');
             } else {
               page('user-center.html');
             }

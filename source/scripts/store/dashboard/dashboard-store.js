@@ -34,14 +34,15 @@ var DashboardStore = Reflux.createStore({
         .end((err, res) => {
           if(!res.body.isFinishedDetail){
             page('user-center.html');
+          }else {
+            var puzzleUnable = res.body.isPaperCommited;
+            this.trigger({
+              puzzleEnabled: !puzzleUnable,
+              homeworkEnabled: res.body.isPaperCommited,
+              isOverTime: res.body.isOverTime,
+              isFinished: res.body.isFinished,
+            });
           }
-          var puzzleUnable = res.body.isPaperCommited;
-          this.trigger({
-            puzzleEnabled: !puzzleUnable,
-            homeworkEnabled: res.body.isPaperCommited,
-            isOverTime: res.body.isOverTime,
-            isFinished: res.body.isFinished,
-          });
         });
   },
 

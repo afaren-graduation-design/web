@@ -1,4 +1,4 @@
-'use strict';
+    'use strict';
 
 var Reflux = require('reflux');
 var StartActions = require('../../actions/start/start-actions');

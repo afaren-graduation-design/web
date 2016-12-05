@@ -13,27 +13,36 @@ var PaperList = React.createClass({
   },
   render: function () {
     var papers = this.state.papers || [];
-    var paperList = papers.map((paper, index) => {
-      return <li className={"list-item"} key={index}>
-        <a href="#">
-          <span className="paper-name">
-            {paper.title}
-          </span>
-        </a>
-      </li>
+    var programList = papers.map((paper, index) => {
+      return (
+          <div key={index}>
+            <h4>
+              <span className="fa fa-group"> </span>
+              <span>{paper.programId}</span>
+            </h4>
+            <div>
+              <ul className="list">
+                {paper.data.map((item, index) => {
+                  return (
+                      <li className={"list-item"} key={index}>
+                        <a href="#">
+                          <span className="paper-name">
+                            {item.paperName}
+                          </span>
+                        </a>
+                      </li>
+                  )
+                })}
+              </ul>
+            </div>
+          </div>)
     });
 
     return (
         <div>
-          <h4>
-            <span className="fa fa-group"> </span>
-            <span>一年级</span>
-          </h4>
-          <ul className="list">
-            {paperList}
-          </ul>
+          {programList}
         </div>
-    );
+    )
   }
 });
 

@@ -38,6 +38,7 @@
     "webpack": "^1.12.9"
   },
   "dependencies": {
+    "async": "^2.1.4",
     "bootstrap": "^3.3.5",
     "es6-shim": "^0.35.1",
     "jquery": "^2.2.3",

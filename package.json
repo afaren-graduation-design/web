@@ -6,7 +6,8 @@
   "license": "ISC",
   "scripts": {
     "webpack": "webpack",
-    "eslint": "eslint ."
+    "eslint": "eslint .",
+    "wpw": "webpack -w"
   },
   "browser": {
     "onepage-scroll": "./node_modules/onepage-scroll/jquery.onepage-scroll.js",

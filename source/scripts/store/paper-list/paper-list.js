@@ -23,14 +23,13 @@ var PapersListStore = Reflux.createStore({
       },
       (data, done)=> {
         async.map(data, (programId, callback)=> {
-          request.get(`/api/programs/${programId}/paperDefinitions`)
+          request.get(`/api/programs/${programId}/papers`)
               .set('Content-Type', 'application/json')
               .use(errorHandler)
               .end((err, resp)=> {
                 if (err) {
                   return;
                 }
-
                 callback(null, {data: resp.body.data, programId});
               })
         }, (err, result)=> {

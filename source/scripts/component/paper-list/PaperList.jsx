@@ -15,6 +15,7 @@ var PaperList = React.createClass({
   },
   render: function () {
     var papers = this.state.papers || [];
+
     var programList = papers.map((paper, index) => {
       return (
           <div key={index}>
@@ -25,11 +26,15 @@ var PaperList = React.createClass({
             <div>
               <ul className="list row">
                 {paper.data.map((item, index) => {
+                  var icon = (item.type === "java") ? "fa-coffee" :
+                        ((item.type === "Ruby") ? "fa-diamond" :
+                          ((item.type === "python") ? "fa-code" :
+                            ((item.type === "javaScript") ? "fa-cube":"fa-files-o")));
                   return (
                       <li className="list-item col-sm-2" key={index}>
                         <div className="icon-box col-sm-5">
                           <span>
-                            <i className="fa fa-files-o"> </i>
+                            <i className={"fa " + icon}> </i>
                           </span>
                         </div>
                         <div className="paper-box col-sm-7">

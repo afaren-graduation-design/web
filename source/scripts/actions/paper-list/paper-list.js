@@ -3,7 +3,8 @@
 var Reflux = require('reflux');
 
 var PaperListAction = Reflux.createActions([
-  'loadPapers'
+  'loadPapers',
+  'getOnePaper'
 ]);
 
 module.exports = PaperListAction;

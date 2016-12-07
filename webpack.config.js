@@ -12,6 +12,7 @@ var config = {
   entry: {
     "group": './source/scripts/group.jsx',
     "paper-list":'./source/scripts/paper-list.jsx',
+    "paper-detail":'./source/scripts/paper-detail.jsx',
     "deadline": './source/scripts/deadline.jsx',
     "style-guide": './source/scripts/style-guide.jsx',
     "404": "./source/scripts/404.js",
@@ -156,6 +157,7 @@ config.plugins.push(htmlwebpackPluginBuilder('admin.html', ['admin.css', 'vendor
 config.plugins.push(htmlwebpackPluginBuilder('403.html', ['vendors']));
 config.plugins.push(htmlwebpackPluginBuilder('index-2016-summer.html', ['index-2016-summer.css', 'vendors', 'index-2016-summer']));
 config.plugins.push(htmlwebpackPluginBuilder('paper-list.html', ['paper-list.css','vendors','paper-list']));
+config.plugins.push(htmlwebpackPluginBuilder('paper-detail.html', ['vendors']));
 
 
 module.exports = config;

@@ -2,7 +2,7 @@ require('font-awesome');
 
 var Reflux = require('reflux');
 var PaperListAction = require('../../actions/paper-list/paper-list');
-var PaperListStore = require('../../store/paper-index/paper-index');
+var PaperListStore = require('../../store/paper-list/paper-list');
 
 var PaperList = React.createClass({
 
@@ -12,15 +12,18 @@ var PaperList = React.createClass({
     PaperListAction.loadPapers();
   },
 
-  clickPaper: function (id) {
+  clickPaper: function (id, programId) {
     return () => {
-      PaperListAction.getOnePaper(id);
+      PaperListAction.getOnePaper(id, programId);
     }
   },
   render: function () {
     var papers = this.state.papers || [];
 
     var programList = papers.map((paper, index) => {
+
+      var icons = ['fa-coffee', 'fa-diamond', 'fa-code', 'fa-files-o', 'fa-cube'];
+
       return (
         <div key={index}>
           <h4>
@@ -30,15 +33,13 @@ var PaperList = React.createClass({
           <div>
             <ul className="list row">
               {paper.data.map((item, index) => {
-                var icon = (item.type === "java") ? "fa-coffee" :
-                  ((item.type === "Ruby") ? "fa-diamond" :
-                    ((item.type === "python") ? "fa-code" :
-                      ((item.type === "javaScript") ? "fa-cube" : "fa-files-o")));
+
+                 var randomNumber = Math.floor(Math.random() *5);
                 return (
-                  <li className="list-item col-sm-2" onClick={this.clickPaper(item.id)} key={index}>
+                  <li className="list-item col-sm-2" onClick={this.clickPaper(item.id, item.programId)} key={index}>
                     <div className="icon-box col-sm-5">
                           <span>
-                            <i className={"fa " + icon}> </i>
+                            <i className={"fa " + icons[randomNumber]}> </i>
                           </span>
                     </div>
                     <div className="paper-box col-sm-7">

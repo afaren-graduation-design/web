@@ -1,17 +1,30 @@
 var Reflux = require('reflux');
-console.log('xixi');
-// var PaperDetailAction = require('../../actions/paper-detail/paper-detail');
-var PaperDetailStore = require('../../store/paper-index/paper-index');
+var paperDetailAction = require('../../actions/paper-detail/paper-detail');
+var paperDetailStore = require('../../store/paper-detail/paper-detail');
 
 var PaperDetailForm = React.createClass({
+  mixins: [Reflux.connect(paperDetailStore)],
 
-  mixins: [Reflux.connect(PaperDetailStore)],
+  getQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+      return unescape(r[2]);
+    }
+    return null;
+  },
+
+  componentDidMount(){
+    var id = this.getQueryString('id');
+    var programId = this.getQueryString('programId');
+    paperDetailAction.getPaperDetail(id, programId);
+  },
 
   render(){
     return (
-      <div>
-        {this.state.id}
-      </div>
+        <div>
+
+        </div>
     )
   }
 });

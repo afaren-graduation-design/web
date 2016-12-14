@@ -34,7 +34,7 @@ var HomeworkSidebarStore = Reflux.createStore({
     }
   },
 
-  onInit: function () {
+  onInit: function (id) {
     async.waterfall([
       (done) => {
         superAgent.get('/api/test/detail')
@@ -63,7 +63,7 @@ var HomeworkSidebarStore = Reflux.createStore({
             })
       },
       (data, done) => {
-        superAgent.get('/api/homework/get-list')
+        superAgent.get(`/api/homework/get-list/${id}`)
             .set('Content-Type', 'application/json')
             .use(nocache)
             .use(errorHandler)
@@ -71,9 +71,11 @@ var HomeworkSidebarStore = Reflux.createStore({
       },
 
       (data, done) => {
+        console.log(data.body);
         this.data.homeworkQuizzes = data.body.homeworkQuizzes;
 
         var orderId = location.hash.substr(1);
+        console.log(location.hash);
         orderId = parseInt(orderId) || 1;
         orderId = Math.max(orderId, 1);
         orderId = Math.min(orderId, this.data.homeworkQuizzes.length);

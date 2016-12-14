@@ -3,7 +3,9 @@
 var Reflux = require('reflux');
 var LogicPuzzleActions = require('../../actions/logic-puzzle/logic-puzzle-actions');
 var LogicPuzzleStore = require('../../store/logic-puzzle/logic-puzzle-store');
+var getQueryString = require('../../../../tools/getQueryString');
 var _newOrderId;
+var id = getQueryString('sectionId');
 
 
 var LogicPuzzleAnswerSubmit = React.createClass({
@@ -27,7 +29,7 @@ var LogicPuzzleAnswerSubmit = React.createClass({
       this.setState({
         submitLoad: true
       });
-      LogicPuzzleActions.submitAnswer(newOrderId );
+      LogicPuzzleActions.submitAnswer(id, newOrderId );
     } else {
       $('#warningModal').modal('show');
     }
@@ -45,7 +47,7 @@ var LogicPuzzleAnswerSubmit = React.createClass({
     this.setState({
       lastLoad: true
     });
-    LogicPuzzleActions.submitAnswer(_newOrderId);
+    LogicPuzzleActions.submitAnswer(id, _newOrderId);
   },
 
   next: function () {
@@ -55,7 +57,7 @@ var LogicPuzzleAnswerSubmit = React.createClass({
     this.setState({
       nextLoad: true
     });
-    LogicPuzzleActions.submitAnswer(_newOrderId);
+    LogicPuzzleActions.submitAnswer(id, _newOrderId);
   },
 
   render: function () {

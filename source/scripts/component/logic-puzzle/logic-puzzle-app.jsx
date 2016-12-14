@@ -5,6 +5,7 @@ var LogicPuzzleStore = require('../../store/logic-puzzle/logic-puzzle-store');
 var LogicPuzzleActions = require('../../actions/logic-puzzle/logic-puzzle-actions');
 var Modal = require('react-bootstrap/lib/Modal');
 var Button = require('react-bootstrap/lib/Button');
+var getQueryString = require('../../../../tools/getQueryString');
 
 var LogicPuzzle = React.createClass({
   mixins: [Reflux.connect(LogicPuzzleStore)],
@@ -16,7 +17,8 @@ var LogicPuzzle = React.createClass({
   },
 
   componentDidMount: function () {
-    LogicPuzzleActions.loadItem();
+    var id = getQueryString('sectionId');
+    LogicPuzzleActions.loadItem(id);
   },
 
   render: function () {

@@ -54,11 +54,12 @@ var LogicPuzzleStore = Reflux.createStore({
 
   },
 
-  onLoadItem: function () {
+  onLoadItem: function (id) {
     async.waterfall([
       (callback) => {
-        this.updateItem(callback);
+        this.updateItem(id, callback);
       }, (res, callback) => {
+        console.log(res.body);
         _answer = res.body.userAnswer;
         this.trigger({
           item: res.body.item,
@@ -76,13 +77,13 @@ var LogicPuzzleStore = Reflux.createStore({
     });
   },
 
-  onSubmitAnswer: function (newOrderId) {
+  onSubmitAnswer: function (id, newOrderId) {
     async.waterfall([
       (callback) => {
         this.onSaveUserAnswer(callback);
       },(res,callback) => {
         _currentIndex = newOrderId;
-        this.updateItem(callback);
+        this.updateItem(id, callback);
       },(res,callback) => {
         _answer = res.body.userAnswer;
         this.trigger({
@@ -133,23 +134,24 @@ var LogicPuzzleStore = Reflux.createStore({
       }
     ],function(err,res){
       if (res.statusCode === constant.httpCode.OK) {
-        page('dashboard.html');
+        page('dashboard.html?programId='+res.body.programId + '&id='+res.body.paperId);
       }
     });
   },
 
-  updateItem: function (callback) {
+  updateItem: function (id, callback) {
     superAgent.get('/api/logic-puzzle')
         .set('Content-Type', 'application/json')
         .query({
+          id,
           orderId: _currentIndex
         })
         .use(errorHandler)
         .end(callback);
   },
 
-  onTimeOver: function (){
-    this.onSubmitPaper();
+  onTimeOver: function (sectionId){
+    this.onSubmitPaper(sectionId);
     this.trigger({
       showModal: true
     });

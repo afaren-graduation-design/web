@@ -28,6 +28,7 @@ var constant = require('../../mixin/constant');
 var Reflux = require('reflux');
 var HomeworkAction = require('./actions/homework/homework-actions');
 var HomeworkStore = require('./store/homework/homework-store.js');
+var getQueryString = require('../../tools/getQueryString');
 
 var Homework = React.createClass({
   mixins: [Reflux.connect(HomeworkStore)],
@@ -56,7 +57,8 @@ var Homework = React.createClass({
   },
 
   componentDidMount: function () {
-    HomeworkAction.init();
+    var id = getQueryString('sectionId');
+    HomeworkAction.init(id);
     window.onpopstate = HomeworkAction.init;
   },
 

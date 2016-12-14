@@ -5,6 +5,8 @@ var TimerStore = require('../../store/logic-puzzle/timer-store');
 var TimerActions = require('../../actions/logic-puzzle/timer-actions');
 var Modal = require('react-bootstrap/lib/Modal');
 var constant = require('../../../../mixin/constant');
+var getQueryString = require('../../../../tools/getQueryString');
+
 
 var LogicPuzzleTimer = React.createClass({
   mixins: [Reflux.connect(TimerStore)],
@@ -17,12 +19,14 @@ var LogicPuzzleTimer = React.createClass({
 
   countDown: function(){
     var sectionId = location.search.split('=')[1];
+    var id = getQueryString('sectionId');
+
     setInterval(() => {
       if(this.state.remainTime){
         var remainTime = this.state.remainTime - 1;
 
         if(remainTime <= 0){
-          this.props.onTimeOver();
+          this.props.onTimeOver(id);
         }
 
         this.setState({

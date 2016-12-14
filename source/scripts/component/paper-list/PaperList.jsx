@@ -1,5 +1,4 @@
 require('font-awesome');
-
 var Reflux = require('reflux');
 var PaperListAction = require('../../actions/paper-list/paper-list');
 var PaperListStore = require('../../store/paper-list/paper-list');

@@ -97,7 +97,7 @@ var config = {
       ReactDOM: 'react-dom'
     }),
     new ExtractTextPlugin("[chunkhash:8].[name].css"),
-    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
+    new webpack.optimize.CommonsChunkPlugin('vendors', '[chunkhash:8].vendors.js'),
 
   ],
   resolve: {

@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "async": "^2.1.4",
-    "bootstrap": "^3.3.5",
+    "bootstrap": "^3.3.7",
     "es6-shim": "^0.35.1",
     "jquery": "^2.2.3",
     "json-loader": "^0.5.4",

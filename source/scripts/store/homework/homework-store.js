@@ -9,6 +9,7 @@ var homeworkQuizzesStatus = require('../../../../mixin/constant').homeworkQuizze
 var errorHandler = require('../../../../tools/error-handler.jsx');
 var async = require('async');
 var page = require('page');
+var getQueryString = require('../../../../tools/getQueryString');
 
 var pollTimeout;
 var TIMEOUT = 5000;
@@ -27,8 +28,10 @@ var HomeworkSidebarStore = Reflux.createStore({
   },
 
   pollData: function () {
+    var id = getQueryString('sectionId');
+
     if (this.hasTaskProcess()) {
-      pollTimeout = setTimeout(this.onInit, TIMEOUT);
+      pollTimeout = setTimeout(this.onInit(id), TIMEOUT);
     } else {
       pollTimeout && clearTimeout(pollTimeout);
     }
@@ -63,6 +66,7 @@ var HomeworkSidebarStore = Reflux.createStore({
             })
       },
       (data, done) => {
+        console.log(id);
         superAgent.get(`/api/homework/get-list/${id}`)
             .set('Content-Type', 'application/json')
             .use(nocache)

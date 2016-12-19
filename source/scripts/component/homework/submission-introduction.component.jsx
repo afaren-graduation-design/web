@@ -39,7 +39,6 @@ var SubmissionIntroduction = React.createClass({
       'githubUrl': repo
     };
     var result = validate(valObj, constraint);
-    console.log(result);
     this.state.githubUrlError = getError(result, 'githubUrl');
     this.forceUpdate();
 

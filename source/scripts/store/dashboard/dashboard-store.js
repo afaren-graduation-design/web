@@ -28,6 +28,7 @@ var DashboardStore = Reflux.createStore({
         }
       })
   },
+
   onGetStatus: function (programId, paperId) {
     async.waterfall([
       (done) => {
@@ -52,13 +53,10 @@ var DashboardStore = Reflux.createStore({
               if (!res.body.isFinishedDetail) {
                 page('user-center.html');
               } else {
-                var puzzleUnable = res.body.isPaperCommited;
                 this.trigger({
                   sections: sections,
-                  puzzleEnabled: !puzzleUnable,
-                  homeworkEnabled: res.body.isPaperCommited,
-                  isOverTime: res.body.isOverTime,
-                  isFinished: res.body.isFinished,
+                  puzzleEnabled: res.body.logicPuzzleEnabled,
+                  homeworkEnabled: res.body.homeworkQuizzesEnabled,
                 });
               }
             });

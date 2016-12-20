@@ -67,7 +67,6 @@ var UserDetailStore = Reflux.createStore({
     if (state !== currentState) {
       this.trigger({
         currentState: state
-
       });
     }
   },

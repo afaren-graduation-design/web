@@ -23,12 +23,20 @@ var UserCenterSide = React.createClass({
     if(mark === 'result') {
       UserCenterActions.loadResult();
     }
+    if(mark === 'message') {
+      UserCenterActions.loadMessage();
+    }
+    if (mark === 'mentorManagement') {
+      UserCenterActions.loadMentorManagement();
+    }
   },
 
   render() {
     var tags = [
       {mark: 'userDetail', value: '个人信息'},
       {mark: 'password', value: '修改密码'},
+      {mark: 'message', value: '消息中心'},
+      {mark: 'mentorManagement', value: '教练管理'}
     ];
 
     var itemHtml = tags.map((item, index) => {

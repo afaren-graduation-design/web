@@ -11,6 +11,8 @@ var UserCenterGender = require('./component/user-center/user-center-gender.compo
 var NewPassword = require('./component/reuse/new-password.component.jsx');
 var FeedbackResult = require('./component/user-center/feedback-result.component.jsx');
 var Account = require('./component/reuse/get-account.component.jsx');
+var Message = require('./component/user-center/user-center-message.component.jsx');
+var MentorManagement = require('./component/user-center/user-center-mentor-mangement.component.jsx');
 
 ReactDom.render(
     <div>
@@ -27,6 +29,8 @@ ReactDom.render(
         <ChangePassword>
           <NewPassword initialStatus="userDetail"/>
         </ChangePassword>
+        <Message/>
+        <MentorManagement/>
       </UserCenterApp>
     </div>,
     document.getElementById('user-center')

@@ -52,20 +52,6 @@ var HomeworkSidebarStore = Reflux.createStore({
               }
             });
       },
-      // (data,done) => {
-      //   superAgent.get('/api/test/isPaperCommitted')
-      //       .set('Content-Type', 'application/json')
-      //       .use(nocache)
-      //       .use(errorHandler)
-      //       .end(function (err, resp) {
-      //         console.log(resp.body);
-      //         if(resp.body.isPaperCommitted === false) {
-      //           done('notCommitted', null);
-      //         }else {
-      //           done(null, null);
-      //         }
-      //       })
-      // },
       (data, done) => {
         console.log(data);
         superAgent.get(`/api/homework/get-list/${id}`)
@@ -101,9 +87,6 @@ var HomeworkSidebarStore = Reflux.createStore({
       if(err === true) {
         page('user-center.html');
       }
-      // if(err === 'notCommitted') {
-      //   page('dashboard.html');
-      // }
       this.data.currentQuiz = data.body.quiz;
       this.trigger(this.data);
       this.pollData();

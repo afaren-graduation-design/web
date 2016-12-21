@@ -20,7 +20,6 @@ var DashboardIcon = React.createClass({
   },
 
   render() {
-    console.log(this.state);
     var PuzzleHref = (this.state.puzzleEnabled === true ? `start.html?sectionId=1` : '#');
     var homeworkHref = (this.state.homeworkEnabled === true ? 'homework.html' : 'deadline.html');
     // homeworkHref = this.state.isOverTime || this.state.isFinished ? 'deadline.html' : homeworkHref;
@@ -48,7 +47,6 @@ var DashboardIcon = React.createClass({
       var arrow = (this.state.sections.indexOf(section) === this.state.sections.length - 1) ? (<div></div>) : (<Arrow/>);
       var uri = (section.type === 'logicQuizzes' && puzzleDisable === 'enable' ? `start.html?programId=${programId}&paperId=${paperId}&sectionId=${section.id}` :
                         (section.type === 'homeworkQuizzes' && homeworkDisable === 'enable' ? `homework.html?programId=${programId}&paperId=${paperId}&sectionId=${section.id}` : '#'));
-      console.log(uri);
       return (
         <div key={index}>
         <a href={uri} className="icon-view">

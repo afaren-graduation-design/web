@@ -30,7 +30,6 @@ var RegisterApp = React.createClass({
     var _this = this;
 
     window.onpopstate = function() {
-      console.log(_this.getCurrentState());
       _this.setState({
         loginState: _this.getCurrentState()
       });

@@ -9,11 +9,11 @@ var errorHandler = require('../../../../tools/error-handler.jsx');
 var TimerStore = Reflux.createStore({
   listenables: [TimerActions],
 
-  onGetRemainTime: function (sectionId) {
+  onGetRemainTime: function (programId, paperId, sectionId) {
     superAgent
         .get('/api/timer/remain-time')
         .set('Content-Type', 'application/json')
-        .query({sectionId: sectionId})
+        .query({programId, paperId, sectionId})
         .use(errorHandler)
         .end((err, res) => {
           this.trigger({

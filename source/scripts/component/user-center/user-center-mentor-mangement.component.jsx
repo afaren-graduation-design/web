@@ -14,24 +14,34 @@ var MentorManagement = React.createClass({
     render: function () {
         var classString = (this.state.currentState === 'mentorManagement' ? '' : ' hide');
         var mentorList = [
+            {name: "李煜", state: '已添加'},
+            {name: "杨幂", state: '已添加'},
             {name: "王一", state: '已添加'},
             {name: "王一", state: '已添加'},
-            {name: "王一", state: '已添加'},
-            {name: "王一", state: '已添加'},
-            {name: "王一", state: '已添加'}
+            {name: "白宇", state: '已添加'}
         ];
 
-        var mentorListHTML = mentorList.map((mentor) => {
+        var mentorSearchList = [
+            {name: "刘亦菲"},
+            {name: "林依晨"},
+            {name: "范冰冰"}];
+
+        var mentorSearchListHTML = mentorSearchList.map((mentor) => {
             return (
-                <div>
-                    <tr>
-                        <td>{mentor.name}</td>
-                        <td>{mentor.state}</td>
-                    </tr>
-                </div>
+                <option value="">{mentor.name}</option>
             )
         });
 
+        var mentorListHTML = mentorList.map((mentor) => {
+            return (
+                <tr>
+                    <td>{mentor.name}</td>
+                    <td>{mentor.state}</td>
+                </tr>
+            )
+        });
+
+        var selectClassString = mentorSearchListHTML ? '' : hide;
 
         return (
             <div className={"col-md-9" + classString}>
@@ -51,17 +61,19 @@ var MentorManagement = React.createClass({
                             </tbody>
                         </table>
                     </div>
+                    <div className=" col-md-4 col-md-offset-3">
+                        <div className="input-group">
+                            <input type="text" className="form-control col-md-3"/>
+                            <span className="input-group-addon">
+                                 <button className="add-mentor-btn" disabled>添加</button>
+                             </span>
+                        </div>
+                        <div className="search-mentor-list">
+                            <select multiple="true" className={"col-md-10" + selectClassString}>
+                                {mentorSearchListHTML}
+                            </select>
+                        </div>
 
-                    <div className="search-frame col-md-3 col-md-offset-4">
-                        <input type="text" placeholder="请输入老师的名字"/>
-                        <i className="glyphicon glyphicon-search"> </i>
-                    </div>
-
-                    <div className="col-md-4 text-center">
-                        
-                        <div>张三<button>添加</button></div>
-                        <div>王二<button>添加</button></div>
-                        <div>李一<button>添加</button></div>
                     </div>
 
                 </div>

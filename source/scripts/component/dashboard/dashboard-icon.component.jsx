@@ -6,6 +6,7 @@ var Col = require('react-bootstrap/lib/Col');
 var Reflux = require('reflux');
 var DashboardStore = require('../../store/dashboard/dashboard-store');
 var Arrow = require('./arrow.component.jsx');
+var getQueryString = require('../../../../tools/getQueryString');
 
 var DashboardIcon = React.createClass({
   mixins: [Reflux.connect(DashboardStore)],
@@ -25,7 +26,8 @@ var DashboardIcon = React.createClass({
     // homeworkHref = this.state.isOverTime || this.state.isFinished ? 'deadline.html' : homeworkHref;
     var puzzleDisable = (this.state.puzzleEnabled === true ? 'enable' : 'disable');
     var homeworkDisable = (this.state.homeworkEnabled === true ? 'enable' : 'disable');
-
+    var programId = getQueryString('programId');
+    var paperId = getQueryString('paperId');
     var iconInfos = {
       logicQuizzes: {
         title: '逻辑题',
@@ -44,8 +46,8 @@ var DashboardIcon = React.createClass({
     };
     var sectionList = this.state.sections.map((section, index) => {
       var arrow = (this.state.sections.indexOf(section) === this.state.sections.length - 1) ? (<div></div>) : (<Arrow/>);
-      var uri = (section.type === 'logicQuizzes' && puzzleDisable === 'enable' ? `start.html?sectionId=${section.id}` :
-                        (section.type === 'homeworkQuizzes' && homeworkDisable === 'enable' ? `homework.html?sectionId=${section.id}` : '#'));
+      var uri = (section.type === 'logicQuizzes' && puzzleDisable === 'enable' ? `start.html?programId=${programId}&paperId=${paperId}&sectionId=${section.id}` :
+                        (section.type === 'homeworkQuizzes' && homeworkDisable === 'enable' ? `homework.html?programId=${programId}&paperId=${paperId}&sectionId=${section.id}` : '#'));
       console.log(uri);
       return (
         <div key={index}>

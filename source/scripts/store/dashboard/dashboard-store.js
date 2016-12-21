@@ -7,6 +7,9 @@ var nocache = require('superagent-no-cache');
 var errorHandler = require('../../../../tools/error-handler.jsx');
 var page = require('page');
 var async = require('async');
+var getQueryString = require('../../../../tools/getQueryString');
+var programId = getQueryString('programId');
+var paperId = getQueryString('paperId');
 
 var DashboardStore = Reflux.createStore({
   listenables: DashboardActions,
@@ -29,7 +32,7 @@ var DashboardStore = Reflux.createStore({
       })
   },
 
-  onGetStatus: function (programId, paperId) {
+  onGetStatus: function () {
     async.waterfall([
       (done) => {
         request.get(`/api/user-initialization/initializeQuizzes/${programId}/${paperId}`)

@@ -10,6 +10,9 @@ var errorHandler = require('../../../../tools/error-handler.jsx');
 var async = require('async');
 var page = require('page');
 var getQueryString = require('../../../../tools/getQueryString');
+var id = getQueryString('sectionId');
+var paperId = getQueryString('paperId');
+var programId = getQueryString('programId');
 
 var pollTimeout;
 var TIMEOUT = 5000;
@@ -28,7 +31,6 @@ var HomeworkSidebarStore = Reflux.createStore({
   },
 
   pollData: function () {
-    var id = getQueryString('sectionId');
 
     if (this.hasTaskProcess()) {
       pollTimeout = setTimeout(this.onInit(id), TIMEOUT);
@@ -53,7 +55,6 @@ var HomeworkSidebarStore = Reflux.createStore({
             });
       },
       (data, done) => {
-        console.log(data);
         superAgent.get(`/api/homework/get-list/${id}`)
             .set('Content-Type', 'application/json')
             .use(nocache)
@@ -71,6 +72,7 @@ var HomeworkSidebarStore = Reflux.createStore({
         this.data.orderId = orderId;
 
         done(null, {
+          id,
           orderId: orderId
         });
       },
@@ -96,11 +98,11 @@ var HomeworkSidebarStore = Reflux.createStore({
   onCreateTask: function (data) {
 
     var jsonData = Object.assign({
-      paperId: 1,
+      paperId: paperId,
+      programId: programId,
       quizId: this.data.currentQuiz.id,
       homeworkQuizUri: this.data.currentQuiz.uri
     }, data);
-    console.log(jsonData);
     async.waterfall([
       (done) => {
         superAgent.post('/api/homework/scoring')
@@ -133,6 +135,7 @@ var HomeworkSidebarStore = Reflux.createStore({
         this.data.orderId = orderId;
 
         done(null, {
+          id,
           orderId: orderId
         });
       },

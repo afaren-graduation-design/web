@@ -50,6 +50,8 @@ var GetAccount = React.createClass({
           <div className={this.state.isLoged ? 'dropdown' : 'hide'}>
             <div className="dropdown-style" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
                aria-expanded="true">
+              <i className="fa fa-bell bigger"></i>
+              &nbsp;&nbsp;
               {this.state.account}
               <span className="caret" />
             </div>

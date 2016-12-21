@@ -20,8 +20,7 @@ var LogicPuzzleSidebar = React.createClass({
     this.setState({
       loading: true
     });
-    var sectionId = location.search.split('=')[1];
-    LogicPuzzleActions.submitPaper(sectionId);
+    LogicPuzzleActions.submitPaper();
   },
 
 

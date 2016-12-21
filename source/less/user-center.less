@@ -3,7 +3,17 @@
 body {
   background-color: @pale-white;
 }
-
+#tabs {
+  overflow-x: hidden;
+  .table {
+    .table-header {
+      background-color:#f5f9fc;
+    }
+    margin-top:15px;
+    margin-left:50px;
+    width: 90%;
+  }
+}
 #user-center {
   .header-major;
   .sidebar,
@@ -15,7 +25,7 @@ body {
   .show-result {
     padding: 20px 40px;
     overflow: scroll;
-    caption{
+    caption {
       font-size: 20px;
     }
   }
@@ -31,7 +41,7 @@ body {
   .form-top-height {
     padding-top: 75px;
     padding-left: 0px;
-    label{
+    label {
       padding-left: 0px;
     }
     .gender {
@@ -48,13 +58,13 @@ body {
     .select {
       border: 1px solid @deep-red;
     }
-    .school-info{
+    .school-info {
       padding: 0px;
     }
   }
   .input-calendar {
     margin-right: 0px;
-    width:100%;
+    width: 100%;
     input {
       border: 1px solid #ccc;
       border-radius: 4px;
@@ -68,11 +78,12 @@ body {
   .input-calendar-wrapper {
     padding: 5px 0px;
   }
-}
+ }
 
 .success-prompt {
   text-align: center;
 }
+
 .visibility {
   visibility: hidden;
 }

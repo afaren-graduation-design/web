@@ -26,15 +26,15 @@ var MentorManagement = React.createClass({
             {name: "林依晨"},
             {name: "范冰冰"}];
 
-        var mentorSearchListHTML = mentorSearchList.map((mentor) => {
+        var mentorSearchListHTML = mentorSearchList.map((mentor,index) => {
             return (
-                <option value="">{mentor.name}</option>
+                <option value="" key={index}>{mentor.name}</option>
             )
         });
 
-        var mentorListHTML = mentorList.map((mentor) => {
+        var mentorListHTML = mentorList.map((mentor,index) => {
             return (
-                <tr>
+                <tr key={index}>
                     <td>{mentor.name}</td>
                     <td>{mentor.state}</td>
                 </tr>
@@ -49,12 +49,11 @@ var MentorManagement = React.createClass({
                     <div className="table-list">
                         <table className='table  table-striped table-hover table-bordered'>
                             <thead>
-                            <div className="list-group-item active">
-                                <tr className="table-head">
+                            <div className="list-group-item active"></div>
+                            <tr className="table-head">
                                     <td>姓名</td>
                                     <td>状态</td>
                                 </tr>
-                            </div>
                             </thead>
                             <tbody>
                             {mentorListHTML}
@@ -63,7 +62,7 @@ var MentorManagement = React.createClass({
                     </div>
                     <div className=" col-md-4 col-md-offset-3">
                         <div className="input-group">
-                            <input type="text" className="form-control col-md-3"/>
+                            <input type="text" className="form-control search-mentor-frame col-md-3"/>
                             <span className="input-group-addon">
                                  <button className="add-mentor-btn" disabled>添加</button>
                              </span>

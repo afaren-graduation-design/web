@@ -58,9 +58,7 @@ var DashboardStore = Reflux.createStore({
                 page('user-center.html');
               } else {
                 this.trigger({
-
-                  puzzleEnabled: res.body.logicPuzzleEnabled,
-                  homeworkEnabled: res.body.homeworkQuizzesEnabled,
+                  sections: res.body.sections
                 });
               }
             });

@@ -46,7 +46,6 @@ var MentorManagement = React.createClass({
         return (
             <div className={"col-md-9" + classString}>
                 <div className="content  text-center">
-                    <div className="table-list">
                         <table className='table  table-striped table-hover table-bordered'>
                             <thead>
                             <div className="list-group-item active"></div>
@@ -59,7 +58,6 @@ var MentorManagement = React.createClass({
                             {mentorListHTML}
                             </tbody>
                         </table>
-                    </div>
                     <div className=" col-md-4 col-md-offset-3">
                         <div className="input-group">
                             <input type="text" className="form-control search-mentor-frame col-md-3"/>

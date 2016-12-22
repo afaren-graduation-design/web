@@ -26,13 +26,13 @@ var MentorManagement = React.createClass({
             {name: "林依晨"},
             {name: "范冰冰"}];
 
-        var mentorSearchListHTML = mentorSearchList.map((mentor,index) => {
+        var mentorSearchListHTML = mentorSearchList.map((mentor, index) => {
             return (
                 <option value="" key={index}>{mentor.name}</option>
             )
         });
 
-        var mentorListHTML = mentorList.map((mentor,index) => {
+        var mentorListHTML = mentorList.map((mentor, index) => {
             return (
                 <tr key={index}>
                     <td>{mentor.name}</td>
@@ -46,18 +46,19 @@ var MentorManagement = React.createClass({
         return (
             <div className={"col-md-9" + classString}>
                 <div className="content  text-center">
+                    <div className="table-list">
                         <table className='table  table-striped table-hover table-bordered'>
                             <thead>
-                            <div className="list-group-item active"></div>
                             <tr className="table-head">
-                                    <td>姓名</td>
-                                    <td>状态</td>
-                                </tr>
+                                <td>姓名</td>
+                                <td>状态</td>
+                            </tr>
                             </thead>
                             <tbody>
                             {mentorListHTML}
                             </tbody>
                         </table>
+                    </div>
                     <div className=" col-md-4 col-md-offset-3">
                         <div className="input-group">
                             <input type="text" className="form-control search-mentor-frame col-md-3"/>

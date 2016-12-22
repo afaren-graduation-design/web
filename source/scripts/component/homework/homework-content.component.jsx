@@ -3,12 +3,20 @@
 var Tabs = require('react-bootstrap/lib/Tabs');
 var Tab = require('react-bootstrap/lib/Tab');
 var homeworkQuizzesStatus = require('../../../../mixin/constant').homeworkQuizzesStatus;
+var getQueryString = require('../../../../tools/getQueryString');
+var page = require('page');
 
 var HomeworkContent = React.createClass({
   componentWillReceiveProps: function(nextProps) {
     if(this.props.orderId !== nextProps.orderId) {
         this.refs.tabs.state.activeKey = 0;
     }
+  },
+
+  backDashboard: function () {
+    var programId = getQueryString('programId');
+    var paperId = getQueryString('paperId');
+    page(`dashboard.html?programId=${programId}&paperId=${paperId}`)
   },
 
   render(){
@@ -22,6 +30,8 @@ var HomeworkContent = React.createClass({
     return (
       <div className="col-md-9 col-sm-9 col-xs-12">
         <div className="content">
+          <a className="btn btn-lg btn-danger btn-block" onClick={this.backDashboard}>返回试卷</a>
+
           <Tabs defaultActiveKey={0} animation={false} getShowStatus={true} ref="tabs">
             {tabHtml}
           </Tabs>

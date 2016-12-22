@@ -51,13 +51,14 @@ var DashboardStore = Reflux.createStore({
           var sections = data.sections;
           request.get(`/api/dashboard/${programId}/${paperId}`)
             .set('Content-Type', 'application/json')
+            .query({sections})
             .use(errorHandler)
             .end((err, res) => {
               if (!res.body.isFinishedDetail) {
                 page('user-center.html');
               } else {
                 this.trigger({
-                  sections: sections,
+
                   puzzleEnabled: res.body.logicPuzzleEnabled,
                   homeworkEnabled: res.body.homeworkQuizzesEnabled,
                 });

@@ -5,6 +5,8 @@ var LogicPuzzleStore = require('../../store/logic-puzzle/logic-puzzle-store');
 var LogicPuzzleActions = require('../../actions/logic-puzzle/logic-puzzle-actions');
 var Modal = require('react-bootstrap/lib/Modal');
 var constant = require('../../../../mixin/constant');
+var page = require('page');
+var getQueryString = require('../../../../tools/getQueryString');
 var able = false;
 
 var LogicPuzzleSidebar = React.createClass({
@@ -23,6 +25,11 @@ var LogicPuzzleSidebar = React.createClass({
     LogicPuzzleActions.submitPaper();
   },
 
+  backDashboard: function () {
+    var programId = getQueryString('programId');
+    var paperId = getQueryString('paperId');
+    page(`dashboard.html?programId=${programId}&paperId=${paperId}`)
+  },
 
   render: function () {
     var isLast = this.state.orderId === (this.state.itemsCount - 1);
@@ -54,7 +61,11 @@ var LogicPuzzleSidebar = React.createClass({
           <div className={able ? 'prompt' : 'hint'}>
             <span>{able ? '检查完毕后可以交卷' : '只有在查看完所有题后才可以交卷'}</span>
           </div>
+          <div className="back">
+          </div>
           <div className="confirm">
+            <a className="btn btn-lg btn-danger btn-block" onClick={this.backDashboard}>返回试卷</a>
+
             <a href="#" className="btn btn-lg btn-danger btn-block" data-toggle="modal"
                data-target={able ? '#submitModal': ''} disabled={able ? '' : 'disabled'}>交卷</a>
           </div>

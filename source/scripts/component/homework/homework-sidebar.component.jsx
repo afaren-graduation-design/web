@@ -60,14 +60,6 @@ var HomeworkSidebar = React.createClass({
             </div>
           </div>
           {itemHtml}
-          <button className='list-group-item'
-                  onClick={this.handleClick.bind(this)}>
-            <div className="row">
-              <div className="col-xs-9 h4 text-center ">请求查看答案</div>
-              <div className='col-xs-3'>
-                <i className='fa fa-key'/></div>
-            </div>
-          </button>
         </div>
       </div>
     );

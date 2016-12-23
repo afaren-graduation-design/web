@@ -51,7 +51,7 @@ var DashboardStore = Reflux.createStore({
           var sections = data.sections;
           request.get(`/api/dashboard/${programId}/${paperId}`)
             .set('Content-Type', 'application/json')
-            .query({sections})
+            .query({sections:JSON.stringify(sections)})
             .use(errorHandler)
             .end((err, res) => {
               if (!res.body.isFinishedDetail) {

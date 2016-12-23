@@ -7,9 +7,9 @@ var getQueryString = require('../../../../tools/getQueryString');
 var page = require('page');
 
 var HomeworkContent = React.createClass({
-  componentWillReceiveProps: function(nextProps) {
-    if(this.props.orderId !== nextProps.orderId) {
-        this.refs.tabs.state.activeKey = 0;
+  componentWillReceiveProps: function (nextProps) {
+    if (this.props.orderId !== nextProps.orderId) {
+      this.refs.tabs.state.activeKey = 0;
     }
   },
 
@@ -22,7 +22,7 @@ var HomeworkContent = React.createClass({
   render(){
     var isOpend = homeworkQuizzesStatus.LOCKED !== this.props.quiz.status;
 
-    var tabNames = isOpend ? ["题目说明", "提交作业", "运行结果"] : ["题目说明"];
+    var tabNames = isOpend ? ["题目说明", "提交作业", "运行结果", "查看答案"] : ["题目说明"];
     var tabHtml = tabNames.map((item, idx) => {
       return <Tab key={idx} eventKey={idx} title={item}>{this.props.children[idx]}</Tab>
     });

@@ -64,10 +64,9 @@ var LogicPuzzleSidebar = React.createClass({
           <div className="back">
           </div>
           <div className="confirm">
-            <a className="btn btn-lg btn-danger btn-block" onClick={this.backDashboard}>返回试卷</a>
-
             <a href="#" className="btn btn-lg btn-danger btn-block" data-toggle="modal"
                data-target={able ? '#submitModal': ''} disabled={able ? '' : 'disabled'}>交卷</a>
+            <a className="btn btn-lg btn-success btn-block" onClick={this.backDashboard}>返回试卷</a>
           </div>
 
           <div className="modal fade bs-example-modal-sm" id="submitModal" tabIndex="-1" role="dialog">

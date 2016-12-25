@@ -3,6 +3,8 @@
 'use strict';
 
 var homeworkQuizzesStatus = require('../../../../mixin/constant').homeworkQuizzesStatus;
+var getQueryString = require('../../../../tools/getQueryString');
+var page = require('page');
 
 var HomeworkSidebar = React.createClass({
   getIconCss: function (state) {
@@ -22,6 +24,12 @@ var HomeworkSidebar = React.createClass({
       }
     });
     return icon;
+  },
+
+  backDashboard: function () {
+    var programId = getQueryString('programId');
+    var paperId = getQueryString('paperId');
+    page(`dashboard.html?programId=${programId}&paperId=${paperId}`)
   },
 
   handleClick: function (orderId) {
@@ -60,6 +68,7 @@ var HomeworkSidebar = React.createClass({
             </div>
           </div>
           {itemHtml}
+          <a className="btn btn-lg btn-success btn-block" onClick={this.backDashboard}>返回试卷</a>
         </div>
       </div>
     );

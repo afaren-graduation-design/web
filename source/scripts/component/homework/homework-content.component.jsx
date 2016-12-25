@@ -13,12 +13,6 @@ var HomeworkContent = React.createClass({
     }
   },
 
-  backDashboard: function () {
-    var programId = getQueryString('programId');
-    var paperId = getQueryString('paperId');
-    page(`dashboard.html?programId=${programId}&paperId=${paperId}`)
-  },
-
   render(){
     var isOpend = homeworkQuizzesStatus.LOCKED !== this.props.quiz.status;
 
@@ -30,8 +24,6 @@ var HomeworkContent = React.createClass({
     return (
       <div className="col-md-9 col-sm-9 col-xs-12">
         <div className="content">
-          <a className="btn btn-lg btn-danger btn-block" onClick={this.backDashboard}>返回试卷</a>
-
           <Tabs defaultActiveKey={0} animation={false} getShowStatus={true} ref="tabs">
             {tabHtml}
           </Tabs>

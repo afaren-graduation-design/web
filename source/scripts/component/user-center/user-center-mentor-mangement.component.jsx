@@ -12,12 +12,11 @@ var MentorManagement = React.createClass({
             inputValue: ''
         };
     },
+
     onchange: function (event) {
-        console.log("=========="+ event.target.value);
         this.setState({inputValue: event.target.value});
-
-
     },
+
     render: function () {
         var classString = (this.state.currentState === 'mentorManagement' ? '' : ' hide');
         var mentorList = [

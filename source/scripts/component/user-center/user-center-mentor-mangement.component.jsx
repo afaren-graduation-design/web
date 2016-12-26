@@ -8,8 +8,15 @@ var MentorManagement = React.createClass({
 
     getInitialState: function () {
         return {
-            currentState: 'userDetail'
+            currentState: 'userDetail',
+            inputValue: ''
         };
+    },
+    onchange: function (event) {
+        console.log("=========="+ event.target.value);
+        this.setState({inputValue: event.target.value});
+
+
     },
     render: function () {
         var classString = (this.state.currentState === 'mentorManagement' ? '' : ' hide');
@@ -28,7 +35,7 @@ var MentorManagement = React.createClass({
 
         var mentorSearchListHTML = mentorSearchList.map((mentor, index) => {
             return (
-                <option value="" key={index}>{mentor.name}</option>
+                <option key={index} value={mentor.name}>{mentor.name}</option>
             )
         });
 
@@ -61,13 +68,13 @@ var MentorManagement = React.createClass({
                     </div>
                     <div className=" col-md-4 col-md-offset-3">
                         <div className="input-group">
-                            <input type="text" className="form-control search-mentor-frame col-md-3"/>
+                            <input type="text" className="form-control search-mentor-frame col-md-3" placeholder="请输入教练邮箱" value={this.state.inputValue}/>
                             <span className="input-group-addon">
                                  <button className="add-mentor-btn" disabled>添加</button>
                              </span>
                         </div>
                         <div className="search-mentor-list">
-                            <select multiple="true" className={"col-md-10" + selectClassString}>
+                            <select multiple="true" className={"col-md-10" + selectClassString} onChange={this.onchange}>
                                 {mentorSearchListHTML}
                             </select>
                         </div>

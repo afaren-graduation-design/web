@@ -108,7 +108,9 @@ var Homework = React.createClass({
             <RunningResult
               quiz={this.state.currentQuiz}/>
 
-            <RequestAnswer/>
+            <RequestAnswer orderId={this.state.orderId}
+                           sectionId={getQueryString('sectionId')}
+                           paperId={getQueryString('paperId')}/>
           </HomeworkContent>
         </div>
       </div>

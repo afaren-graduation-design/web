@@ -11,12 +11,11 @@ var RequestAnswer = React.createClass({
     MessageActions.createMessage({
       to: 1,
       type: 'requestAnswer',
-      deeplink: 'papers/1/sections/1/homeworks/1'
+      deeplink: `papers/${this.props.paperId}/sections/${this.props.sectionId}/homeworks/${this.props.orderId}`
     });
   },
 
   render() {
-
     return (
       <div className="runningResult tab">
         <div className="result">

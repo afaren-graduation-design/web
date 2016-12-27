@@ -11,6 +11,7 @@ var MentorManagement = React.createClass({
     getInitialState: function () {
         return {
             currentState: 'userDetail',
+            mentorList: [],
             mentorSearchList: [],
             inputId: '',
             isDisabled: true
@@ -18,6 +19,7 @@ var MentorManagement = React.createClass({
     },
 
     componentDidMount: function () {
+        MentorManagementAction.getMessages();
         Rx.Observable.fromEvent(this.inputInfo,'keyup')
             .pluck('target','value')
             .map(text => text.trim())
@@ -31,12 +33,8 @@ var MentorManagement = React.createClass({
 
     onchange: function (event) {
         this.inputInfo.value =  event.target.value;
+        console.log('change---'+event.target.id);
         this.setState({inputId: event.target.key, isDisabled:false});
-    },
-
-    searchMentor: function (event) {
-        const email = event.target.value;
-        console.log( "===="+ email);
     },
 
     addMentor: function () {
@@ -47,19 +45,13 @@ var MentorManagement = React.createClass({
 
     render: function () {
         var classString = (this.state.currentState === 'mentorManagement' ? '' : ' hide');
-        var mentorList = [
-            {name: "李煜", state: '已添加'},
-            {name: "杨幂", state: '已添加'},
-            {name: "王一", state: '已添加'},
-            {name: "王一", state: '已添加'},
-            {name: "白宇", state: '已添加'}
-        ];
 
+        var mentorList = this.state.mentorList || [];
         var mentorSearchList = this.state.mentorSearchList || [];
 
         var mentorSearchListHTML = mentorSearchList.map((mentor, index) => {
             return (
-                <option key={mentor._id} value={mentor.email}>{mentor.name}</option>
+                <option id={mentor.userId} value={mentor.email}>{mentor.name}</option>
             )
         });
 

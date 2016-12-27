@@ -10,6 +10,19 @@ var lang = require('../../../../mixin/lang-message/chinese');
 var MentorManagementStore = Reflux.createStore({
   listenables: [MentorManagementAction],
 
+  onGetMessages: function () {
+    request.get('api/messages')
+        .set('Content-Type', 'application/json')
+        .use(errorHandler)
+        .end((err,res) => {
+          if (!res) {
+            return;
+          }
+          this.trigger({
+            mentorList:res.body
+          });
+        });
+  },
   onSearchMentor: function (email) {
     request.get('/api/mentors?email=' + email)
         .set('Content-Type', 'application/json')

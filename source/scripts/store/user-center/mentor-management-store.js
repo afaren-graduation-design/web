@@ -11,7 +11,6 @@ var MentorManagementStore = Reflux.createStore({
   listenables: [MentorManagementAction],
 
   onSearchMentor: function (email) {
-    console.log("actions---" + email);
     request.get('/api/mentors?email=' + email)
         .set('Content-Type', 'application/json')
         .use(errorHandler)

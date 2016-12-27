@@ -1,20 +1,48 @@
 'use strict';
 var UserCenterStore = require('../../store/user-center/user-center-store');
+var MentorManagementStore = require('../../store/user-center/mentor-management-store');
+var MentorManagementAction = require('../../actions/user-center/mentor-management-action');
 var Reflux = require('reflux');
+var Rx = require('rx');
 
 var MentorManagement = React.createClass({
-    mixins: [Reflux.connect(UserCenterStore)],
-
+    mixins: [Reflux.connect(UserCenterStore),Reflux.connect(MentorManagementStore)],
 
     getInitialState: function () {
         return {
             currentState: 'userDetail',
-            inputValue: ''
+            mentorSearchList: [],
+            inputId: '',
+            isDisabled: true
         };
     },
 
+    componentDidMount: function () {
+        Rx.Observable.fromEvent(this.inputInfo,'keyup')
+            .pluck('target','value')
+            .map(text => text.trim())
+            .filter(text => text.length >= 3)
+            .debounce(1000)
+            .distinctUntilChanged()
+            .forEach(item => {
+               MentorManagementAction.searchMentor(item);
+            })
+    },
+
     onchange: function (event) {
-        this.setState({inputValue: event.target.value});
+        this.inputInfo.value =  event.target.value;
+        this.setState({inputId: event.target.key, isDisabled:false});
+    },
+
+    searchMentor: function (event) {
+        const email = event.target.value;
+        console.log( "===="+ email);
+    },
+
+    addMentor: function () {
+        const id = this.state.inputId;
+        console.log("+++++" + id);
+
     },
 
     render: function () {
@@ -27,14 +55,11 @@ var MentorManagement = React.createClass({
             {name: "白宇", state: '已添加'}
         ];
 
-        var mentorSearchList = [
-            {name: "刘亦菲"},
-            {name: "林依晨"},
-            {name: "范冰冰"}];
+        var mentorSearchList = this.state.mentorSearchList || [];
 
         var mentorSearchListHTML = mentorSearchList.map((mentor, index) => {
             return (
-                <option key={index} value={mentor.name}>{mentor.name}</option>
+                <option key={mentor._id} value={mentor.email}>{mentor.name}</option>
             )
         });
 
@@ -67,9 +92,12 @@ var MentorManagement = React.createClass({
                     </div>
                     <div className=" col-md-4 col-md-offset-3">
                         <div className="input-group">
-                            <input type="text" className="form-control search-mentor-frame col-md-3" placeholder="请输入教练邮箱" value={this.state.inputValue}/>
+                            <input type="text" className="form-control search-mentor-frame col-md-3" placeholder="请输入教练邮箱"
+                                   ref={(ref) => {
+                                       this.inputInfo = ref;
+                                   }} />
                             <span className="input-group-addon">
-                                 <button className="add-mentor-btn" disabled>添加</button>
+                                 <button className="add-mentor-btn" disabled={this.state.isDisabled} onClick={this.addMentor}>添加</button>
                              </span>
                         </div>
                         <div className="search-mentor-list">

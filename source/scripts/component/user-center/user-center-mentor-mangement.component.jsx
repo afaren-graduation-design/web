@@ -33,14 +33,11 @@ var MentorManagement = React.createClass({
 
     onchange: function (event) {
         this.inputInfo.value =  event.target.value;
-        console.log('change---'+event.target.id);
-        this.setState({inputId: event.target.key, isDisabled:false});
+        this.setState({inputId: this.inputUserId, isDisabled:false});
     },
 
     addMentor: function () {
-        const id = this.state.inputId;
-        console.log("+++++" + id);
-
+        MentorManagementAction.createMessages(this.state.inputId);
     },
 
     render: function () {
@@ -51,15 +48,23 @@ var MentorManagement = React.createClass({
 
         var mentorSearchListHTML = mentorSearchList.map((mentor, index) => {
             return (
-                <option id={mentor.userId} value={mentor.email}>{mentor.name}</option>
+                <option  ref={(ref) => {
+                    this.inputUserId = mentor.userId;
+                }}  value={mentor.email}>{mentor.name}</option>
             )
         });
 
         var mentorListHTML = mentorList.map((mentor, index) => {
+            var state = '';
+            if(mentor.state === 0){
+                state = '未读';
+            }else {
+                state = '已读';
+            }
             return (
                 <tr key={index}>
                     <td>{mentor.name}</td>
-                    <td>{mentor.state}</td>
+                    <td>{state}</td>
                 </tr>
             )
         });

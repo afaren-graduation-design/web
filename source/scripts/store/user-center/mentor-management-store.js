@@ -14,7 +14,7 @@ var MentorManagementStore = Reflux.createStore({
     request.get('api/messages')
         .set('Content-Type', 'application/json')
         .use(errorHandler)
-        .end((err,res) => {
+        .end((err, res) => {
           if (!res) {
             return;
           }
@@ -23,6 +23,30 @@ var MentorManagementStore = Reflux.createStore({
           });
         });
   },
+
+  onCreateMessages: function (mentorId) {
+    request.post('api/messages')
+        .set('Content-Type','application/json')
+        .send({to: mentorId, type: 'invitation'})
+        .use(errorHandler)
+        .end((err, res) => {
+          if (!res){
+            return;
+          }
+          request.get('api/messages')
+              .set('Content-Type', 'application/json')
+              .use(errorHandler)
+              .end((err, res) => {
+                if (!res) {
+                  return;
+                }
+                this.trigger({
+                  mentorList:res.body
+                });
+              });
+        });
+  },
+
   onSearchMentor: function (email) {
     request.get('/api/mentors?email=' + email)
         .set('Content-Type', 'application/json')

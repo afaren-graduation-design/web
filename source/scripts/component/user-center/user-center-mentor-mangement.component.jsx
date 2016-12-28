@@ -32,8 +32,9 @@ var MentorManagement = React.createClass({
     },
 
     onchange: function (event) {
-        this.inputInfo.value =  event.target.value;
-        this.setState({inputId: this.inputUserId, isDisabled:false});
+        var arr = event.target.value.split('-');
+        this.inputInfo.value =  arr[0];
+        this.setState({inputId: arr[1], isDisabled:false});
     },
 
     addMentor: function () {
@@ -48,9 +49,7 @@ var MentorManagement = React.createClass({
 
         var mentorSearchListHTML = mentorSearchList.map((mentor, index) => {
             return (
-                <option  ref={(ref) => {
-                    this.inputUserId = mentor.userId;
-                }}  value={mentor.email}>{mentor.name}</option>
+                <option value={mentor.name +'-'+mentor.userId}>{mentor.name}</option>
             )
         });
 

@@ -38,7 +38,8 @@ var Homework = React.createClass({
     return {
       homeworkQuizzes: [],
       orderId: 1,
-      currentQuiz: {}
+      currentQuiz: {},
+      currentAnswerPath:""
     };
   },
 
@@ -110,7 +111,8 @@ var Homework = React.createClass({
 
             <RequestAnswer orderId={this.state.orderId}
                            sectionId={getQueryString('sectionId')}
-                           paperId={getQueryString('paperId')}/>
+                           paperId={getQueryString('paperId')}
+                           answerPath={this.state.currentAnswerPath}/>
           </HomeworkContent>
         </div>
       </div>

@@ -90,6 +90,9 @@ var HomeworkSidebarStore = Reflux.createStore({
         page('user-center.html');
       }
       this.data.currentQuiz = data.body.quiz;
+      console.log("000000000000");
+      console.log(data);
+      this.data.currentAnswerPath = data.body.answerPath;
       this.trigger(this.data);
       this.pollData();
     });

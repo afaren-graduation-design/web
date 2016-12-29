@@ -16,6 +16,10 @@ var RequestAnswer = React.createClass({
   },
 
   render() {
+
+    console.log("lllllllllllllll");
+    console.log(this.props.answerPath);
+
     return (
       <div className="runningResult tab">
         <div className="result">

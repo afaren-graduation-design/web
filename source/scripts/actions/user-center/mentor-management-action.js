@@ -3,9 +3,9 @@
 var Reflux = require('reflux');
 
 var MentorManagementAction = Reflux.createActions([
-    'getMessages',
-    'searchMentor',
-    'createMessages'
+  'getMessages',
+  'searchMentor',
+  'createMessages'
 
 ]);
 

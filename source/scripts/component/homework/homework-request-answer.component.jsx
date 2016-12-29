@@ -16,15 +16,13 @@ var RequestAnswer = React.createClass({
   },
 
   render() {
-
-    console.log("lllllllllllllll");
-    console.log(this.props.answerPath);
+    const btn = <button className="btn btn-primary" onClick={this.handleRequest}>请求答案</button>;
+    let result = this.props.answerPath ? this.props.answerPath : {btn};
 
     return (
       <div className="runningResult tab">
         <div className="result">
-          <button className="btn btn-primary" onClick={this.handleRequest}>请求答案</button>
-
+          {result}
         </div>
       </div>
     );

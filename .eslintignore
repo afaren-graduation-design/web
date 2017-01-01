@@ -1,3 +1,4 @@
+webpack.config.js
 spec/*
 public/*
 node_modules/*

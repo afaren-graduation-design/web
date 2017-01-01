@@ -2,9 +2,7 @@
 
 var MentorTable = React.createClass({
   render() {
-
     var mentorList = this.props.mentorList || [];
-
     var mentorListHTML = mentorList.map((mentor, index) => {
       var state = '';
       if (mentor.state === 0) {

@@ -10,7 +10,7 @@ var RequestAnswer = React.createClass({
   handleRequest: function () {
     MessageActions.createMessage({
       to: 1,
-      type: 'requestAnswer',
+      type: 'REQUEST_ANSWER',
       deeplink: `papers/${this.props.paperId}/sections/${this.props.sectionId}/homeworks/${this.props.orderId}`
     });
   },

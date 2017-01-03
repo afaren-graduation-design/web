@@ -55,16 +55,16 @@ var MentorManagement = React.createClass({
     var selectClassString = mentorSearchListHTML ? '' : hide;
 
     return (
-      <div className={"col-md-9" + classString}>
+      <div className={"col-md-9 col-sm-9 col-xs-12" + classString}>
         <div className="content  text-center">
           <div className="table-list">
 
             <MentorTable mentorList={this.state.mentorList}/>
 
           </div>
-          <div className=" col-md-4 col-md-offset-3">
+          <div className="col-md-4 col-sm-4 col-xs-4 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
             <div className="input-group">
-              <input type="text" className="form-control search-mentor-frame col-md-3" placeholder="请输入教练邮箱"
+              <input type="text" className="form-control search-mentor-frame col-md-3 col-sm-3 col-xs-3" placeholder="请输入教练邮箱"
                      ref={(ref) => {
                        this.inputInfo = ref;
                      }}/>
@@ -74,7 +74,7 @@ var MentorManagement = React.createClass({
                              </span>
             </div>
             <div className="search-mentor-list">
-              <select multiple="true" className={"col-md-10" + selectClassString} onChange={this.onchange}>
+              <select multiple="true" className={"col-md-10 col-sm-10 col-xs-10" + selectClassString} onChange={this.onchange}>
                 {mentorSearchListHTML}
               </select>
             </div>

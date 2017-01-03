@@ -90,9 +90,6 @@ var HomeworkSidebarStore = Reflux.createStore({
         page('user-center.html');
       }
       this.data.currentQuiz = data.body.quiz;
-      console.log("jjjjj")
-      console.log(data);
-
       if(data.body.answer.status === 200){
         this.data.currentAnswer = data.body.answer.path;
       }

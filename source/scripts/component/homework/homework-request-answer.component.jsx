@@ -16,9 +16,8 @@ var RequestAnswer = React.createClass({
   },
 
   render() {
-    const btn = <button className="btn btn-primary" onClick={this.handleRequest}>请求答案</button>;
-    let result = this.props.answerPath ? this.props.answerPath : {btn};
-
+    const RequestAnswerBtn = <button className="btn btn-primary" onClick={this.handleRequest}>请求答案</button>;
+    let result = this.props.answer ? this.props.answer : RequestAnswerBtn;
     return (
       <div className="runningResult tab">
         <div className="result">

@@ -90,8 +90,12 @@ var HomeworkSidebarStore = Reflux.createStore({
         page('user-center.html');
       }
       this.data.currentQuiz = data.body.quiz;
+      console.log("jjjjj")
+      console.log(data);
 
-      this.data.currentAnswerPath = data.body.answerPath;
+      if(data.body.answer.status === 200){
+        this.data.currentAnswer = data.body.answer.path;
+      }
       this.trigger(this.data);
       this.pollData();
     });
@@ -151,7 +155,6 @@ var HomeworkSidebarStore = Reflux.createStore({
             .end(done);
       }
     ], (err, data) => {
-
       this.data.currentQuiz = data.body.quiz;
       this.trigger(this.data);
       this.pollData();
@@ -160,3 +163,5 @@ var HomeworkSidebarStore = Reflux.createStore({
 });
 
 module.exports = HomeworkSidebarStore;
+
+

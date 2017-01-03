@@ -9,7 +9,7 @@ var MentorManagementStore = Reflux.createStore({
   listenables: [MentorManagementAction],
 
   onGetMessages: function () {
-    request.get('api/messages')
+    request.get('api/mentors/search')
         .set('Content-Type', 'application/json')
         .use(errorHandler)
         .end((err, res) => {
@@ -31,7 +31,7 @@ var MentorManagementStore = Reflux.createStore({
           if (err) {
             throw err;
           }
-          request.get('api/messages')
+          request.get('api/mentors/search')
               .set('Content-Type', 'application/json')
               .use(errorHandler)
               .end((err, res) => {

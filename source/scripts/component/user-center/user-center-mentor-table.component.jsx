@@ -2,23 +2,25 @@
 
 var MentorTable = React.createClass({
   render() {
+    const stateData = {
+      'AGREE_INVITATION': '已接受',
+      'INVITATION': '已发送'
+    };
+
     var mentorList = this.props.mentorList || [];
-    var mentorListHTML = mentorList.map((mentor, index) => {
-      var state = '';
-      if (mentor.state === 0) {
-        state = '未读';
-      } else {
-        state = '已读';
+    var mentorListHTML = mentorList.map(({name, type}, index) => {
+      if (type !== 'DISAGREE_INVITATION') {
+        return (
+          <tr key={index}>
+            <td>{name}</td>
+            <td>{stateData[type]}</td>
+          </tr>
+        );
       }
-      return (
-        <tr key={index}>
-          <td>{mentor.name}</td>
-          <td>{state}</td>
-        </tr>
-      )
+
     });
     return (
-      <table className='table  table-striped table-hover table-bordered'>
+      <table className='table table-striped table-hover table-bordered'>
         <thead>
         <tr className="table-head">
           <td>姓名</td>

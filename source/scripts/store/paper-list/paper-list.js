@@ -22,18 +22,18 @@ var PapersListStore = Reflux.createStore({
             }
           )
       },
-      (data, done)=> {
-        async.map(data, (programId, callback)=> {
+      (data, done) => {
+        async.map(data, (programId, callback) => {
           request.get(`/api/programs/${programId}/papers`)
             .set('Content-Type', 'application/json')
             .use(errorHandler)
-            .end((err, resp)=> {
+            .end((err, resp) => {
               if (err) {
                 return;
               }
               callback(null, {data: resp.body.data, programId});
             })
-        }, (err, result)=> {
+        }, (err, result) => {
           if (err) {
             return;
           }
@@ -44,7 +44,15 @@ var PapersListStore = Reflux.createStore({
   },
 
   onGetOnePaper: function (id, programId) {
-    page('dashboard.html?programId='+programId + '&paperId='+id);
+    request.post(`/api/programs/${programId}/papers/${id}`)
+      .end((err, res) => {
+        if (err) {
+          return;
+        }
+        if (res.body.data.status === 200) {
+          page('dashboard.html?programId='+programId + '&paperId='+res.body.data.id);
+        }
+      })
   }
 });
 

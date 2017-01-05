@@ -16,7 +16,7 @@ var MentorSearch = React.createClass({
     };
   },
 
-  compoentDidMount() {
+  componentDidMount() {
     Rx.Observable.fromEvent(this.inputInfo, 'keyup')
       .pluck('target', 'value')
       .map(text => text.trim())
@@ -24,8 +24,6 @@ var MentorSearch = React.createClass({
       .debounce(1000)
       .distinctUntilChanged()
       .forEach(item => {
-        console.log('sdfhsdjkflsh');
-        console.log(item)
         MentorManagementAction.searchMentor(item);
       })
   },

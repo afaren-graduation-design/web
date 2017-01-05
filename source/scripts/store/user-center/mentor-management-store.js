@@ -10,7 +10,7 @@ var MentorManagementStore = Reflux.createStore({
   listenables: [MentorManagementAction],
 
   onGetMessages: function () {
-    request.get('api/mentors/search')
+    request.get('api/mentors')
       .set('Content-Type', 'application/json')
       .use(noCache)
       .use(errorHandler)
@@ -34,7 +34,7 @@ var MentorManagementStore = Reflux.createStore({
         if (err) {
           throw err;
         } else {
-          request.get('api/mentors/search')
+          request.get('api/mentors')
             .set('Content-Type', 'application/json')
             .use(noCache)
             .use(errorHandler)
@@ -53,7 +53,7 @@ var MentorManagementStore = Reflux.createStore({
   },
 
   onSearchMentor: function (email) {
-    request.get('/api/mentors?email=' + email)
+    request.get('/api/mentors/search?email=' + email)
       .set('Content-Type', 'application/json')
       .use(noCache)
       .use(errorHandler)

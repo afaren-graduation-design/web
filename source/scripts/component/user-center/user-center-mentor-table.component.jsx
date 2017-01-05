@@ -20,17 +20,19 @@ var MentorTable = React.createClass({
 
     });
     return (
-      <table className='table table-striped table-hover table-bordered'>
-        <thead>
-        <tr className="table-head">
-          <td>姓名</td>
-          <td>状态</td>
-        </tr>
-        </thead>
-        <tbody>
-        {mentorListHTML}
-        </tbody>
-      </table>
+      <div className="table-list">
+        <table className='table table-striped table-hover table-bordered'>
+          <thead>
+          <tr className="table-head">
+            <td>姓名</td>
+            <td>状态</td>
+          </tr>
+          </thead>
+          <tbody>
+          {mentorListHTML}
+          </tbody>
+        </table>
+      </div>
     );
   }
 });

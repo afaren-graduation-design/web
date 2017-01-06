@@ -18,11 +18,31 @@ var MessageManagementStore = Reflux.createStore({
         if (err) {
           throw err;
         } else {
+          console.log(res.body);
           this.trigger({
-            unreadMessages: res.body
+            unreadMessages: res.body.items,
+            totalCount: res.body.totalCount
           });
         }
       });
+  },
+
+  onFindAll: function () {
+    request.get('api/messages')
+        .set('Content-Type', 'application/json')
+        .use(noCache)
+        .use(errorHandler)
+        .end((err, res) => {
+          if (err) {
+            throw err;
+          } else {
+            console.log(res.body);
+            this.trigger({
+              allMessages: res.body.items,
+              totalCount: res.body.totalCount
+            });
+          }
+        });
   }
 });
 

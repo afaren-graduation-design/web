@@ -3,7 +3,8 @@
 var Reflux = require('reflux');
 
 var MessageManagementAction = Reflux.createActions([
-  'findUnread'
+  'findUnread',
+  'findAll'
 
 ]);
 

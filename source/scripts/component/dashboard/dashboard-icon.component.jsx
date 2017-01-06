@@ -23,12 +23,12 @@ var DashboardIcon = React.createClass({
     var programId = getQueryString('programId');
     var paperId = getQueryString('paperId');
     var iconInfos = {
-      logicQuizzes: {
+      logicPuzzle: {
         title: '逻辑题',
         name: 'logic',
         glyphicon: 'glyphicon-education'
       },
-      homeworkQuizzes: {
+      homeworkQuiz: {
         title: '编程题',
         name: 'homework',
         glyphicon: 'glyphicon-road'
@@ -37,9 +37,13 @@ var DashboardIcon = React.createClass({
     var sectionList = this.state.sections.map((section, index) => {
       var arrow = (this.state.sections.indexOf(section) === this.state.sections.length - 1) ? (<div></div>) : (
           <Arrow/>);
-      var disable = section.status === true ? 'enable' : 'disable';
-      var uri = (section.type === 'logicQuizzes' && disable === 'enable' ? `start.html?programId=${programId}&paperId=${paperId}&sectionId=${section.id}` :
-        (section.type === 'homeworkQuizzes' && disable === 'enable' ? `homework.html?programId=${programId}&paperId=${paperId}&sectionId=${section.id}` : '#'));
+      let preSection = this.state.sections[index - 1] || {status: 1};
+      let preStatus = preSection.status;
+
+      let status = (section.status === 0 || section.status === 3) && (preStatus === 1 || preStatus === 2);
+      var disable = status === true ? 'enable' : 'disable';
+      var uri = (section.type === 'logicPuzzle' && disable === 'enable' ? `logic-puzzle.html?programId=${programId}&paperId=${paperId}&sectionId=${section.sectionId}$questionId=${section.firstQuizId}` :
+        (section.type === 'homeworkQuiz' && disable === 'enable' ? `homework.html?programId=${programId}&paperId=${paperId}&sectionId=${section.sectionId}$questionId=${section.firstQuizId}` : '#'));
       return (
         <div key={index}>
           <a href={uri} className="icon-view">

@@ -1,26 +1,27 @@
 'use strict';
 
+const stateData = {
+  'AGREE_INVITATION': '已接受',
+  'INVITATION': '已发送'
+};
+
+var MentorTableLine = React.createClass({
+  render() {
+    return (
+      <tr key={this.props.index}>
+        <td>{this.props.name}</td>
+        <td>{stateData[this.props.type]}</td>
+      </tr>
+    );
+  }
+});
+
+
 var MentorTable = React.createClass({
   render() {
-    const stateData = {
-      'AGREE_INVITATION': '已接受',
-      'INVITATION': '已发送'
-    };
-
     var mentorList = this.props.mentorList || [];
-    var mentorListHTML = mentorList.map(({name, type}, index) => {
-      if (type !== 'DISAGREE_INVITATION') {
-        return (
-          <tr key={index}>
-            <td>{name}</td>
-            <td>{stateData[type]}</td>
-          </tr>
-        );
-      }
-
-    });
     return (
-      <div className="table-list">
+      <div className="table-list text-center">
         <table className='table table-striped table-hover table-bordered'>
           <thead>
           <tr className="table-head">
@@ -29,7 +30,15 @@ var MentorTable = React.createClass({
           </tr>
           </thead>
           <tbody>
-          {mentorListHTML}
+          {
+            mentorList.map((item, index) => {
+              if (item.type !== 'DISAGREE_INVITATION') {
+                return (
+                  <MentorTableLine key={index} index={index} {...item}/>
+                )
+              }
+            })
+          }
           </tbody>
         </table>
       </div>

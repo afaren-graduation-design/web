@@ -25,7 +25,7 @@ var Message = React.createClass({
 
   getInitialState: function () {
     return {
-      
+      currentState: 'userDetail',
       unreadMessages: [],
       allMessages: [],
       unreadOrAll: false,

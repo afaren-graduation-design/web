@@ -28,10 +28,12 @@ var MentorSearch = React.createClass({
       })
   },
 
-  onchange: function (event) {
-    var arr = event.target.value.split('-');
-    this.inputInfo.value = arr[0];
-    this.setState({inputId: arr[1], isDisabled: false});
+  handleClick: function ({name, userId}) {
+    this.inputInfo.value = name;
+    this.setState({
+      inputId: userId,
+      isDisabled: false
+    });
   },
 
   addMentor: function () {
@@ -40,12 +42,7 @@ var MentorSearch = React.createClass({
 
   render() {
     var mentorSearchList = this.state.mentorSearchList || [];
-    var mentorSearchListHTML = mentorSearchList.map((mentor, index) => {
-      return (
-        <option key={index} value={mentor.name + '-' + mentor.userId}>{mentor.name}</option>
-      )
-    });
-    var selectClassString = mentorSearchListHTML ? '' : hide;
+
     return (
       <div>
         <div className="col-md-4 col-md-offset-3 ">
@@ -59,11 +56,16 @@ var MentorSearch = React.createClass({
               <button className="add-mentor-btn" disabled={this.state.isDisabled} onClick={this.addMentor}>添加</button>
             </span>
           </div>
-          <div className="search-mentor-list">
-            <select multiple="true" className={"col-md-10 col-sm-10 col-xs-10" + selectClassString}
-                    onChange={this.onchange}>
-              {mentorSearchListHTML}
-            </select>
+          <div className={"search-mentor-list col-md-8 " + (mentorSearchList.length ? '' : 'hidden')}>
+            <ul>
+              {
+                mentorSearchList.map(({name, userId}, index) => {
+                  return (
+                    <li key={index} onClick={this.handleClick.bind(this, {name, userId})}>{name}</li>
+                  )
+                })
+              }
+            </ul>
           </div>
         </div>
       </div>

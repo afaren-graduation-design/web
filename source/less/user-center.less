@@ -3,17 +3,19 @@
 body {
   background-color: @pale-white;
 }
+
 #tabs {
   overflow-x: hidden;
   .table {
     .table-header {
-      background-color:#f5f9fc;
+      background-color: #f5f9fc;
     }
-    margin-top:15px;
-    margin-left:50px;
+    margin-top: 15px;
+    margin-left: 50px;
     width: 90%;
   }
 }
+
 #user-center {
   .header-major;
   .sidebar,
@@ -78,7 +80,7 @@ body {
   .input-calendar-wrapper {
     padding: 5px 0px;
   }
- }
+}
 
 .success-prompt {
   text-align: center;
@@ -88,38 +90,65 @@ body {
   visibility: hidden;
 }
 
-
-.table-head{
-  background:#f5f9fc;
+.table-head {
+  background: #f5f9fc;
 }
 
-.table-list{
-  padding:20px;
+.table-list {
+  padding: 20px;
 }
 
-.search-mentor-frame{
+.search-mentor-frame {
   padding-right: -10px;
 }
 
-.add-mentor-btn{
-  list-style-type:none;
-  background: none;
-  outline:none;
-  border:0;
+.input-group {
+  position: relative;
 }
 
-select{
-  outline: none;
-  padding:0;
-  margin-right:20px;
-
-}
-
-select option{
+.search-mentor-list {
+  position: absolute;
+  margin: 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   padding: 0;
-  margin:0 -10px;
+
+  ul {
+    display: block;
+    width: 100%;
+    padding: 0;
+  }
+
+  li {
+    list-style-type: none;
+    font-weight: bold;
+    padding-left: 13px;
+    &:hover, &:active {
+      background-color: #62A8D1;
+      border-radius: 5px;
+    }
+  }
 }
 
-select option:hover{
+.add-mentor-btn {
+  list-style-type: none;
+  background: none;
+  outline: none;
+  border: 0;
+}
+
+select {
+  outline: none;
+  padding: 0;
+  margin-right: 20px;
+
+}
+
+select option {
+  padding: 0;
+  margin: 0 -10px;
+}
+
+select option:hover {
   background: #5178c0;
 }

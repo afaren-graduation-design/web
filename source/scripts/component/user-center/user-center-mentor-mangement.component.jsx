@@ -27,7 +27,7 @@ var MentorManagement = React.createClass({
 
     return (
       <div className={"col-md-9 col-sm-9 col-xs-12" + classString}>
-        <div className="content  text-center">
+        <div className="content">
           <MentorTable mentorList={this.state.mentorList}/>
           <MentorSearch/>
         </div>

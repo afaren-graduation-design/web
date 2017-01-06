@@ -22,7 +22,7 @@ var Message = React.createClass({
 
   render: function () {
     var classString = (this.state.currentState === 'message' ? '' : ' hide');
-    const unreadMessages = this.state.unreadMessages || [];
+    const unreadMessages = this.state.unreadMessages.item || [];
     const unreadMessageHTML = unreadMessages.map(message => {
       if (message.type === 'agreementinvitation') {
         return (

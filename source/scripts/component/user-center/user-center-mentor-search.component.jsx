@@ -18,11 +18,6 @@ var MentorSearch = React.createClass({
   },
 
   componentDidMount() {
-
-    window.onresize = ()=> {
-      console.log(document.getElementById('email').style)
-    }
-
     Rx.Observable.fromEvent(this.inputInfo, 'keyup')
       .pluck('target', 'value')
       .map(text => text.trim())
@@ -31,7 +26,6 @@ var MentorSearch = React.createClass({
       .distinctUntilChanged()
       .forEach(item => {
         MentorManagementAction.searchMentor(item);
-        console.log(this.state.mentorSearchList.length)
       })
   },
 
@@ -65,7 +59,7 @@ var MentorSearch = React.createClass({
       <div>
         <div className="col-md-4 col-md-offset-3 ">
           <div className="input-group">
-            <input id="email" type="text" className="form-control search-mentor-frame col-md-3"
+            <input type="text" className="form-control search-mentor-frame col-md-3"
                    placeholder="请输入教练邮箱"
                    ref={(ref) => {
                      this.inputInfo = ref;

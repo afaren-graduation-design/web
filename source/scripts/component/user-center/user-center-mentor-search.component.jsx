@@ -12,11 +12,17 @@ var MentorSearch = React.createClass({
     return {
       mentorSearchList: [],
       inputId: '',
-      isDisabled: true
+      isDisabled: true,
+      errorInfo:''
     };
   },
 
   componentDidMount() {
+
+    window.onresize = ()=> {
+      console.log(document.getElementById('email').style)
+    }
+
     Rx.Observable.fromEvent(this.inputInfo, 'keyup')
       .pluck('target', 'value')
       .map(text => text.trim())
@@ -25,6 +31,7 @@ var MentorSearch = React.createClass({
       .distinctUntilChanged()
       .forEach(item => {
         MentorManagementAction.searchMentor(item);
+        console.log(this.state.mentorSearchList.length)
       })
   },
 
@@ -37,7 +44,18 @@ var MentorSearch = React.createClass({
   },
 
   addMentor: function () {
-    MentorManagementAction.createMessages(this.state.inputId);
+    let mentors = this.state.mentorSearchList;
+    let exit = mentors.find((item) => {
+      return item.userId === this.state.inputId
+    });
+    if(exit) {
+      this.setState({
+        mentorSearchList:[],
+        errorInfo:'已经添加过'
+      });
+    }else {
+      MentorManagementAction.createMessages(this.state.inputId);
+    }
   },
 
   render() {
@@ -47,7 +65,7 @@ var MentorSearch = React.createClass({
       <div>
         <div className="col-md-4 col-md-offset-3 ">
           <div className="input-group">
-            <input type="text" className="form-control search-mentor-frame col-md-3"
+            <input id="email" type="text" className="form-control search-mentor-frame col-md-3"
                    placeholder="请输入教练邮箱"
                    ref={(ref) => {
                      this.inputInfo = ref;
@@ -67,6 +85,7 @@ var MentorSearch = React.createClass({
               }
             </ul>
           </div>
+          <div className={mentorSearchList.length ? 'hidden' : ''}>{this.state.errorInfo}</div>
         </div>
       </div>
     );

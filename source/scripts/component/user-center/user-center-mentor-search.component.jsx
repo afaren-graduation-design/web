@@ -10,10 +10,11 @@ var MentorSearch = React.createClass({
 
   getInitialState: function () {
     return {
+      mentorList: [],
       mentorSearchList: [],
       inputId: '',
       isDisabled: true,
-      errorInfo:''
+      errorInfo: ''
     };
   },
 
@@ -38,16 +39,16 @@ var MentorSearch = React.createClass({
   },
 
   addMentor: function () {
-    let mentors = this.state.mentorSearchList;
+    let mentors = this.state.mentorList;
     let exit = mentors.find((item) => {
-      return item.userId === this.state.inputId
+      return item.userId == this.state.inputId
     });
-    if(exit) {
+    if (exit) {
       this.setState({
-        mentorSearchList:[],
-        errorInfo:'已经添加过'
+        mentorSearchList: [],
+        errorInfo: '已经添加过'
       });
-    }else {
+    } else {
       MentorManagementAction.createMessages(this.state.inputId);
     }
   },
@@ -79,7 +80,9 @@ var MentorSearch = React.createClass({
               }
             </ul>
           </div>
-          <div className={mentorSearchList.length ? 'hidden' : ''}>{this.state.errorInfo}</div>
+          <div className={mentorSearchList.length ? 'hidden' : ''}>
+            {this.state.errorInfo}
+          </div>
         </div>
       </div>
     );

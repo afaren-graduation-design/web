@@ -19,6 +19,13 @@ var MentorSearch = React.createClass({
   },
 
   componentDidMount() {
+
+    window.onresize = () => {
+      let width = document.getElementById("email").offsetWidth;
+      document.getElementById("searchList").style.width = width + 'px';
+
+    };
+
     Rx.Observable.fromEvent(this.inputInfo, 'keyup')
       .pluck('target', 'value')
       .map(text => text.trim())
@@ -60,7 +67,7 @@ var MentorSearch = React.createClass({
       <div>
         <div className="col-md-4 col-md-offset-3 ">
           <div className="input-group">
-            <input type="text" className="form-control search-mentor-frame col-md-3"
+            <input id="email" type="text" className="form-control search-mentor-frame col-md-3"
                    placeholder="请输入教练邮箱"
                    ref={(ref) => {
                      this.inputInfo = ref;
@@ -69,7 +76,7 @@ var MentorSearch = React.createClass({
               <button className="add-mentor-btn" disabled={this.state.isDisabled} onClick={this.addMentor}>添加</button>
             </span>
           </div>
-          <div className={"search-mentor-list col-md-8 " + (mentorSearchList.length ? '' : 'hidden')}>
+          <div id="searchList" className={"search-mentor-list col-md-8 " + (mentorSearchList.length ? '' : 'hidden')}>
             <ul>
               {
                 mentorSearchList.map(({name, userId}, index) => {

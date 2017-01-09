@@ -19,7 +19,7 @@ var MessageManagementStore = Reflux.createStore({
           throw err;
         } else {
           this.trigger({
-            unreadMessages: res.body.items,
+            messageList: res.body.items,
             totalCount: res.body.totalCount
           });
         }
@@ -36,9 +36,26 @@ var MessageManagementStore = Reflux.createStore({
             throw err;
           } else {
             this.trigger({
-              allMessages: res.body.items,
+              messageList: res.body.items,
               totalCount: res.body.totalCount
             });
+          }
+        });
+  },
+
+  onOperateMessage: function (messageId, operation, index) {
+    request.put(`/api/messages/${messageId}/${operation}`)
+        .use(noCache)
+        .set('Content-Type', 'application/json')
+        .end((err, res) => {
+          if (res.statusCode === 204) {
+            if (index === 0){
+              this.onFindUnread();
+            } else {
+              this.onFindAll();
+            }
+          } else {
+            throw err;
           }
         });
   }

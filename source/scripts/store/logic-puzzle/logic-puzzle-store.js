@@ -13,6 +13,7 @@ var getQueryString = require('../../../../tools/getQueryString');
 var programId = getQueryString('programId');
 var paperId = getQueryString('paperId');
 var sectionId = getQueryString('sectionId');
+var questionId = getQueryString('questionId');
 
 var LogicPuzzleStore = Reflux.createStore({
   listenables: [LogicPuzzleActions],
@@ -62,8 +63,9 @@ var LogicPuzzleStore = Reflux.createStore({
   onLoadItem: function () {
     async.waterfall([
       (callback) => {
-        this.updateItem(sectionId, callback);
+        this.updateItem(questionId, callback);
       }, (res, callback) => {
+      console.log(res.body)
         _answer = res.body.userAnswer;
         this.trigger({
           item: res.body.item,
@@ -87,7 +89,7 @@ var LogicPuzzleStore = Reflux.createStore({
         this.onSaveUserAnswer(callback);
       }, (res, callback) => {
         _currentIndex = newOrderId;
-        this.updateItem(sectionId, callback);
+        this.updateItem(questionId, callback);
       }, (res, callback) => {
 
         _answer = res.body.userAnswer;
@@ -143,15 +145,17 @@ var LogicPuzzleStore = Reflux.createStore({
     });
   },
 
-  updateItem: function (id, callback) {
-    superAgent.get('/api/logic-puzzle')
-      .set('Content-Type', 'application/json')
-      .query({
-        id,
-        orderId: _currentIndex
-      })
-      .use(errorHandler)
+  updateItem: function (questionId, callback) {
+    superAgent.get(`/api/questions/${questionId}`)
       .end(callback);
+    // superAgent.get('/api/logic-puzzle')
+    //   .set('Content-Type', 'application/json')
+    //   .query({
+    //     id,
+    //     orderId: _currentIndex
+    //   })
+    //   .use(errorHandler)
+    //   .end(callback);
   },
 
   onTimeOver: function () {

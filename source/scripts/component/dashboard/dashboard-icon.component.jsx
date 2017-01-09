@@ -23,12 +23,12 @@ var DashboardIcon = React.createClass({
     var programId = getQueryString('programId');
     var paperId = getQueryString('paperId');
     var iconInfos = {
-      logicPuzzle: {
+      LogicPuzzle: {
         title: '逻辑题',
         name: 'logic',
         glyphicon: 'glyphicon-education'
       },
-      homeworkQuiz: {
+      HomeworkQuiz: {
         title: '编程题',
         name: 'homework',
         glyphicon: 'glyphicon-road'
@@ -42,8 +42,8 @@ var DashboardIcon = React.createClass({
 
       let status = (section.status === 0 || section.status === 3) && (preStatus === 1 || preStatus === 2);
       var disable = status === true ? 'enable' : 'disable';
-      var uri = (section.type === 'logicPuzzle' && disable === 'enable' ? `logic-puzzle.html?programId=${programId}&paperId=${paperId}&sectionId=${section.sectionId}$questionId=${section.firstQuizId}` :
-        (section.type === 'homeworkQuiz' && disable === 'enable' ? `homework.html?programId=${programId}&paperId=${paperId}&sectionId=${section.sectionId}$questionId=${section.firstQuizId}` : '#'));
+      var uri = (section.type === 'LogicPuzzle' && disable === 'enable' ? `logic-puzzle.html?programId=${programId}&paperId=${paperId}&sectionId=${section.sectionId}&questionId=${section.firstQuizId}` :
+        (section.type === 'HomeworkQuiz' && disable === 'enable' ? `homework.html?programId=${programId}&paperId=${paperId}&sectionId=${section.sectionId}$questionId=${section.firstQuizId}` : '#'));
       return (
         <div key={index}>
           <a href={uri} className="icon-view">

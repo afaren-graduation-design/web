@@ -43,40 +43,6 @@ var DashboardStore = Reflux.createStore({
           sections: res.body.data
         })
       });
-    // async.waterfall([
-    //   (done) => {
-    //     request.get(`/api/user-initialization/initializeQuizzes/${programId}/${paperId}`)
-    //       .set('Content-Type', 'application/json')
-    //       .use(errorHandler)
-    //       .end(function (err, res) {
-    //         if (err) {
-    //           done(err);
-    //         } else {
-    //           done(null, res.body);
-    //         }
-    //       });
-    //   },
-    //   (data, done) => {
-    //     if (data.status === 200) {
-    //       var sections = data.sections;
-    //       request.get(`/api/dashboard/${programId}/${paperId}`)
-    //         .set('Content-Type', 'application/json')
-    //         .query({sections:JSON.stringify(sections)})
-    //         .use(errorHandler)
-    //         .end((err, res) => {
-    //           if (!res.body.isFinishedDetail) {
-    //             page('user-center.html');
-    //           } else {
-    //             this.trigger({
-    //               sections: res.body.sections
-    //             });
-    //           }
-    //         });
-    //     } else {
-    //       done(err);
-    //     }
-    //   }
-    // ]);
   },
 
   submitPaper: function () {

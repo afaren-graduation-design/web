@@ -62,7 +62,8 @@ var MentorManagementStore = Reflux.createStore({
           throw err;
         } else {
           this.trigger({
-            mentorSearchList: res.body.usersDetail
+            mentorSearchList: res.body.usersDetail,
+            searchResult: (res.body.usersDetail.length === 0)
           });
         }
       });

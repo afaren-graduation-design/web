@@ -12,6 +12,7 @@ var MentorSearch = React.createClass({
     return {
       mentorList: [],
       mentorSearchList: [],
+      searchResult: '',
       inputId: '',
       isDisabled: true,
       errorInfo: ''
@@ -87,8 +88,9 @@ var MentorSearch = React.createClass({
               }
             </ul>
           </div>
+
           <div className={mentorSearchList.length ? 'hidden' : ''}>
-            {this.state.errorInfo}
+            {this.state.searchResult ? '没有搜索到' : this.state.errorInfo}
           </div>
         </div>
       </div>

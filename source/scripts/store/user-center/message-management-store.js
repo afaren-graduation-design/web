@@ -49,6 +49,7 @@ var MessageManagementStore = Reflux.createStore({
         .set('Content-Type', 'application/json')
         .end((err, res) => {
           if (res.statusCode === 204) {
+            console.log(index);
             if (index === 0){
               this.onFindUnread();
             } else {

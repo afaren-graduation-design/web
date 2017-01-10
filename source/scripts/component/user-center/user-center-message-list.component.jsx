@@ -44,6 +44,8 @@ var MessageLine = React.createClass({
               {
                 buttonConfiguration.map((item) => {
                   var index = this.props.tabsValue;
+                  console.log(index)
+                  console.log(this.props.tabsValue);
                   return (
                       <ButtonLine messageId={this.props.message._id}
                                   index={index} item={item}/>
@@ -86,7 +88,7 @@ var MessageList = React.createClass({
                   }
                   return (
                       <MessageLine isShowButton={isShowButton} messageType={messageType}
-                                   message={message}/>
+                                   message={message} tabsValue={this.props.tabsValue}/>
                   )
 
                 })

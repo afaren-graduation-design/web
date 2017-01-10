@@ -18,6 +18,11 @@ var MentorSearch = React.createClass({
       errorInfo: ''
     };
   },
+  componentDidUpdate() {
+    let width = document.getElementById("email").offsetWidth;
+    document.getElementById("searchList").style.width = width + 'px';
+
+  },
 
   componentDidMount() {
 
@@ -47,11 +52,17 @@ var MentorSearch = React.createClass({
   },
 
   addMentor: function () {
+
     let mentors = this.state.mentorList;
     let exit = mentors.find((item) => {
       return item.userId == this.state.inputId
     });
-    if (exit) {
+    if (mentors.length) {
+      this.setState({
+        mentorSearchList: [],
+        errorInfo: '只能添加一个教练'
+      });
+    } else if (exit) {
       this.setState({
         mentorSearchList: [],
         errorInfo: '已经添加过'
@@ -80,9 +91,10 @@ var MentorSearch = React.createClass({
           <div id="searchList" className={"search-mentor-list col-md-8 " + (mentorSearchList.length ? '' : 'hidden')}>
             <ul>
               {
-                mentorSearchList.map(({name, userId}, index) => {
+                mentorSearchList.map(({name, userId, email}, index) => {
                   return (
-                    <li key={index} onClick={this.handleClick.bind(this, {name, userId})}>{name}</li>
+                    <li key={index}
+                        onClick={this.handleClick.bind(this, {name, userId, email})}>{name} {'<' + email + '>'}</li>
                   )
                 })
               }

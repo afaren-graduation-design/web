@@ -34,18 +34,22 @@ var ButtonLine = React.createClass({
 });
 var MessageLine = React.createClass({
   render() {
+    var da = new Date(this.props.message.updatedAt);
+    var year = da.getFullYear()+'年';
+    var month = da.getMonth()+1+'月';
+    var date = da.getDate()+'日';
+    var data = [year,month,date].join('');
     return (
         <tr key={this.props.message._id}>
           <td>
-            {
-              new Date(this.props.message.updatedAt).toDateString('ja-JP')}
+            {data}
             &nbsp;&nbsp;教练{this.props.message.fromDetail.name}{this.props.messageType.text}
             <div className={'pull-right ' + this.props.isShowButton}>
               {
-                buttonConfiguration.map((item) => {
+                buttonConfiguration.map((item, i) => {
                   var index = this.props.tabsValue;
                   return (
-                      <ButtonLine messageId={this.props.message._id}
+                      <ButtonLine key={i} messageId={this.props.message._id}
                                   index={index} item={item}/>
                   )
                 })
@@ -76,7 +80,7 @@ var MessageList = React.createClass({
             <table className='table table-bordered table-striped table-hover'>
               <tbody className='table-body'>
               {
-                messageList.map((message) => {
+                messageList.map((message,i) => {
                   let isShowButton = '';
                   let messageType = messageTypes.find(messageType => {
                     return messageType.type == message.type;
@@ -85,7 +89,7 @@ var MessageList = React.createClass({
                     isShowButton = 'hidden';
                   }
                   return (
-                      <MessageLine isShowButton={isShowButton} messageType={messageType}
+                      <MessageLine key={i} isShowButton={isShowButton} messageType={messageType}
                                    message={message} tabsValue={this.props.tabsValue}/>
                   )
 

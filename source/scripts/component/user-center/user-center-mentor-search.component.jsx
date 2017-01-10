@@ -25,7 +25,6 @@ var MentorSearch = React.createClass({
   },
 
   componentDidMount() {
-
     window.onresize = () => {
       let width = document.getElementById("email").offsetWidth;
       document.getElementById("searchList").style.width = width + 'px';

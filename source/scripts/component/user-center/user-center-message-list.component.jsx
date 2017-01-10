@@ -38,7 +38,7 @@ var MessageLine = React.createClass({
     var year = da.getFullYear()+'年';
     var month = da.getMonth()+1+'月';
     var date = da.getDate()+'日';
-    var data = [year,month,date].join('-');
+    var data = [year,month,date].join('');
     return (
         <tr key={this.props.message._id}>
           <td>

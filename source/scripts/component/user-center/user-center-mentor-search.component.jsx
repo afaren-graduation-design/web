@@ -56,15 +56,15 @@ var MentorSearch = React.createClass({
     let exit = mentors.find((item) => {
       return item.userId == this.state.inputId
     });
-    if (mentors.length) {
-      this.setState({
-        mentorSearchList: [],
-        errorInfo: '只能添加一个教练'
-      });
-    } else if (exit) {
+    if (exit) {
       this.setState({
         mentorSearchList: [],
         errorInfo: '已经添加过'
+      });
+    } else if (mentors.length) {
+      this.setState({
+        mentorSearchList: [],
+        errorInfo: '只能添加一个教练'
       });
     } else {
       MentorManagementAction.createMessages(this.state.inputId);
@@ -73,7 +73,7 @@ var MentorSearch = React.createClass({
 
   render() {
     var mentorSearchList = this.state.mentorSearchList || [];
-
+    console.log(mentorSearchList);
     return (
       <div>
         <div className="col-md-4 col-md-offset-3 ">

@@ -46,7 +46,6 @@ var MessageManagementStore = Reflux.createStore({
 
   onOperateMessage: function (messageId, operation, index) {
     request.put(`/api/messages/${messageId}/${operation}`)
-        .use(noCache)
         .set('Content-Type', 'application/json')
         .end((err, res) => {
           if (res.statusCode === 204) {

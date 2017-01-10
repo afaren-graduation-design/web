@@ -78,14 +78,14 @@ var MessageList = React.createClass({
               {
                 messageList.map((message) => {
                   let isShowButton = '';
-                  let exit = messageTypes.find(messageType => {
+                  let messageType = messageTypes.find(messageType => {
                     return messageType.type == message.type;
                   });
-                  if (!exit) {
+                  if (!messageType || message.state === 1) {
                     isShowButton = 'hidden';
                   }
                   return (
-                      <MessageLine isShowButton={isShowButton} messageType={exit}
+                      <MessageLine isShowButton={isShowButton} messageType={messageType}
                                    message={message}/>
                   )
 

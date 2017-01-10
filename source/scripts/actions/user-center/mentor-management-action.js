@@ -3,7 +3,7 @@
 var Reflux = require('reflux');
 
 var MentorManagementAction = Reflux.createActions([
-  'getMessages',
+  'getMentors',
   'searchMentor',
   'createMessages'
 

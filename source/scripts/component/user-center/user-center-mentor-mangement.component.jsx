@@ -18,7 +18,7 @@ var MentorManagement = React.createClass({
   },
 
   componentDidMount: function () {
-    MentorManagementAction.getMessages();
+    MentorManagementAction.getMentors();
 
   },
 

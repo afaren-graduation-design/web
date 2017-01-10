@@ -9,7 +9,7 @@ var errorHandler = require('../../../../tools/error-handler.jsx');
 var MentorManagementStore = Reflux.createStore({
   listenables: [MentorManagementAction],
 
-  onGetMessages: function () {
+  onGetMentors: function () {
     request.get('api/mentors')
       .set('Content-Type', 'application/json')
       .use(noCache)

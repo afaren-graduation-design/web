@@ -3,7 +3,6 @@ var UserCenterStore = require('../../store/user-center/user-center-store');
 var MentorManagementStore = require('../../store/user-center/mentor-management-store');
 var MentorManagementAction = require('../../actions/user-center/mentor-management-action');
 var Reflux = require('reflux');
-var Rx = require('rx');
 var MentorTable = require('./user-center-mentor-table.component.jsx');
 var MentorSearch = require('./user-center-mentor-search.component.jsx');
 

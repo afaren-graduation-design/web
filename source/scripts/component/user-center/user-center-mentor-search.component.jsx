@@ -48,7 +48,6 @@ var MentorSearch = React.createClass({
 
   addMentor: function () {
     let mentors = this.state.mentorList;
-    console.log(mentors)
     let exit = mentors.find((item) => {
       return item.userId == this.state.inputId
     });

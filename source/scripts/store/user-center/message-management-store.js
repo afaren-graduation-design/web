@@ -18,6 +18,7 @@ var MessageManagementStore = Reflux.createStore({
         if (err) {
           throw err;
         } else {
+          console.log(res.body);
           this.trigger({
             messageList: res.body.items,
             totalCount: res.body.totalCount

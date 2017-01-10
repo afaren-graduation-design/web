@@ -10,20 +10,57 @@ var buttonConfiguration = [
 ];
 
 var messageTypes = [
-  {type: 'INVITATION', text: '同意成为你的教练testType'},
-  {type: 'REQUEST_ANSWER', text: '同意你查看答案testType'},
   {type: 'AGREE_INVITATION', text: '同意成为你的教练'},
   {type: 'DISAGREE_INVITATION', text: '不同意成为你的教练'},
   {type: 'AGREE_REQUEST_ANSWER', text: '同意你查看答案'},
   {type: 'DISAGREE_REQUEST_ANSWER', text: '不同意你查看答案'}
 ];
 
+var ButtonLine = React.createClass({
+
+  handleRequest(messageId, operation, index) {
+    MessageManagementAction.operateMessage(messageId, operation, index);
+  },
+
+  render() {
+    return (
+        <button type='button' className={'btn btn-xs ' + this.props.item.buttonType}
+                onClick={this.handleRequest.bind(this, this.props.messageId, this.props.item.operation, this.props.index)}>
+          <i className={'ace-icon ' + this.props.item.icon}> </i>{this.props.item.text}
+        </button>
+    );
+
+  }
+});
+var MessageLine = React.createClass({
+  render() {
+    return (
+        <tr key={this.props.message._id}>
+          <td>
+            {
+              new Date(this.props.message.updatedAt).toDateString('ja-JP')}
+            &nbsp;&nbsp;教练{this.props.message.fromDetail.name}{this.props.messageType.text}
+            <div className={'pull-right ' + this.props.isShowButton}>
+              {
+                buttonConfiguration.map((item) => {
+                  var index = this.props.tabsValue;
+                  return (
+                      <ButtonLine messageId={this.props.message._id}
+                                  index={index} item={item}/>
+                  )
+                })
+              }
+            </div>
+          </td>
+        </tr>
+    );
+  }
+});
 var MessageList = React.createClass({
   mixins: [Reflux.connect(UserCenterStore), Reflux.connect(MessageManagementStore)],
   getInitialState: function () {
     return {
-      messageList: [],
-      buttonConfiguration: buttonConfiguration
+      messageList: []
     };
   },
 
@@ -31,49 +68,29 @@ var MessageList = React.createClass({
     this.props.getMessageList(index);
   },
 
-  handleRequest(messageId, operation, index) {
-     MessageManagementAction.operateMessage(messageId, operation, index);
-  },
-
   render: function () {
-    var buttonConfiguration = (messageId) => {
-      return this.state.buttonConfiguration.map((item) => {
-        var index = this.props.tabsValue;
-        return (
-            <button type='button' className={'btn btn-xs ' + item.buttonType}
-                    onClick={this.handleRequest.bind(this, messageId, item.operation, index)}>
-              <i className={'ace-icon ' + item.icon}> </i>{item.text}
-            </button>
-        );
-      });
-    };
     var messageList = this.props.messageList || [];
-    var message = messageList.map((message) => {
-      return messageTypes.map(messageType => {
-        if (messageType.type === message.type) {
-          let isShowButton = 'hidden';
-          if (message.state === 0) {
-            isShowButton = '';
-          }
-          return (
-              <tr key={message._id}>
-                <td>
-                  教练{message.fromDetail.name}{messageType.text}
-                  <div className={'pull-right ' + isShowButton}>
-                    {buttonConfiguration(message._id)}
-                  </div>
-                </td>
-              </tr>
-          );
-        }
-      });
-    });
     return (
         <div id='myTabContent' className='row tab-content'>
           <div className='tab-pane fade in active unread' id='unread'>
             <table className='table table-bordered table-striped table-hover'>
               <tbody className='table-body'>
-              {message}
+              {
+                messageList.map((message) => {
+                  let isShowButton = '';
+                  let exit = messageTypes.find(messageType => {
+                    return messageType.type == message.type;
+                  });
+                  if (!exit) {
+                    isShowButton = 'hidden';
+                  }
+                  return (
+                      <MessageLine isShowButton={isShowButton} messageType={exit}
+                                   message={message}/>
+                  )
+
+                })
+              }
               </tbody>
             </table>
           </div>

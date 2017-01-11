@@ -73,10 +73,10 @@ var MentorSearch = React.createClass({
 
   render() {
     var mentorSearchList = this.state.mentorSearchList || [];
-    console.log(mentorSearchList);
+    
     return (
       <div>
-        <div className="col-md-4 col-md-offset-3 ">
+        <div className="search">
           <div className="input-group">
             <input id="email" type="text" className="form-control search-mentor-frame col-md-3"
                    placeholder="请输入教练邮箱"

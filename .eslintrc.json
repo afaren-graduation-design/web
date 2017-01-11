@@ -118,7 +118,12 @@
       }
     ],
     "new-parens": 2,
-	"no-magic-numbers": 2,
+	"no-magic-numbers": [
+		2,
+		{
+			"ignoreArrayIndexes": true
+		}
+	],
     "no-array-constructor": 2,
     "no-caller": 2,
     "no-class-assign": 2,

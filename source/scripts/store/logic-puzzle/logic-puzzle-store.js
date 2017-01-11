@@ -56,6 +56,7 @@ var LogicPuzzleStore = Reflux.createStore({
       if (err) {
         return errorHandler.showError(err);
       }
+      this.trigger({itemsCount:questionIds.length});
     });
   },
 
@@ -68,9 +69,9 @@ var LogicPuzzleStore = Reflux.createStore({
         this.trigger({
           item: res.body.item,
           userAnswer: res.body.userAnswer,
-          itemsCount: res.body.itemsCount,
+          // itemsCount: res.body.itemsCount,
           orderId: _currentIndex,
-          isExample: res.body.isExample
+          isExample: res.body.item.answer
         });
         callback(null, 'done');
       }
@@ -89,12 +90,11 @@ var LogicPuzzleStore = Reflux.createStore({
         _currentIndex = newOrderId;
         this.updateItem(questionIds[_currentIndex].id, callback);
       }, (res, callback) => {
-
         _answer = res.body.userAnswer;
         this.trigger({
           item: res.body.item,
           userAnswer: res.body.userAnswer,
-          itemsCount: res.body.itemsCount,
+          // itemsCount: res.body.itemsCount,
           orderId: _currentIndex,
           isExample: res.body.isExample,
           lastLoad: false,
@@ -148,14 +148,6 @@ var LogicPuzzleStore = Reflux.createStore({
       .set('Content-Type','application/json')
       .use(errorHandler)
       .end(callback);
-    // superAgent.get('/api/logic-puzzle')
-    //   .set('Content-Type', 'application/json')
-    //   .query({
-    //     id,
-    //     orderId: _currentIndex
-    //   })
-    //   .use(errorHandler)
-    //   .end(callback);
   },
 
   onTimeOver: function () {

@@ -39,31 +39,31 @@ var HomeworkSidebarStore = Reflux.createStore({
     }
   },
 
-  onInit: function (id) {
+  onInit: function ({programId, paperId, sectionId, questionId}) {
     async.waterfall([
       (done) => {
         superAgent.get('/api/test/detail')
-            .set('Content-Type', 'application/json')
-            .use(nocache)
-            .use(errorHandler)
-            .end(function(err,resp) {
-              if(resp.body.data === false) {
-              done(true,null);
-              }else {
-                done(null,null);
-              }
-            });
+          .set('Content-Type', 'application/json')
+          .use(nocache)
+          .use(errorHandler)
+          .end(function (err, resp) {
+            if (resp.body.data === false) {
+              done(true, null);
+            } else {
+              done(null, null);
+            }
+          });
       },
       (data, done) => {
-        superAgent.get(`/api/homework/get-list/${id}`)
-            .set('Content-Type', 'application/json')
-            .use(nocache)
-            .use(errorHandler)
-            .end(done);
+        superAgent.get(`/api/programs/${programId}/papers/${paperId}/sections/${sectionId}/questionIds`)
+          .set('Content-Type', 'application/json')
+          .use(nocache)
+          .use(errorHandler)
+          .end(done);
       },
 
       (data, done) => {
-        this.data.homeworkQuizzes = data.body.homeworkQuizzes;
+        this.data.homeworkQuizzes = data.body;
 
         var orderId = location.hash.substr(1);
         orderId = parseInt(orderId) || 1;
@@ -78,21 +78,21 @@ var HomeworkSidebarStore = Reflux.createStore({
       },
 
       (query, done) => {
-        superAgent.get('/api/homework/quiz')
-            .set('Content-Type', 'application/json')
-            .use(nocache)
-            .use(errorHandler)
-            .query(query)
-            .end(done);
+        superAgent.get(`/api/questions/${questionId}`)
+          .set('Content-Type', 'application/json')
+          .use(nocache)
+          .use(errorHandler)
+          .query(query)
+          .end(done);
       }
     ], (err, data) => {
-      if(err === true) {
+      if (err === true) {
         page('user-center.html');
       }
-      this.data.currentQuiz = data.body.quiz;
-      if(data.body.answer.status === 200){
-        this.data.currentAnswer = data.body.answer.path;
-      }
+      this.data.currentQuiz = data.body;
+      // if (data.body.answer.status === 200) {
+      //   this.data.currentAnswer = data.body.answer.path;
+      // }
       this.trigger(this.data);
       this.pollData();
     });
@@ -109,11 +109,11 @@ var HomeworkSidebarStore = Reflux.createStore({
     async.waterfall([
       (done) => {
         superAgent.post('/api/homework/scoring')
-            .set('Content-Type', 'application/json')
-            .use(nocache)
-            .use(errorHandler)
-            .send(jsonData)
-            .end(done);
+          .set('Content-Type', 'application/json')
+          .use(nocache)
+          .use(errorHandler)
+          .send(jsonData)
+          .end(done);
       },
 
       (data, done) => {
@@ -144,15 +144,15 @@ var HomeworkSidebarStore = Reflux.createStore({
       },
 
       (query, done) => {
-        superAgent.get('/api/homework/quiz')
-            .set('Content-Type', 'application/json')
-            .use(nocache)
-            .use(errorHandler)
-            .query(query)
-            .end(done);
+        superAgent.get(`/api/questions/${orderId}`)
+          .set('Content-Type', 'application/json')
+          .use(nocache)
+          .use(errorHandler)
+          .query(query)
+          .end(done);
       }
     ], (err, data) => {
-      this.data.currentQuiz = data.body.quiz;
+      this.data.currentQuiz = data.body;
       this.trigger(this.data);
       this.pollData();
     });

@@ -34,7 +34,8 @@ var HomeworkSidebar = React.createClass({
 
   handleClick: function (orderId) {
     if (orderId !== this.props.orderId) {
-      this.props.onOrderIdChange(orderId);
+      var questionId = getQueryString('sectionId').split('$questionId=')[1];
+      this.props.onOrderIdChange(questionId);
     }
   },
 
@@ -42,7 +43,8 @@ var HomeworkSidebar = React.createClass({
     var itemHtml = this.props.homeworkQuizzes.map((item, index) => {
       var orderId = index + 1;
       var classStr = 'list-group-item ' + (this.props.orderId === orderId ? ' selected' : '');
-      var iconCss = this.getIconCss(item.status);
+      var iconCss = 3;
+      // this.getIconCss(item.status);
       var quizName = '第' + (orderId) + '题';
 
       return (

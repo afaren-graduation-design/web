@@ -39,7 +39,7 @@ var Homework = React.createClass({
       homeworkQuizzes: [],
       orderId: 1,
       currentQuiz: {},
-      currentAnswer:""
+      currentAnswer: ""
     };
   },
 
@@ -59,8 +59,11 @@ var Homework = React.createClass({
   },
 
   componentDidMount: function () {
-    var id = getQueryString('sectionId');
-    HomeworkAction.init(id);
+    var programId = getQueryString('programId');
+    var paperId = getQueryString('paperId');
+    var sectionId = getQueryString('sectionId').substr(0, 24);
+    var questionId = getQueryString('sectionId').split('$questionId=')[1];
+    HomeworkAction.init({programId, paperId, sectionId, questionId});
     window.onpopstate = HomeworkAction.init;
   },
 

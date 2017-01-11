@@ -14,7 +14,8 @@ var HomeworkContent = React.createClass({
   },
 
   render(){
-    var isOpend = homeworkQuizzesStatus.LOCKED !== this.props.quiz.status;
+    var isOpend = true;
+    // homeworkQuizzesStatus.LOCKED !== this.props.quiz.status;
 
     var tabNames = isOpend ? ["题目说明", "提交作业", "运行结果", "查看答案"] : ["题目说明"];
     var tabHtml = tabNames.map((item, idx) => {

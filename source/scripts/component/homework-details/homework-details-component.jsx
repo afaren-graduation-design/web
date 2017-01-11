@@ -20,6 +20,7 @@ var HomeworkDetails = React.createClass({
   },
 
   componentWillMount: function () {
+    console.log(window.location.href)
     var urlAddress = window.location.href;
     var userId = this.getUserIdFromHref(urlAddress);
     HomeworkDetailsActions.loadUserDetail(userId);

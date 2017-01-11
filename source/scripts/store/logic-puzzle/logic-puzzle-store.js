@@ -83,12 +83,13 @@ var LogicPuzzleStore = Reflux.createStore({
   },
 
   onSubmitAnswer: function (newOrderId) {
+    _currentIndex = newOrderId;
+    var quizId = questionIds[_currentIndex].id;
     async.waterfall([
       (callback) => {
-        // this.onSaveUserAnswer(callback);
-      // }, (res, callback) => {
-        _currentIndex = newOrderId;
-        this.updateItem(questionIds[_currentIndex].id, callback);
+        this.onSaveUserAnswer(questionIds[_currentIndex-1].id, callback);
+      }, (res, callback) => {
+        this.updateItem(quizId, callback);
       }, (res, callback) => {
         _answer = res.body.userAnswer;
         this.trigger({
@@ -110,10 +111,10 @@ var LogicPuzzleStore = Reflux.createStore({
     });
   },
 
-  onSaveUserAnswer: function (callback) {
-    superAgent.post('/api/logic-puzzle/save')
+  onSaveUserAnswer: function (quizId, callback) {
+    superAgent.post(`/api/puzzle/quiz/${quizId}/submit`)
         .set('Content-Type', 'application/json')
-        .send({userAnswer: _answer, orderId: _currentIndex, sectionId})
+        .send({userAnswer: _answer})
         .use(errorHandler)
         .end(callback);
   },
@@ -126,13 +127,13 @@ var LogicPuzzleStore = Reflux.createStore({
   },
 
   onSubmitPaper: function () {
+    var quizId = questionIds[_currentIndex].id;
     async.waterfall([
       (callback) => {
-        this.onSaveUserAnswer(callback);
+        this.onSaveUserAnswer(quizId, callback);
       }, (res, callback) => {
-        superAgent.post('/api/logic-puzzle')
+        superAgent.post(`/api/puzzle/${sectionId}/submition`)
             .set('Content_Type', 'application/json')
-            .send({sectionId: sectionId})
             .use(errorHandler)
             .end(callback);
       }

@@ -61,8 +61,8 @@ var Homework = React.createClass({
   componentDidMount: function () {
     var programId = getQueryString('programId');
     var paperId = getQueryString('paperId');
-    var sectionId = getQueryString('sectionId').substr(0, 24);
-    var questionId = getQueryString('sectionId').split('$questionId=')[1];
+    var sectionId = getQueryString('sectionId');
+    var questionId = getQueryString('questionId');
     HomeworkAction.init({programId, paperId, sectionId, questionId});
     window.onpopstate = HomeworkAction.init;
   },

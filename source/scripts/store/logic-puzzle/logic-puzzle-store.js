@@ -14,6 +14,7 @@ var programId = getQueryString('programId');
 var paperId = getQueryString('paperId');
 var sectionId = getQueryString('sectionId');
 var questionId = getQueryString('questionId');
+var questionIds;
 
 var LogicPuzzleStore = Reflux.createStore({
   listenables: [LogicPuzzleActions],
@@ -39,12 +40,13 @@ var LogicPuzzleStore = Reflux.createStore({
               if (err) {
                 done(err, null);
               }else {
-                done(null, resp.body);
+                questionIds = resp.body;
+                done(null, null);
               }
 
             });
       }
-    ], (err, data) => {
+    ], (err) => {
       if (err === true) {
         page('user-center.html');
       }
@@ -54,7 +56,6 @@ var LogicPuzzleStore = Reflux.createStore({
       if (err) {
         return errorHandler.showError(err);
       }
-      this.trigger({questionIds: data})
     });
   },
 
@@ -83,10 +84,10 @@ var LogicPuzzleStore = Reflux.createStore({
   onSubmitAnswer: function (newOrderId) {
     async.waterfall([
       (callback) => {
-        this.onSaveUserAnswer(callback);
-      }, (res, callback) => {
+        // this.onSaveUserAnswer(callback);
+      // }, (res, callback) => {
         _currentIndex = newOrderId;
-        this.updateItem(questionId, callback);
+        this.updateItem(questionIds[_currentIndex].id, callback);
       }, (res, callback) => {
 
         _answer = res.body.userAnswer;

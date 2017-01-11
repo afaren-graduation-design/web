@@ -4,6 +4,9 @@ var Reflux = require('reflux');
 var LogicPuzzleActions = require('../../actions/logic-puzzle/logic-puzzle-actions');
 var LogicPuzzleStore = require('../../store/logic-puzzle/logic-puzzle-store');
 var _newOrderId;
+var getQueryString = require('../../../../tools/getQueryString');
+
+var questionId = getQueryString('questionId');
 
 
 var LogicPuzzleAnswerSubmit = React.createClass({

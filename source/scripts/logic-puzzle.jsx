@@ -1,6 +1,7 @@
 'use strict';
 
 require('./libs/outdatedBrowserCheck');
+var Reflux = require('reflux');
 
 require('../less/logic-puzzle.less');
 require('lightbox2/dist/css/lightbox.min.css');
@@ -17,6 +18,7 @@ var LogicPuzzleTimer = require('./component/logic-puzzle/logic-puzzle-timer.comp
 var LogicPuzzleActions = require('./actions/logic-puzzle/logic-puzzle-actions');
 var Navigation = require('./component/navigation/navigation.component.jsx');
 var Account = require('./component/reuse/get-account.component.jsx');
+var LogicPuzzleStore = require('./store/logic-puzzle/logic-puzzle-store');
 
 
 $('#submitModal').on('show.bs.modal', function () {
@@ -28,6 +30,8 @@ function handleTimeOver(){
   LogicPuzzleActions.timeOver();
 }
 var LogicPuzzleApp = React.createClass({
+  mixins: [Reflux.connect(LogicPuzzleStore)],
+
   componentDidMount: function() {
     LogicPuzzleActions.init();
     window.onpopstate = LogicPuzzleActions.init;

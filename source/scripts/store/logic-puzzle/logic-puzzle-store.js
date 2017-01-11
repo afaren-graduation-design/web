@@ -14,7 +14,7 @@ var programId = getQueryString('programId');
 var paperId = getQueryString('paperId');
 var sectionId = getQueryString('sectionId');
 var questionId = getQueryString('questionId');
-var questionIds;
+
 var LogicPuzzleStore = Reflux.createStore({
   listenables: [LogicPuzzleActions],
 
@@ -39,12 +39,12 @@ var LogicPuzzleStore = Reflux.createStore({
               if (err) {
                 done(err, null);
               }else {
-                questionIds = resp.body;
+                done(null, resp.body);
               }
-              done();
+
             });
       }
-    ], (err) => {
+    ], (err, data) => {
       if (err === true) {
         page('user-center.html');
       }
@@ -54,6 +54,7 @@ var LogicPuzzleStore = Reflux.createStore({
       if (err) {
         return errorHandler.showError(err);
       }
+      this.trigger({questionIds: data})
     });
   },
 

@@ -62,7 +62,6 @@ var LogicPuzzleStore = Reflux.createStore({
       (callback) => {
         this.updateItem(questionId, callback);
       }, (res, callback) => {
-        console.log(res.body)
         _answer = res.body.userAnswer;
         this.trigger({
           item: res.body.item,
@@ -144,7 +143,9 @@ var LogicPuzzleStore = Reflux.createStore({
 
   updateItem: function (questionId, callback) {
     superAgent.get(`/api/questions/${questionId}`)
-        .end(callback);
+      .set('Content-Type','application/json')
+      .use(errorHandler)
+      .end(callback);
     // superAgent.get('/api/logic-puzzle')
     //   .set('Content-Type', 'application/json')
     //   .query({

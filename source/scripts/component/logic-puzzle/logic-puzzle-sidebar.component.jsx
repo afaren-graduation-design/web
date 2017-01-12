@@ -8,6 +8,7 @@ var constant = require('../../../../mixin/constant');
 var page = require('page');
 var getQueryString = require('../../../../tools/getQueryString');
 var able = false;
+var temp = 0;
 
 var LogicPuzzleSidebar = React.createClass({
   mixins: [Reflux.connect(LogicPuzzleStore)],
@@ -33,6 +34,11 @@ var LogicPuzzleSidebar = React.createClass({
     var isLast = this.state.orderId === (this.state.itemsCount - 1);
     if (isLast) {
       able = true;
+    }
+    if (this.state.itemsCount !== undefined) {
+      temp = this.state.itemsCount;
+    } else {
+      this.state.itemsCount = temp;
     }
     return (
         <div className="sidebar">

@@ -8,7 +8,7 @@ var getQueryString = require('../../../../tools/getQueryString');
 
 var questionId = getQueryString('questionId');
 
-
+var temp = 0;
 var LogicPuzzleAnswerSubmit = React.createClass({
   mixins: [Reflux.connect(LogicPuzzleStore)],
 
@@ -62,6 +62,13 @@ var LogicPuzzleAnswerSubmit = React.createClass({
   },
 
   render: function () {
+
+    if(this.state.itemsCount !== undefined) {
+      temp = this.state.itemsCount;
+    } else {
+      this.state.itemsCount = temp;
+    }
+
     var isFirst = this.state.orderId === 0;
     var isLast = this.state.orderId === (this.state.itemsCount - 1);
 

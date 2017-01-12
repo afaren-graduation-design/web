@@ -42,8 +42,7 @@ var HomeworkSidebar = React.createClass({
     var itemHtml = this.props.homeworkQuizzes.map((item, index) => {
       var orderId = index + 1;
       var classStr = 'list-group-item ' + (this.props.orderId === orderId ? ' selected' : '');
-      var iconCss = 3;
-      this.getIconCss(item.status);
+      var iconCss = this.getIconCss(item.status);
       var quizName = item.homeworkName;
 
       return (

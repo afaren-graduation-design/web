@@ -64,6 +64,8 @@ var HomeworkSidebarStore = Reflux.createStore({
 
       (data, done) => {
         this.data.homeworkQuizzes = data.body;
+        console.log(data.body);
+        console.log('=====================')
 
         var orderId = location.hash.substr(1);
         orderId = parseInt(orderId) || 1;

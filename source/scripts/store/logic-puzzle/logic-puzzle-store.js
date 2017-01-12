@@ -56,6 +56,7 @@ var LogicPuzzleStore = Reflux.createStore({
       if (err) {
         return errorHandler.showError(err);
       }
+      this.trigger({itemsCount:questionIds.length});
     });
   },
 

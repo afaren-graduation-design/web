@@ -69,9 +69,8 @@ var LogicPuzzleStore = Reflux.createStore({
         this.trigger({
           item: res.body.item,
           userAnswer: res.body.userAnswer,
-          // itemsCount: res.body.itemsCount,
           orderId: _currentIndex,
-          isExample: res.body.item.answer
+          isExample: res.body.isExample
         });
         callback(null, 'done');
       }
@@ -95,7 +94,6 @@ var LogicPuzzleStore = Reflux.createStore({
         this.trigger({
           item: res.body.item,
           userAnswer: res.body.userAnswer,
-          // itemsCount: res.body.itemsCount,
           orderId: _currentIndex,
           isExample: res.body.isExample,
           lastLoad: false,

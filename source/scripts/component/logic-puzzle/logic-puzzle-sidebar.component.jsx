@@ -14,7 +14,7 @@ var LogicPuzzleSidebar = React.createClass({
 
   getInitialState: function () {
     return {
-      loading: false
+      loading: false,
     };
   },
 
@@ -26,9 +26,7 @@ var LogicPuzzleSidebar = React.createClass({
   },
 
   backDashboard: function () {
-    var programId = getQueryString('programId');
-    var paperId = getQueryString('paperId');
-    page(`dashboard.html?programId=${programId}&paperId=${paperId}`)
+    page(`dashboard.html?programId=${this.state.programId}&paperId=${this.state.paperId}`)
   },
 
   render: function () {
@@ -37,7 +35,6 @@ var LogicPuzzleSidebar = React.createClass({
       able = true;
     }
     return (
-
         <div className="sidebar">
           <div className="description">
             <h2>逻辑题</h2>

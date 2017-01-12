@@ -42,8 +42,8 @@ var DashboardIcon = React.createClass({
 
       let status = (section.status === 0 || section.status === 3) && (preStatus === 1 || preStatus === 2);
       var disable = status === true ? 'enable' : 'disable';
-      var uri = (section.type === 'LogicPuzzle' && disable === 'enable' ? `logic-puzzle.html?paperId=${paperId}&sectionId=${section.sectionId}&questionId=${section.firstQuizId}` :
-        (section.type === 'HomeworkQuiz' && disable === 'enable' ? `homework.html?paperId=${paperId}&sectionId=${section.sectionId}$questionId=${section.firstQuizId}` : '#'));
+      var uri = (section.type === 'LogicPuzzle' && disable === 'enable' ? `logic-puzzle.html?sectionId=${section.sectionId}&questionId=${section.firstQuizId}` :
+        (section.type === 'HomeworkQuiz' && disable === 'enable' ? `homework.html?programId=${programId}&paperId=${paperId}&sectionId=${section.sectionId}$questionId=${section.firstQuizId}` : '#'));
       return (
         <div key={index}>
           <a href={uri} className="icon-view">

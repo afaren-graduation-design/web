@@ -70,7 +70,9 @@ var LogicPuzzleStore = Reflux.createStore({
           userAnswer: res.body.userAnswer,
           itemsCount: res.body.itemsCount,
           orderId: _currentIndex,
-          isExample: res.body.isExample
+          isExample: res.body.isExample,
+          programId: res.body.info.programId,
+          paperId: res.body.info.paperId
         });
         callback(null, 'done');
       }

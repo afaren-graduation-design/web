@@ -63,6 +63,7 @@ var HomeworkSidebarStore = Reflux.createStore({
       },
 
       (data, done) => {
+        console.log(data.body);
         this.data.homeworkQuizzes = data.body;
         console.log(data.body);
         console.log('=====================')
@@ -159,9 +160,10 @@ var HomeworkSidebarStore = Reflux.createStore({
             .end(done);
       }
     ], (err, data) => {
+      console.log(data);
       this.data.currentQuiz = data.body;
+      // console.log(this.data);
       this.trigger(this.data);
-      this.pollData();
     });
   }
 });

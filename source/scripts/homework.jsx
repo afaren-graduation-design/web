@@ -82,6 +82,7 @@ var Homework = React.createClass({
   },
 
   render: function () {
+    const ids = Object.assign({},this.state.currentQuiz.info);
     return (
       <div>
         <header>
@@ -93,7 +94,10 @@ var Homework = React.createClass({
           <HomeworkSidebar
             homeworkQuizzes={this.state.homeworkQuizzes}
             onOrderIdChange={this.handleOrderIdChange}
-            orderId={this.state.orderId}/>
+            orderId={this.state.orderId} ids={ids}   />
+
+
+
 
           <HomeworkContent
             orderId={this.state.orderId}

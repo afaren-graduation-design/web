@@ -23,7 +23,7 @@ var LogicPuzzleSidebar = React.createClass({
     this.setState({
       loading: true
     });
-    LogicPuzzleActions.submitPaper();
+    LogicPuzzleActions.submitPaper(this.state.programId, this.state.paperId);
   },
 
   backDashboard: function () {

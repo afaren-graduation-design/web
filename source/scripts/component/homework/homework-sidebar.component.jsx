@@ -27,9 +27,7 @@ var HomeworkSidebar = React.createClass({
   },
 
   backDashboard: function () {
-    var programId = getQueryString('programId');
-    var paperId = getQueryString('paperId');
-    page(`dashboard.html?programId=${programId}&paperId=${paperId}`)
+    page(`dashboard.html?programId=${this.props.ids.programId}&paperId=${this.props.ids.paperId}`)
   },
 
   handleClick: function (orderId) {

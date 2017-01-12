@@ -128,7 +128,7 @@ var LogicPuzzleStore = Reflux.createStore({
     });
   },
 
-  onSubmitPaper: function () {
+  onSubmitPaper: function (programId, paperId){
     var quizId = questionIds[_currentIndex].id;
     async.waterfall([
       (callback) => {

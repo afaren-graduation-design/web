@@ -15,9 +15,9 @@ marked.setOptions({
 var HomeworkIntroduction = React.createClass({
 
   componentWillUpdate: function (prev) {
-    // if(this.props.quiz.id !== prev.quiz.id) {
-    //   this.refs.container.scrollTop = 0;
-    // }
+    if(this.props.quiz.id !== prev.quiz.id) {
+      this.refs.container.scrollTop = 0;
+    }
   },
 
   render() {

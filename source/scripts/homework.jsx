@@ -63,7 +63,7 @@ var Homework = React.createClass({
     var paperId = getQueryString('paperId');
     var sectionId = getQueryString('sectionId');
     var questionId = getQueryString('questionId');
-    HomeworkAction.init({programId, paperId, sectionId, questionId});
+    HomeworkAction.init(questionId);
     window.onpopstate = HomeworkAction.init;
   },
 

@@ -85,10 +85,9 @@ var SubmissionIntroduction = React.createClass({
       homeworkQuizzesStatus.ACTIVE
     ];
 
-    // var submitable = submitableStatus.some((val) => {
-    //   return this.props.quiz.status === val
-    // });
-    var submitable = false;
+    var submitable = submitableStatus.some((val) => {
+      return this.props.quiz.status === val
+    });
 
     return (
       <div className="tab">

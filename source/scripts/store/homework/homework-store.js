@@ -10,7 +10,7 @@ var errorHandler = require('../../../../tools/error-handler.jsx');
 var async = require('async');
 var page = require('page');
 var getQueryString = require('../../../../tools/getQueryString');
-var id = getQueryString('sectionId');
+var sectionId = getQueryString('sectionId');
 var paperId = getQueryString('paperId');
 var programId = getQueryString('programId');
 
@@ -30,16 +30,16 @@ var HomeworkSidebarStore = Reflux.createStore({
     });
   },
 
-  pollData: function () {
+  pollData: function (quizId) {
 
     if (this.hasTaskProcess()) {
-      pollTimeout = setTimeout(this.onInit(id), TIMEOUT);
+      pollTimeout = setTimeout(this.onInit(quizId), TIMEOUT);
     } else {
       pollTimeout && clearTimeout(pollTimeout);
     }
   },
 
-  onInit: function ({programId, paperId, sectionId, questionId}) {
+  onInit: function (questionId) {
     async.waterfall([
       (done) => {
         superAgent.get('/api/test/detail')
@@ -75,7 +75,7 @@ var HomeworkSidebarStore = Reflux.createStore({
         this.data.orderId = orderId;
 
         done(null, {
-          id,
+          sectionId,
           orderId: orderId
         });
       },
@@ -93,20 +93,15 @@ var HomeworkSidebarStore = Reflux.createStore({
         page('user-center.html');
       }
       this.data.currentQuiz = data.body;
-      // if (data.body.answer.status === 200) {
-      //   this.data.currentAnswer = data.body.answer.path;
-      // }
       this.trigger(this.data);
       this.pollData();
     });
   },
 
   onCreateTask: function (data) {
-
     var jsonData = Object.assign({
       paperId: paperId,
-      programId: programId,
-      quizId: this.data.currentQuiz.id,
+      quizId: this.data.homeworkQuizzes[this.data.orderId-1].id,
       homeworkQuizUri: this.data.currentQuiz.uri
     }, data);
     async.waterfall([
@@ -127,7 +122,7 @@ var HomeworkSidebarStore = Reflux.createStore({
       }
     ], (err, data) => {
       this.trigger(this.data);
-      this.pollData();
+      this.pollData(this.data.homeworkQuizzes[this.data.orderId-1].id);
     });
   },
 
@@ -142,7 +137,7 @@ var HomeworkSidebarStore = Reflux.createStore({
         this.data.orderId = orderId;
 
         done(null, {
-          id,
+          sectionId,
           orderId: orderId
         });
       },

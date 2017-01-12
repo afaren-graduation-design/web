@@ -2,8 +2,7 @@
 
 var RunningResult = React.createClass({
   render() {
-    var resultText = '';
-    // this.props.quiz.result;
+    var resultText = this.props.quiz.result;
 
     return (
       <div className="runningResult tab">

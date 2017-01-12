@@ -43,23 +43,23 @@ var HomeworkSidebarStore = Reflux.createStore({
     async.waterfall([
       (done) => {
         superAgent.get('/api/test/detail')
-          .set('Content-Type', 'application/json')
-          .use(nocache)
-          .use(errorHandler)
-          .end(function (err, resp) {
-            if (resp.body.data === false) {
-              done(true, null);
-            } else {
-              done(null, null);
-            }
-          });
+            .set('Content-Type', 'application/json')
+            .use(nocache)
+            .use(errorHandler)
+            .end(function (err, resp) {
+              if (resp.body.data === false) {
+                done(true, null);
+              } else {
+                done(null, null);
+              }
+            });
       },
       (data, done) => {
         superAgent.get(`/api/programs/${programId}/papers/${paperId}/sections/${sectionId}/questionIds`)
-          .set('Content-Type', 'application/json')
-          .use(nocache)
-          .use(errorHandler)
-          .end(done);
+            .set('Content-Type', 'application/json')
+            .use(nocache)
+            .use(errorHandler)
+            .end(done);
       },
 
       (data, done) => {
@@ -79,11 +79,11 @@ var HomeworkSidebarStore = Reflux.createStore({
 
       (query, done) => {
         superAgent.get(`/api/questions/${questionId}`)
-          .set('Content-Type', 'application/json')
-          .use(nocache)
-          .use(errorHandler)
-          .query(query)
-          .end(done);
+            .set('Content-Type', 'application/json')
+            .use(nocache)
+            .use(errorHandler)
+            .query(query)
+            .end(done);
       }
     ], (err, data) => {
       if (err === true) {
@@ -109,11 +109,11 @@ var HomeworkSidebarStore = Reflux.createStore({
     async.waterfall([
       (done) => {
         superAgent.post('/api/homework/scoring')
-          .set('Content-Type', 'application/json')
-          .use(nocache)
-          .use(errorHandler)
-          .send(jsonData)
-          .end(done);
+            .set('Content-Type', 'application/json')
+            .use(nocache)
+            .use(errorHandler)
+            .send(jsonData)
+            .end(done);
       },
 
       (data, done) => {
@@ -145,11 +145,11 @@ var HomeworkSidebarStore = Reflux.createStore({
 
       (query, done) => {
         superAgent.get(`/api/questions/${orderId}`)
-          .set('Content-Type', 'application/json')
-          .use(nocache)
-          .use(errorHandler)
-          .query(query)
-          .end(done);
+            .set('Content-Type', 'application/json')
+            .use(nocache)
+            .use(errorHandler)
+            .query(query)
+            .end(done);
       }
     ], (err, data) => {
       this.data.currentQuiz = data.body;

@@ -15,7 +15,6 @@ var HomeworkContent = React.createClass({
 
   render(){
     var isOpend = homeworkQuizzesStatus.LOCKED !== this.props.quiz.status;
-
     var tabNames = isOpend ? ["题目说明", "提交作业", "运行结果", "查看答案"] : ["题目说明"];
     var tabHtml = tabNames.map((item, idx) => {
       return <Tab key={idx} eventKey={idx} title={item}>{this.props.children[idx]}</Tab>
@@ -31,7 +30,6 @@ var HomeworkContent = React.createClass({
       </div>
     );
   }
-
 });
 
 module.exports = HomeworkContent;

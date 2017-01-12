@@ -34,8 +34,7 @@ var HomeworkSidebar = React.createClass({
 
   handleClick: function (orderId) {
     if (orderId !== this.props.orderId) {
-      var questionId = getQueryString('sectionId').split('$questionId=')[1];
-      this.props.onOrderIdChange(questionId);
+      this.props.onOrderIdChange(orderId);
     }
   },
 

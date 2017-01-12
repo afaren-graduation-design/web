@@ -131,6 +131,7 @@ var HomeworkSidebarStore = Reflux.createStore({
   onChangeOrderId: function (orderId) {
     async.waterfall([
       (done) => {
+
         var orderId = location.hash.substr(1);
         orderId = parseInt(orderId) || 1;
         orderId = Math.max(orderId, 1);
@@ -144,7 +145,11 @@ var HomeworkSidebarStore = Reflux.createStore({
       },
 
       (query, done) => {
-        superAgent.get(`/api/questions/${orderId}`)
+        let questionId = this.data.homeworkQuizzes.find((quiz, index) => {
+          return index + 1 === orderId;
+        }).id;
+        console.log(questionId)
+        superAgent.get(`/api/questions/${questionId}`)
             .set('Content-Type', 'application/json')
             .use(nocache)
             .use(errorHandler)

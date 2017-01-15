@@ -3,6 +3,8 @@
 node_modules/
 public
 npm-debug.log
+
+# 下面写这么费劲就是为了添加一个admin
 !public/
 public/*
 !public/assets/

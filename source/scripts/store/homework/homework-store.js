@@ -55,6 +55,13 @@ var HomeworkSidebarStore = Reflux.createStore({
             });
       },
       (data, done) => {
+        superAgent.get(`/api/timer/initSection/${sectionId}`)
+          .set('Content-Type', 'application/json')
+          .use(nocache)
+          .use(errorHandler)
+          .end(done);
+      },
+      (data, done) => {
         superAgent.get(`/api/programs/${programId}/papers/${paperId}/sections/${sectionId}/questionIds`)
             .set('Content-Type', 'application/json')
             .use(nocache)

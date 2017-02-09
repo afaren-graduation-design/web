@@ -108,6 +108,7 @@ var SubmissionIntroduction = React.createClass({
                        className="form-control"
                        ref="githubUrl"
                        onChange={this.handleRepoChange}
+                       value={this.props.quiz.userAnswerRepo}
                        placeholder="仅支持github，例：https://github.com/abc/def"
                        disabled={submitable ? '' : 'disabled'}/>
 
@@ -123,6 +124,7 @@ var SubmissionIntroduction = React.createClass({
                        className="form-control"
                        type="text"
                        onChange={this.handleBranchChange}
+                       value={this.props.quiz.branch}
                        disabled={submitable ? '' : 'disabled'}
                        placeholder="请输入分支,不填将默认为master"/>
               </div>
@@ -131,6 +133,8 @@ var SubmissionIntroduction = React.createClass({
               <label className="col-sm-2 control-label"/>
               <div className="col-sm-4">
                 <button className="btn btn-block btn-primary"
+                        disabled={this.props.quiz.status === constant.homeworkQuizzesStatus.SUCCESS ||
+                        this.props.quiz.status === constant.homeworkQuizzesStatus.PROGRESS ? 'disabled' : ''}
                         onClick={this.handleSubmit}>
                   提交代码地址
                 </button>

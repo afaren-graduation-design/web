@@ -70,10 +70,7 @@ var HomeworkSidebarStore = Reflux.createStore({
       },
 
       (data, done) => {
-        console.log(data.body);
         this.data.homeworkQuizzes = data.body;
-        console.log(data.body);
-        console.log('=====================')
 
         var orderId = location.hash.substr(1);
         orderId = parseInt(orderId) || 1;
@@ -153,7 +150,6 @@ var HomeworkSidebarStore = Reflux.createStore({
         let questionId = this.data.homeworkQuizzes.find((quiz, index) => {
           return index + 1 === orderId;
         }).id;
-        console.log(questionId)
         superAgent.get(`/api/questions/${questionId}`)
             .set('Content-Type', 'application/json')
             .use(nocache)
@@ -162,9 +158,7 @@ var HomeworkSidebarStore = Reflux.createStore({
             .end(done);
       }
     ], (err, data) => {
-      console.log(data);
       this.data.currentQuiz = data.body;
-      // console.log(this.data);
       this.trigger(this.data);
     });
   }

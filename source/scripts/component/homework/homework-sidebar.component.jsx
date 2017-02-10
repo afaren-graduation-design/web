@@ -30,8 +30,10 @@ var HomeworkSidebar = React.createClass({
     page(`dashboard.html?programId=${this.props.ids.programId}&paperId=${this.props.ids.paperId}`)
   },
 
-  handleClick: function (orderId) {
+  handleClick: function (orderId, questionId) {
     if (orderId !== this.props.orderId) {
+      var sectionId =getQueryString('sectionId');
+      page(`homework.html?sectionId=${sectionId}&questionId=${questionId}#${orderId}`);
       this.props.onOrderIdChange(orderId);
     }
   },
@@ -42,11 +44,12 @@ var HomeworkSidebar = React.createClass({
       var classStr = 'list-group-item ' + (this.props.orderId === orderId ? ' selected' : '');
       var iconCss = this.getIconCss(item.status);
       var quizName = item.homeworkName;
+      var questionId = item.id;
 
       return (
         <button className={classStr}
                 key={index}
-                onClick={this.handleClick.bind(null, orderId)}>
+                onClick={this.handleClick.bind(null, orderId, questionId)}>
           <div className="row">
             <div className="col-xs-9 h4 text-center ">{quizName}</div>
             <div className='col-xs-3'>

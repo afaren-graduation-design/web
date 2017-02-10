@@ -87,8 +87,12 @@ var LogicPuzzleStore = Reflux.createStore({
   onSubmitAnswer: function (newOrderId) {
     _currentIndex = newOrderId;
     var quizId = questionIds[_currentIndex].id;
+
     async.waterfall([
       (callback) => {
+        if(_currentIndex === 0){
+          this.onSaveUserAnswer(questionIds[_currentIndex].id, callback);
+        }
         this.onSaveUserAnswer(questionIds[_currentIndex-1].id, callback);
       }, (res, callback) => {
         this.updateItem(quizId, callback);

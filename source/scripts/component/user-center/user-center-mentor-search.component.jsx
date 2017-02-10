@@ -68,6 +68,8 @@ var MentorSearch = React.createClass({
       });
     } else {
       MentorManagementAction.createMessages(this.state.inputId);
+      this.inputInfo.value = '';
+      this.setState({mentorSearchList: []});
     }
   },
 

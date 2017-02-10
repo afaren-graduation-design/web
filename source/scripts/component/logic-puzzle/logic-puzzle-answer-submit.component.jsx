@@ -48,7 +48,7 @@ var LogicPuzzleAnswerSubmit = React.createClass({
     this.setState({
       lastLoad: true
     });
-    LogicPuzzleActions.submitAnswer(_newOrderId);
+    LogicPuzzleActions.submitAnswer("previous", _newOrderId);
   },
 
   next: function () {
@@ -58,7 +58,7 @@ var LogicPuzzleAnswerSubmit = React.createClass({
     this.setState({
       nextLoad: true
     });
-    LogicPuzzleActions.submitAnswer(_newOrderId);
+    LogicPuzzleActions.submitAnswer("next", _newOrderId);
   },
 
   render: function () {

@@ -31,7 +31,6 @@ var HomeworkSidebarStore = Reflux.createStore({
   },
 
   pollData: function (quizId) {
-
     if (this.hasTaskProcess()) {
       pollTimeout = setTimeout(this.onInit(quizId), TIMEOUT);
     } else {
@@ -98,7 +97,7 @@ var HomeworkSidebarStore = Reflux.createStore({
       }
       this.data.currentQuiz = data.body;
       this.trigger(this.data);
-      this.pollData();
+      this.pollData(questionId);
     });
   },
 

@@ -4,14 +4,15 @@ var Reflux = require('reflux');
 var MentorManagementStore = require('../../store/user-center/mentor-management-store');
 var MentorManagementAction = require('../../actions/user-center/mentor-management-action');
 var MessageActions = require('../../actions/messages/message-actions');
-var RequestAnswerStore = require('../../store/message/request-answer-store');
+var MessageStore = require('../../store/message/message-store');
 
 var RequestAnswer = React.createClass({
-  mixins: [Reflux.connect(MentorManagementStore), Reflux.connect(RequestAnswerStore)],
+  mixins: [Reflux.connect(MentorManagementStore), Reflux.connect(MessageStore)],
 
   getInitialState: function () {
     return {
-      mentorList: []
+      mentorList: [],
+      answer: ''
     };
   },
 
@@ -23,7 +24,7 @@ var RequestAnswer = React.createClass({
     MessageActions.createMessage({
       to: this.state.mentorList[0].userId,
       type: 'REQUEST_ANSWER',
-      deeplink: `papers/${this.props.paperId}/sections/${this.props.sectionId}/homeworks/${this.props.orderId}`
+      deeplink: this.props.questionId
     });
   },
 

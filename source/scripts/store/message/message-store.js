@@ -1,5 +1,4 @@
 /*eslint no-magic-numbers: 0*/
-'use strict';
 
 var Reflux = require('reflux');
 var superAgent = require('superagent');
@@ -17,7 +16,6 @@ var requestAnswerStore = Reflux.createStore({
       .end((err, res) => {
         console.log(res.body)
       })
-
   }
 });
 

@@ -3,7 +3,9 @@
 var Reflux = require('reflux');
 var superAgent = require('superagent');
 var MessageActions = require('../../actions/messages/message-actions');
+var constant = require('../../../../mixin/constant');
 var errorHandler = require('../../../../tools/error-handler.jsx');
+var noCache = require('superagent-no-cache');
 
 var requestAnswerStore = Reflux.createStore({
   listenables: [MessageActions],
@@ -20,13 +22,15 @@ var requestAnswerStore = Reflux.createStore({
 
   onGetAnswer: function (data) {
     superAgent
-      .post('/api/questions')
-      .use(errorHandler)
-      .send(data)
+      .get('/api/questions/getAnswer/' + data.deeplink)
+      .query(data)
+      .use(noCache)
       .end((err, res) => {
-        this.trigger({
-          answer: res.body.answerPath
-        });
+        if (res.statusCode === constant.httpCode.OK) {
+          this.trigger({
+            answer: res.body.answerPath
+          });
+        }
       })
   }
 });

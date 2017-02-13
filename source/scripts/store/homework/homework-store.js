@@ -93,7 +93,7 @@ var HomeworkSidebarStore = Reflux.createStore({
       }
     ], (err, data) => {
       if (err === true) {
-        page('user-center.html');
+        page('user-center.html#userDetail');
       }
       this.data.currentQuiz = data.body;
       this.trigger(this.data);

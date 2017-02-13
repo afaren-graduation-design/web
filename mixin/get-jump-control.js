@@ -32,7 +32,7 @@ function jumpControl (data) {
       'start.html',
       'dashboard.html'
     ],
-    targetPath: '/user-center.html',
+    targetPath: '/user-center.html#userDetail',
     condition: isLoged && !isDetailed
   }, {
     originPath: [
@@ -48,7 +48,7 @@ function jumpControl (data) {
     condition: isAgreed
   }, {
     originPath: [
-      'user-center.html'
+      'user-center.html#userDetail'
     ],
     targetPath: 'register.html',
     condition: !(isLoged || isThirdParty)

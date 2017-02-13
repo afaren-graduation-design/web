@@ -180,7 +180,7 @@ var UserDetail = React.createClass({
     return (
       <div className={'col-md-9 col-sm-9 col-xs-12' + classString}>
         <div className='content'>
-          <form className='form-horizontal form-top-height' onSubmit={this.update} action='user-center.html'>
+          <form className='form-horizontal form-top-height' onSubmit={this.update} action='user-center.html#userDetail'>
             <div id='account-info'>
               <label htmlFor='inputSchool' className='col-sm-4 col-md-4 control-label'>学校<span
                 className="error alert alert-danger">*</span></label>

@@ -156,7 +156,7 @@ var RegisterForm = React.createClass({
         <label className={'registerable' + (this.props.isDisabled ? '' : ' hide')}>注册已关闭</label>
         <h4 className="welcome">欢迎注册思沃学院</h4>
 
-        <form action='user-center.html' onSubmit={this.register}>
+        <form action='user-center.html#userDetail' onSubmit={this.register}>
           <div className="form-group">
             <input className="form-control" type="text" placeholder="请输入手机号" name="mobilePhone" ref="mobilePhone"
                    onBlur={this.validate} disabled={this.props.isDisabled}/>

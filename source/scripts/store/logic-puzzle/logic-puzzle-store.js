@@ -48,7 +48,7 @@ var LogicPuzzleStore = Reflux.createStore({
       }
     ], (err) => {
       if (err === true) {
-        page('user-center.html');
+        page('user-center.html#userDetail');
       }
       if (err === 'committed') {
         page('dashboard.html');

@@ -20,7 +20,7 @@ var DashboardStore = Reflux.createStore({
       .use(nocache)
       .end((err, resp) => {
         if (resp.body.data === false) {
-          page('user-center.html');
+          page('user-center.html#userDetail');
           this.trigger({
             isGetStatus: false
           })

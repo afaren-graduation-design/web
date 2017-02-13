@@ -1,6 +1,7 @@
 'use strict';
 
 var Reflux = require('reflux');
+// var page = require('page');
 var MentorManagementStore = require('../../store/user-center/mentor-management-store');
 var MentorManagementAction = require('../../actions/user-center/mentor-management-action');
 var MessageActions = require('../../actions/messages/message-actions');
@@ -37,10 +38,11 @@ var RequestAnswer = React.createClass({
   },
 
   render() {
+    const AddMentor = <a href='user-center.html'>您当前没有mentor,请先添加mentor.</a>;
     const RequestAnswerBtn = <button className="btn btn-primary" onClick={this.handleRequest}>请求答案</button>;
     const MentorSpan = <span
       className="mentor-span">{this.state.mentorList.length ? 'mentor : ' + this.state.mentorList[0].name : ''}</span>;
-    let info = this.state.mentorList.length ? '' : '您当前没有mentor,请先添加mentor.';
+    let info = this.state.mentorList.length ? '' : AddMentor;
     let result = info || (this.state.answer ? this.state.answer : RequestAnswerBtn);
     return (
       <div className="runningResult tab">

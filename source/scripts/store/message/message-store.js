@@ -18,20 +18,6 @@ var requestAnswerStore = Reflux.createStore({
       .end((err, res) => {
         console.log(res.body)
       })
-  },
-
-  onGetAnswer: function (data) {
-    superAgent
-      .get('/api/questions/getAnswer/' + data.deeplink)
-      .query(data)
-      .use(noCache)
-      .end((err, res) => {
-        if (res.statusCode === constant.httpCode.OK) {
-          this.trigger({
-            answer: res.body.answerPath
-          });
-        }
-      })
   }
 });
 

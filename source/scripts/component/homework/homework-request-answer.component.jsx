@@ -1,7 +1,8 @@
 'use strict';
 
 var Reflux = require('reflux');
-// var page = require('page');
+var superAgent = require('superagent');
+var noCache = require('superagent-no-cache');
 var MentorManagementStore = require('../../store/user-center/mentor-management-store');
 var MentorManagementAction = require('../../actions/user-center/mentor-management-action');
 var MessageActions = require('../../actions/messages/message-actions');
@@ -20,11 +21,20 @@ var RequestAnswer = React.createClass({
   componentDidMount: function () {
     MentorManagementAction.getMentors(() => {
       if (this.state.mentorList.length) {
-        MessageActions.getAnswer({
-          from: this.state.mentorList[0].userId,
-          type: 'AGREE_REQUEST_ANSWER',
-          deeplink: this.props.questionId
-        });
+        superAgent
+          .get('/api/questions/getAnswer/' + this.props.questionId)
+          .query({
+            from: this.state.mentorList[0].userId,
+            type: 'AGREE_REQUEST_ANSWER',
+          })
+          .use(noCache)
+          .end((err, res) => {
+            if (res.statusCode === constant.httpCode.OK) {
+              this.trigger({
+                answer: res.body.answerPath
+              });
+            }
+          });
       }
     });
   },

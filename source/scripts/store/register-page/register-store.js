@@ -62,7 +62,7 @@ var RegisterStore = Reflux.createStore({
         var info = req.body;
 
         if (info.status === constant.httpCode.OK) {
-          page('user-center.html');
+          page('user-center.html#userDetail');
         } else if (info.status === constant.httpCode.FORBIDDEN) {
           this.trigger({
             isDisabled: info.registerable

@@ -27,7 +27,7 @@ var GetAccount = React.createClass({
   render: function () {
     var userList = (
       <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li><a href="user-center.html">个人中心</a></li>
+        <li><a href="user-center.html#userDetail">个人中心</a></li>
         <li><a href="paper-list.html">控制台</a></li>
         <li role="separator" className="divider"/>
         <li><a onClick={this.logout}>退出</a></li>

@@ -32,7 +32,7 @@ var LoginStore = Reflux.createStore({
           } else if (data.isFinishedDetail) {
             page('paper-list.html');
           } else {
-            page('user-center.html');
+            page('user-center.html#userDetail');
           }
         } else if (data.status === constant.httpCode.FORBIDDEN) {
           this.trigger({

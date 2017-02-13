@@ -11,7 +11,7 @@ var MentorManagement = React.createClass({
 
   getInitialState: function () {
     return {
-      currentState: 'userDetail',
+      currentState: window.location.hash.substr(1) || 'userDetail',
       mentorList: []
     };
   },

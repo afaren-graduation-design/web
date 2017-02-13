@@ -11,7 +11,7 @@ var UserCenterSide = React.createClass({
 
   getInitialState: function () {
     return {
-      currentState: 'userDetail'
+      currentState: window.location.hash.substr(1)
     };
   },
 
@@ -43,7 +43,7 @@ var UserCenterSide = React.createClass({
       var classStr = 'list-group-item ' + (item.mark === this.state.currentState ? 'selected' : '');
 
       return (
-        <a className={classStr} href="javascript:void(0)" key={index}
+        <a className={classStr} href={'#' + item.mark} key={index}
            onClick={this.handleClick.bind(null, item.mark, this.state.currentState)}>
           <div className="row">
             <div className="col-xs-9 h4 text-center">{item.value}</div>

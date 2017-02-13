@@ -38,7 +38,7 @@ var RequestAnswer = React.createClass({
   },
 
   render() {
-    const AddMentor = <a href='user-center.html'>您当前没有mentor,请先添加mentor.</a>;
+    const AddMentor = <a href='user-center.html#mentorManagement'>您当前没有mentor,请先添加mentor.</a>;
     const RequestAnswerBtn = <button className="btn btn-primary" onClick={this.handleRequest}>请求答案</button>;
     const MentorSpan = <span
       className="mentor-span">{this.state.mentorList.length ? 'mentor : ' + this.state.mentorList[0].name : ''}</span>;

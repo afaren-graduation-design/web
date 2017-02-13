@@ -13,41 +13,41 @@ var LoginStore = Reflux.createStore({
   onLogin: function (phoneEmail, loginPassword, captcha) {
 
     request.post('/api/login')
-        .set('Content-Type', 'application/json')
-        .send({
-          account: phoneEmail,
-          password: loginPassword,
-          captcha: captcha
-        })
-        .use(errorHandler)
-        .end((err, req) => {
+      .set('Content-Type', 'application/json')
+      .send({
+        account: phoneEmail,
+        password: loginPassword,
+        captcha: captcha
+      })
+      .use(errorHandler)
+      .end((err, req) => {
 
-          var data = JSON.parse(req.text);
-          if (data.status === constant.httpCode.OK) {
-            this.trigger({
-              loginFailed: false
-            });
-            if(data.isSuperAdmin){
-              page('admin.html');
-            } else if (data.isFinishedDetail){
-              page('paper-list.html');
-            } else {
-              page('user-center.html');
-            }
-          } else if (data.status === constant.httpCode.FORBIDDEN) {
-            this.trigger({
-              clickable: false,
-              captchaError: '验证码输入错误'
-            });
+        var data = JSON.parse(req.text);
+        if (data.status === constant.httpCode.OK) {
+          this.trigger({
+            loginFailed: false
+          });
+          if (data.isSuperAdmin) {
+            page('admin.html');
+          } else if (data.isFinishedDetail) {
+            page('paper-list.html');
+          } else {
+            page('user-center.html');
           }
-          else {
-            this.trigger({
-              clickable: false,
-              loginFailed: true
-            });
-          }
+        } else if (data.status === constant.httpCode.FORBIDDEN) {
+          this.trigger({
+            clickable: false,
+            captchaError: '验证码输入错误'
+          });
+        }
+        else {
+          this.trigger({
+            clickable: false,
+            loginFailed: true
+          });
+        }
 
-        });
+      });
   },
 
   onSetCaptchaError: function (error) {

@@ -20,18 +20,18 @@ var UserCenterGender = React.createClass({
         genderError: false
       });
     }
-    if(this.state.gender === 'M') {
+    if (this.state.gender === 'M') {
       this.refs.male.checked = true;
-    }else {
+    } else {
       this.refs.female.checked = true;
     }
   },
   genderChange: function () {
     var checked;
 
-    if(this.refs.male.checked === true) {
+    if (this.refs.male.checked === true) {
       checked = 'M';
-    }else {
+    } else {
       checked = 'F';
     }
 
@@ -46,25 +46,25 @@ var UserCenterGender = React.createClass({
     ];
 
     return (
-        <div>
-          <div className="col-sm-4 col-md-4">
-            {tags.map((item, index) => {
-              return (
-                  <div key={index} className="col-sm-3 col-md-3">
-                    <input type="radio" name="gender" className="gender" id={item.genderName}
-                           onChange={this.genderChange} ref={item.genderName}/>
-                    <label htmlFor={item.genderName}>{item.label}</label>
-                  </div>
-              );
-            })}
+      <div>
+        <div className="col-sm-4 col-md-4">
+          {tags.map((item, index) => {
+            return (
+              <div key={index} className="col-sm-3 col-md-3">
+                <input type="radio" name="gender" className="gender" id={item.genderName}
+                       onChange={this.genderChange} ref={item.genderName}/>
+                <label htmlFor={item.genderName}>{item.label}</label>
+              </div>
+            );
+          })}
 
-          </div>
-          <div className={'error alert alert-danger' + (this.state.genderError === true ? '' : ' hide')}
-               role="alert">
-            <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            请选择性别
-          </div>
         </div>
+        <div className={'error alert alert-danger' + (this.state.genderError === true ? '' : ' hide')}
+             role="alert">
+          <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          请选择性别
+        </div>
+      </div>
     );
   }
 });

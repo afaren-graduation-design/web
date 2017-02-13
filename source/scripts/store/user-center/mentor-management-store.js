@@ -9,7 +9,7 @@ var errorHandler = require('../../../../tools/error-handler.jsx');
 var MentorManagementStore = Reflux.createStore({
   listenables: [MentorManagementAction],
 
-  onGetMentors: function () {
+  onGetMentors: function (callback) {
     request.get('api/mentors')
       .set('Content-Type', 'application/json')
       .use(noCache)
@@ -20,7 +20,7 @@ var MentorManagementStore = Reflux.createStore({
         } else {
           this.trigger({
             mentorList: res.body
-          });
+          }, callback);
         }
       });
   },

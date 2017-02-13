@@ -10,12 +10,14 @@ var constant = require('../../../../mixin/constant');
 var GetAccountStore = Reflux.createStore({
   listenables: [QAPageActions],
 
-  onLoadQAContent:function() {
+  onLoadQAContent: function () {
     request.get('/api/qa')
       .set('Content-Type', 'application/json')
       .use(errorHandler)
       .end((err, res) => {
-        if (err) {return;}
+        if (err) {
+          return;
+        }
         this.trigger({
           qaContent: res.body.qaContent
         });

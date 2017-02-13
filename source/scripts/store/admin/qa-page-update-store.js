@@ -11,21 +11,21 @@ var QAPageUpdateStore = Reflux.createStore({
 
   onUpdateQAPage: function (url) {
     request.put('/api/qa/update')
-        .set('Content-Type', 'application/json')
-        .send({qaInfoAddress: url})
-        .use(errorHandler)
-        .end((err,res) => {
-          this.trigger({
-            updateStatus: res.body.status === constant.httpCode.OK ? 'success' : 'failed'
-          });
+      .set('Content-Type', 'application/json')
+      .send({qaInfoAddress: url})
+      .use(errorHandler)
+      .end((err, res) => {
+        this.trigger({
+          updateStatus: res.body.status === constant.httpCode.OK ? 'success' : 'failed'
         });
+      });
   },
-  onInit: function() {
+  onInit: function () {
     request.get('/api/qa')
-    .use(errorHandler)
-    .end((err,res) => {
-      this.trigger(res.body);
-    });
+      .use(errorHandler)
+      .end((err, res) => {
+        this.trigger(res.body);
+      });
   }
 });
 

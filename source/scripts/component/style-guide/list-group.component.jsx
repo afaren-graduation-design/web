@@ -2,10 +2,10 @@
 
 var ListGroup = React.createClass({
 
-  getInitialState: function() {
+  getInitialState: function () {
     return ({
       title: '个人中心',
-      list: ['群组首页','群组试卷','群组成员','群组管理'],
+      list: ['群组首页', '群组试卷', '群组成员', '群组管理'],
       clickNumber: 1
     })
   },
@@ -19,7 +19,7 @@ var ListGroup = React.createClass({
   render() {
 
     var listContent = this.state.list.map((item, index) => {
-      var classStr = "list-group-item " + (this.state.clickNumber === index + 1 ? 'select': '');
+      var classStr = "list-group-item " + (this.state.clickNumber === index + 1 ? 'select' : '');
       return (
         <button className={classStr} key={index} onClick={this.handleClick.bind(null, index + 1)}>
           <div className="row">

@@ -25,28 +25,28 @@ var Table = React.createClass({
     var tableList = this.state.tableList;
     var list = tableList.map((item, index) => {
       return (
-          <tr key={index}>
-            <th scope="row">{index + 1}</th>
-            <td>{item.firstName}</td>
-            <td>{item.lastName}</td>
-            <td>{item.userName}</td>
-          </tr>
+        <tr key={index}>
+          <th scope="row">{index + 1}</th>
+          <td>{item.firstName}</td>
+          <td>{item.lastName}</td>
+          <td>{item.userName}</td>
+        </tr>
       )
     });
     return (
-        <table className="table table-hover">
-          <thead>
-          <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
-          </tr>
-          </thead>
-          <tbody>
-            {list}
-          </tbody>
-        </table>
+      <table className="table table-hover">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Username</th>
+        </tr>
+        </thead>
+        <tbody>
+        {list}
+        </tbody>
+      </table>
     )
   }
 });

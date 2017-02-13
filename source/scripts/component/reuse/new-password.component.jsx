@@ -12,7 +12,7 @@ var UserCenterStore = require('../../store/user-center/user-center-store');
 var PasswordResetStore = require('../../store/password-retrieve/password-reset-store');
 
 var NewPassword = React.createClass({
-  mixins: [Reflux.connect(PasswordStore), Reflux.connect(ChangePasswordStore), Reflux.connect(UserCenterStore),Reflux.connect(PasswordResetStore)],
+  mixins: [Reflux.connect(PasswordStore), Reflux.connect(ChangePasswordStore), Reflux.connect(UserCenterStore), Reflux.connect(PasswordResetStore)],
 
   getInitialState: function () {
     return {
@@ -41,9 +41,9 @@ var NewPassword = React.createClass({
     var stateObj = {};
 
     stateObj.newPasswordError = getError(result, 'newPassword');
-    if(this.state.confirmPassword !== this.state.newPassword) {
+    if (this.state.confirmPassword !== this.state.newPassword) {
       stateObj.confirmPasswordError = lang.CONFIRM_ERROR;
-    }else {
+    } else {
       stateObj.confirmPasswordError = '';
     }
     this.setState(stateObj);
@@ -76,40 +76,40 @@ var NewPassword = React.createClass({
 
   render: function () {
     return (
-        <div className="new-password ">
-          <div className="col-sm-12 col-md-12">
-            <label htmlFor="newPassword" className="col-sm-3 col-md-3 control-label">新密码</label>
-            <div className={'form-group col-sm-6 col-md-6 has-' + (this.state.newPasswordError === '' ? '' : 'error')}>
-              <input type="password" className="form-control" aria-describedby="helpBlock2"
-                     name="newPassword" id="newPassword"
-                     placeholder="请输入新密码" onBlur={this.validate}
-                     ref="newPassword"/>
-            </div>
-            <span
-                className={'col-sm-3 col-md-3 error alert alert-danger' + (this.state.newPasswordError === '' ? ' hide' : '')}
-                aria-hidden="true" role="alert">
-                  <i className="glyphicon glyphicon-exclamation-sign"/>
-              {this.state.newPasswordError}
-            </span>
+      <div className="new-password ">
+        <div className="col-sm-12 col-md-12">
+          <label htmlFor="newPassword" className="col-sm-3 col-md-3 control-label">新密码</label>
+          <div className={'form-group col-sm-6 col-md-6 has-' + (this.state.newPasswordError === '' ? '' : 'error')}>
+            <input type="password" className="form-control" aria-describedby="helpBlock2"
+                   name="newPassword" id="newPassword"
+                   placeholder="请输入新密码" onBlur={this.validate}
+                   ref="newPassword"/>
           </div>
-          <div className="col-sm-12 col-md-12">
-            <label htmlFor="confirmPassword" className="col-sm-3 col-md-3 control-label">确认密码</label>
-            <div
-                className={'form-group col-sm-6 col-md-6 has-' + (this.state.confirmPasswordError === '' ? '' : 'error')}>
-              <input type="password" className="form-control" aria-describedby="helpBlock2"
-                     name="confirmPassword" id="confirmPassword"
-                     placeholder="请再次确认新密码" onBlur={this.validate}
-                     ref="confirmPassword"/>
-            </div>
           <span
-              className={'col-sm-3 col-md-3 error alert alert-danger' + (this.state.confirmPasswordError === '' ? ' hide' : '')}
-              aria-hidden="true" role="alert">
+            className={'col-sm-3 col-md-3 error alert alert-danger' + (this.state.newPasswordError === '' ? ' hide' : '')}
+            aria-hidden="true" role="alert">
+                  <i className="glyphicon glyphicon-exclamation-sign"/>
+            {this.state.newPasswordError}
+            </span>
+        </div>
+        <div className="col-sm-12 col-md-12">
+          <label htmlFor="confirmPassword" className="col-sm-3 col-md-3 control-label">确认密码</label>
+          <div
+            className={'form-group col-sm-6 col-md-6 has-' + (this.state.confirmPasswordError === '' ? '' : 'error')}>
+            <input type="password" className="form-control" aria-describedby="helpBlock2"
+                   name="confirmPassword" id="confirmPassword"
+                   placeholder="请再次确认新密码" onBlur={this.validate}
+                   ref="confirmPassword"/>
+          </div>
+          <span
+            className={'col-sm-3 col-md-3 error alert alert-danger' + (this.state.confirmPasswordError === '' ? ' hide' : '')}
+            aria-hidden="true" role="alert">
             <i className="glyphicon glyphicon-exclamation-sign"/>
             {this.state.confirmPasswordError}
           </span>
-          </div>
-
         </div>
+
+      </div>
     );
   }
 });

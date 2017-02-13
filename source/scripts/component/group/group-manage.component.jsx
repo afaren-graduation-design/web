@@ -2,11 +2,11 @@
 
 var GroupTitle = require("../style-guide/group-title.component.jsx");
 
-var GroupManage = React.createClass ({
+var GroupManage = React.createClass({
 
   render() {
     return (
-        <GroupTitle titleName="群组管理"/>
+      <GroupTitle titleName="群组管理"/>
     );
   }
 });

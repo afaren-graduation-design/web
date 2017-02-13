@@ -7,8 +7,8 @@ var PasswordResetForm = require('./component/password-retrieve/password-reset-fo
 var NewPassword = require('./component/reuse/new-password.component.jsx');
 
 ReactDom.render(
-    <PasswordResetForm>
-      <NewPassword/>
-    </PasswordResetForm>,
-    document.getElementById('password-reset-container')
+  <PasswordResetForm>
+    <NewPassword/>
+  </PasswordResetForm>,
+  document.getElementById('password-reset-container')
 );

@@ -6,9 +6,9 @@ var GroupSidebar = React.createClass({
 
   render() {
     return (
-        <div className="col-md-3">
-          <ListGroup />
-        </div>
+      <div className="col-md-3">
+        <ListGroup />
+      </div>
     );
   }
 });

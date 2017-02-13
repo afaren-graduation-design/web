@@ -9,21 +9,21 @@ var UserCenterStore = require('../../store/user-center/user-center-store');
 var UserCenterSide = React.createClass({
   mixins: [Reflux.connect(UserCenterStore)],
 
-  getInitialState: function(){
+  getInitialState: function () {
     return {
       currentState: 'userDetail'
     };
   },
 
   handleClick: function (mark, currentState) {
-    UserCenterActions.changeState(mark,currentState);
-    if(mark === 'userDetail') {
+    UserCenterActions.changeState(mark, currentState);
+    if (mark === 'userDetail') {
       UserCenterActions.loadUserDetail();
     }
-    if(mark === 'result') {
+    if (mark === 'result') {
       UserCenterActions.loadResult();
     }
-    if(mark === 'message') {
+    if (mark === 'message') {
       UserCenterActions.loadMessage();
     }
     if (mark === 'mentorManagement') {
@@ -43,28 +43,28 @@ var UserCenterSide = React.createClass({
       var classStr = 'list-group-item ' + (item.mark === this.state.currentState ? 'selected' : '');
 
       return (
-          <a className={classStr} href="javascript:void(0)" key={index}
-             onClick={this.handleClick.bind(null, item.mark, this.state.currentState)}>
-            <div className="row">
-              <div className="col-xs-9 h4 text-center">{item.value}</div>
-              <div className="col-xs-3"></div>
-            </div>
-          </a>
+        <a className={classStr} href="javascript:void(0)" key={index}
+           onClick={this.handleClick.bind(null, item.mark, this.state.currentState)}>
+          <div className="row">
+            <div className="col-xs-9 h4 text-center">{item.value}</div>
+            <div className="col-xs-3"></div>
+          </div>
+        </a>
       );
     });
 
     return (
-        <div className="col-md-3 col-sm-3 col-xs-12">
-          <div className="list-group">
-            <div className="list-group-item active">
-              <div className="row">
-                <div className="col-xs-9 h4 text-center">个人中心</div>
-                <div className="col-xs-3"><i className={'user-center-nav-icon h4 fa-lg fa fa-user-plus'}></i></div>
-              </div>
+      <div className="col-md-3 col-sm-3 col-xs-12">
+        <div className="list-group">
+          <div className="list-group-item active">
+            <div className="row">
+              <div className="col-xs-9 h4 text-center">个人中心</div>
+              <div className="col-xs-3"><i className={'user-center-nav-icon h4 fa-lg fa fa-user-plus'}></i></div>
             </div>
-            {itemHtml}
           </div>
+          {itemHtml}
         </div>
+      </div>
     );
   }
 });

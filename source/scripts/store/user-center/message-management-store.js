@@ -28,35 +28,35 @@ var MessageManagementStore = Reflux.createStore({
 
   onFindAll: function () {
     request.get('api/messages')
-        .set('Content-Type', 'application/json')
-        .use(noCache)
-        .use(errorHandler)
-        .end((err, res) => {
-          if (err) {
-            throw err;
-          } else {
-            this.trigger({
-              messageList: res.body.items,
-              totalCount: res.body.totalCount
-            });
-          }
-        });
+      .set('Content-Type', 'application/json')
+      .use(noCache)
+      .use(errorHandler)
+      .end((err, res) => {
+        if (err) {
+          throw err;
+        } else {
+          this.trigger({
+            messageList: res.body.items,
+            totalCount: res.body.totalCount
+          });
+        }
+      });
   },
 
   onOperateMessage: function (messageId, operation, index) {
     request.put(`/api/messages/${messageId}/${operation}`)
-        .set('Content-Type', 'application/json')
-        .end((err, res) => {
-          if (res.statusCode === 204) {
-            if (index === 0){
-              this.onFindUnread();
-            } else {
-              this.onFindAll();
-            }
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        if (res.statusCode === 204) {
+          if (index === 0) {
+            this.onFindUnread();
           } else {
-            throw err;
+            this.onFindAll();
           }
-        });
+        } else {
+          throw err;
+        }
+      });
   }
 });
 

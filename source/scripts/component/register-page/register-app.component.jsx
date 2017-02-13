@@ -13,7 +13,7 @@ var Captcha = require('./captcha.component.jsx');
 var RegisterApp = React.createClass({
   mixins: [Reflux.connect(RegisterStore)],
 
-  getCurrentState: function() {
+  getCurrentState: function () {
     var state = window.location.href.split("#");
     return "login" === state[1];
   },
@@ -29,7 +29,7 @@ var RegisterApp = React.createClass({
     RegisterAction.registerable();
     var _this = this;
 
-    window.onpopstate = function() {
+    window.onpopstate = function () {
       _this.setState({
         loginState: _this.getCurrentState()
       });
@@ -39,20 +39,20 @@ var RegisterApp = React.createClass({
 
   render() {
     var formHtml = this.state.loginState ?
-        (<LoginForm><Captcha/></LoginForm>) :
-        (<RegisterForm isDisabled={this.state.isDisabled}>
-          <RegisterPassword isDisabled={this.state.isDisabled}/>
-          <Captcha isDisabled={this.state.isDisabled}/>
-        </RegisterForm>);
+      (<LoginForm><Captcha/></LoginForm>) :
+      (<RegisterForm isDisabled={this.state.isDisabled}>
+        <RegisterPassword isDisabled={this.state.isDisabled}/>
+        <Captcha isDisabled={this.state.isDisabled}/>
+      </RegisterForm>);
 
     return (
-        <div className="row">
-          {formHtml}
-          <LoginInfo
-              isLoginState={this.state.loginState}
-              onStateChange={this.handleStateChange}/>
-          <RegisterAgreement/>
-        </div>
+      <div className="row">
+        {formHtml}
+        <LoginInfo
+          isLoginState={this.state.loginState}
+          onStateChange={this.handleStateChange}/>
+        <RegisterAgreement/>
+      </div>
     );
   }
 });

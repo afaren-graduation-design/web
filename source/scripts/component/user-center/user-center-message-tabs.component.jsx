@@ -27,25 +27,25 @@ var MessageTabs = React.createClass({
 
   render: function () {
     return (
-        <div className='tab-ul'>
-          <ul id='myTab' className='myTab nav nav-tabs'>
-            {
-              this.props.tabsConfiguration.map((tab, index) => {
-                return (
-                    <li key={index} className={tab.activeStatus}>
-                      <a href='#' onClick={this.handleTabsToggle.bind(this, index)}>
-                        <div className='font-color'>
-                          <i className={'fa ' + tab.icon}> </i>&nbsp;&nbsp;{tab.value}
-                        </div>
-                      </a>
-                    </li>
-                );
-              })
-            }
-          </ul>
-        </div>
+      <div className='tab-ul'>
+        <ul id='myTab' className='myTab nav nav-tabs'>
+          {
+            this.props.tabsConfiguration.map((tab, index) => {
+              return (
+                <li key={index} className={tab.activeStatus}>
+                  <a href='#' onClick={this.handleTabsToggle.bind(this, index)}>
+                    <div className='font-color'>
+                      <i className={'fa ' + tab.icon}> </i>&nbsp;&nbsp;{tab.value}
+                    </div>
+                  </a>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
     );
-    }
+  }
 });
 
 module.exports = MessageTabs;

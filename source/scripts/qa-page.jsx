@@ -45,19 +45,19 @@ var QAPage = React.createClass({
     }
 
     return (
+      <div>
+        <header>
+          <Navigation>
+            <Account state="index"/>
+          </Navigation>
+        </header>
         <div>
-          <header>
-            <Navigation>
-              <Account state="index"/>
-            </Navigation>
-          </header>
-          <div>
-            <div className="content">
-              <div id="QADescribe" className="container-fluid" dangerouslySetInnerHTML={content()}>
-              </div>
+          <div className="content">
+            <div id="QADescribe" className="container-fluid" dangerouslySetInnerHTML={content()}>
             </div>
           </div>
         </div>
+      </div>
     );
   }
 });

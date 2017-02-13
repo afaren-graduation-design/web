@@ -16,6 +16,18 @@ var requestAnswerStore = Reflux.createStore({
       .end((err, res) => {
         console.log(res.body)
       })
+  },
+
+  onGetAnswer: function (data) {
+    superAgent
+      .post('/api/questions')
+      .use(errorHandler)
+      .send(data)
+      .end((err, res) => {
+        this.trigger({
+          answer: res.body.answerPath
+        });
+      })
   }
 });
 

@@ -12,28 +12,28 @@ var passwordRetrieveStore = Reflux.createStore({
 
   onRetrieve: function (email) {
     request.get('/api/password/retrieve')
-        .set('Content-Type', 'application/json')
-        .query({
-          email: email
-        })
-        .use(errorHandler)
-        .end((err, res) => {
-          if(!res){
-            return;
-          }
-          if (res.body.status === constant.httpCode.OK) {
-            this.trigger({
-              retrieveFailed : false,
-              showMessage : true
-            });
-          } else if(res.body.status === constant.httpCode.NOT_FOUND){
-            this.trigger({
-              clickable: false,
-              retrieveFailed : true,
-              showMessage : false
-            });
-          }
-        });
+      .set('Content-Type', 'application/json')
+      .query({
+        email: email
+      })
+      .use(errorHandler)
+      .end((err, res) => {
+        if (!res) {
+          return;
+        }
+        if (res.body.status === constant.httpCode.OK) {
+          this.trigger({
+            retrieveFailed: false,
+            showMessage: true
+          });
+        } else if (res.body.status === constant.httpCode.NOT_FOUND) {
+          this.trigger({
+            clickable: false,
+            retrieveFailed: true,
+            showMessage: false
+          });
+        }
+      });
   }
 
 });

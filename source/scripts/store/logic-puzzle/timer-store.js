@@ -11,15 +11,15 @@ var TimerStore = Reflux.createStore({
 
   onGetRemainTime: function (programId, paperId, sectionId) {
     superAgent
-        .get('/api/timer/remain-time')
-        .set('Content-Type', 'application/json')
-        .query({programId, paperId, sectionId})
-        .use(errorHandler)
-        .end((err, res) => {
-          this.trigger({
-            'remainTime': res.body.remainTime
-          });
+      .get('/api/timer/remain-time')
+      .set('Content-Type', 'application/json')
+      .query({programId, paperId, sectionId})
+      .use(errorHandler)
+      .end((err, res) => {
+        this.trigger({
+          'remainTime': res.body.remainTime
         });
+      });
   }
 });
 

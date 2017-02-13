@@ -12,21 +12,21 @@ var Reflux = require('reflux');
 var Start = React.createClass({
   mixins: [Reflux.connect(StartStore)],
 
-  componentDidMount: function() {
+  componentDidMount: function () {
     StartActions.init();
     window.onpopstate = StartActions.init;
   },
 
   render: function () {
     return (
-        <div>
-          <header>
-            <Navigation>
-              <Account />
-            </Navigation>
-          </header>
-          <StartInfo />
-        </div>
+      <div>
+        <header>
+          <Navigation>
+            <Account />
+          </Navigation>
+        </header>
+        <StartInfo />
+      </div>
     )
   }
 });

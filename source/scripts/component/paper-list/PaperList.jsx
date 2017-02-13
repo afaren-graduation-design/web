@@ -33,7 +33,7 @@ var PaperList = React.createClass({
             <ul className="list row">
               {paper.data.map((item, index) => {
 
-                 var randomNumber = Math.floor(Math.random() *5);
+                var randomNumber = Math.floor(Math.random() * 5);
                 return (
                   <li className="list-item col-sm-2" onClick={this.clickPaper(item.id, item.programId)} key={index}>
                     <div className="icon-box col-sm-5">

@@ -10,9 +10,9 @@ var TextBox = React.createClass({
 
   render() {
     return (
-        <textarea className="textarea"
-                  value={this.state.content}
-                  readOnly={this.props.readonly ? 'readonly' : ''}/>
+      <textarea className="textarea"
+                value={this.state.content}
+                readOnly={this.props.readonly ? 'readonly' : ''}/>
     );
   }
 });

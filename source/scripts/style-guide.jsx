@@ -18,8 +18,8 @@ var UploadAvatar = require('./component/style-guide/upload-avatar.component.jsx'
 var LectureButton = require('./component/style-guide/lecture-button.component.jsx');
 var CompleteSection = require('./component/style-guide/complete-section.component.jsx');
 var LockSection = require('./component/style-guide/lock-section.component.jsx');
-var AddGroup =require('./component/style-guide/add-group.component.jsx');
-var TextBox =require('./component/style-guide/textbox.component.jsx');
+var AddGroup = require('./component/style-guide/add-group.component.jsx');
+var TextBox = require('./component/style-guide/textbox.component.jsx');
 
 require('../less/textbox.less');
 require('../less/group-title.less');
@@ -40,27 +40,27 @@ require('../less/complete-section.less');
 require('../less/lock-section.less');
 
 ReactDom.render(
-    <div>
-      <GroupTitle />
-      <ListGroup />
-      <GroupEvent />
-      <DiscussFrame />
-      <Arrows />
-      <DiscussSubject />
-      <DiscussList />
-      <Paper item=""/>
-      <AddPaper />
-      <Table />
-      <InviteLink />
-      <PageMachine />
-      <GroupAvatar />
-      <AddGroup />
-      <UploadAvatar />
-      <LectureButton />
-      <AddSection />
-      <CompleteSection />
-      <LockSection />
-      <TextBox />
-    </div>,
-    document.getElementById('style-guide')
+  <div>
+    <GroupTitle />
+    <ListGroup />
+    <GroupEvent />
+    <DiscussFrame />
+    <Arrows />
+    <DiscussSubject />
+    <DiscussList />
+    <Paper item=""/>
+    <AddPaper />
+    <Table />
+    <InviteLink />
+    <PageMachine />
+    <GroupAvatar />
+    <AddGroup />
+    <UploadAvatar />
+    <LectureButton />
+    <AddSection />
+    <CompleteSection />
+    <LockSection />
+    <TextBox />
+  </div>,
+  document.getElementById('style-guide')
 );

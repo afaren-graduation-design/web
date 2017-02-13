@@ -1,9 +1,9 @@
 'use strict';
 
 var Arrows = React.createClass({
-  render: function() {
+  render: function () {
     return (
-        <i className="fa fa-arrow-circle-down fa-5x text-primary"></i>
+      <i className="fa fa-arrow-circle-down fa-5x text-primary"></i>
     )
   }
 });

@@ -17,23 +17,23 @@ var LogicPuzzleBoxes = React.createClass({
   render: function () {
 
     return (
-        <div className="logic-title">
-          <div className="box">
-            <div>BoxNo.</div>
-            <ol>
-              {this.state.item.initializedBox.filter((val, key) => {
-                return key > 0;
-              }).map((box, idx) => {
-                return (
-                    <li key={idx}>
-                      <div>{idx + 1}</div>
-                      <div className="num">{box}</div>
-                    </li>
-                );
-              })}
-            </ol>
-          </div>
+      <div className="logic-title">
+        <div className="box">
+          <div>BoxNo.</div>
+          <ol>
+            {this.state.item.initializedBox.filter((val, key) => {
+              return key > 0;
+            }).map((box, idx) => {
+              return (
+                <li key={idx}>
+                  <div>{idx + 1}</div>
+                  <div className="num">{box}</div>
+                </li>
+              );
+            })}
+          </ol>
         </div>
+      </div>
     );
   }
 });

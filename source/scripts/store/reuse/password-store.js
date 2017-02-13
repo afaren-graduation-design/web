@@ -7,15 +7,15 @@ var PasswordActions = require('../../actions/reuse/password-actions');
 var UserDetailStore = Reflux.createStore({
   listenables: [PasswordActions],
 
-  onChangeNewPassword: function(passwordObj) {
+  onChangeNewPassword: function (passwordObj) {
     this.trigger(passwordObj);
   },
 
-  onGetPasswordError: function(passwordError) {
+  onGetPasswordError: function (passwordError) {
     this.trigger(passwordError);
   },
 
-  onSubmitEvent: function(evt) {
+  onSubmitEvent: function (evt) {
     this.trigger({event: evt});
   }
 });

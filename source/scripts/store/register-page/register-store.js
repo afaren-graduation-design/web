@@ -15,71 +15,71 @@ var RegisterStore = Reflux.createStore({
 
   onCheckEmail: function (value, done) {
     return request
-        .get('/api/register/validate-email')
-        .set('Content-Type', 'application/json')
-        .query({
-          email: value
-        })
-        .use(errorHandler)
-        .end((err, req) => {
-          var error = '';
-          if (req.body.status === constant.httpCode.OK) {
-            error = '该邮箱已被注册';
-          }
-          done({emailError: error});
-        });
+      .get('/api/register/validate-email')
+      .set('Content-Type', 'application/json')
+      .query({
+        email: value
+      })
+      .use(errorHandler)
+      .end((err, req) => {
+        var error = '';
+        if (req.body.status === constant.httpCode.OK) {
+          error = '该邮箱已被注册';
+        }
+        done({emailError: error});
+      });
   },
 
   onCheckMobilePhone: function (value, done) {
     return request
-        .get('/api/register/validate-mobile-phone')
-        .set('Content-Type', 'application/json')
-        .query({
-          mobilePhone: value
-        })
-        .use(errorHandler)
-        .end((err, req) => {
-          var error = '';
-          if (req.body.status === constant.httpCode.OK) {
-            error = '该手机号已被注册';
-          }
-          done({mobilePhoneError: error});
-        });
+      .get('/api/register/validate-mobile-phone')
+      .set('Content-Type', 'application/json')
+      .query({
+        mobilePhone: value
+      })
+      .use(errorHandler)
+      .end((err, req) => {
+        var error = '';
+        if (req.body.status === constant.httpCode.OK) {
+          error = '该手机号已被注册';
+        }
+        done({mobilePhoneError: error});
+      });
   },
 
   onRegister: function (mobilePhone, email, password, captcha) {
     request
-        .post('/api/register')
-        .set('Content-Type', 'application/json')
-        .send({
-          mobilePhone: mobilePhone,
-          email: email,
-          password: password,
-          captcha: captcha
-        })
-        .use(errorHandler)
-        .end((err, req) => {
-          var info = req.body;
+      .post('/api/register')
+      .set('Content-Type', 'application/json')
+      .send({
+        mobilePhone: mobilePhone,
+        email: email,
+        password: password,
+        captcha: captcha
+      })
+      .use(errorHandler)
+      .end((err, req) => {
+        var info = req.body;
 
-          if (info.status === constant.httpCode.OK) {
-            page('user-center.html');
-          } else if (info.status === constant.httpCode.FORBIDDEN) {
-            this.trigger({
-              isDisabled: info.registerable
-            });
-          } else {
-            var emailExist = info.data.isEmailExist ? '该邮箱已被注册' : '';
-            var mobilePhoneExist = info.data.isMobilePhoneExist ? '该手机号已被注册' : '';
-            var captchaError = info.data.isCaptchaError ? '验证码错误' : '';
+        if (info.status === constant.httpCode.OK) {
+          page('user-center.html');
+        } else if (info.status === constant.httpCode.FORBIDDEN) {
+          this.trigger({
+            isDisabled: info.registerable
+          });
+        } else {
+          var emailExist = info.data.isEmailExist ? '该邮箱已被注册' : '';
+          var mobilePhoneExist = info.data.isMobilePhoneExist ? '该手机号已被注册' : '';
+          var captchaError = info.data.isCaptchaError ? '验证码错误' : '';
 
-            this.trigger({
-              mobilePhoneError: mobilePhoneExist,
-              emailError: emailExist,
-              captchaError: captchaError,
-              clickable: false
-            });
-          }
-        });
+          this.trigger({
+            mobilePhoneError: mobilePhoneExist,
+            emailError: emailExist,
+            captchaError: captchaError,
+            clickable: false
+          });
+        }
+      });
   },
 
 
@@ -87,15 +87,15 @@ var RegisterStore = Reflux.createStore({
     async.series({
       initializeQuizzes: (done) => {
         request.get('/api/user-initialization/initializeQuizzes')
-            .set('Content-Type', 'application/json')
-            .use(errorHandler)
-            .end(function (err) {
-              if (err) {
-                done(err);
-              } else {
-                done(null, true);
-              }
-            });
+          .set('Content-Type', 'application/json')
+          .use(errorHandler)
+          .end(function (err) {
+            if (err) {
+              done(err);
+            } else {
+              done(null, true);
+            }
+          });
       }
     }, function (err, data) {
       if (data.initializeQuizzes) {
@@ -128,18 +128,18 @@ var RegisterStore = Reflux.createStore({
 
   onRegisterable: function () {
     request.get('/api/register/registerable')
-        .set('Content-Type', 'application/json')
-        .use(errorHandler)
-        .end((err, res) => {
-          if (!res.body) {
-            return;
-          } else if (res.status === constant.httpCode.OK) {
-            this.trigger({
-              isDisabled: !res.body.registerable
-            });
+      .set('Content-Type', 'application/json')
+      .use(errorHandler)
+      .end((err, res) => {
+        if (!res.body) {
+          return;
+        } else if (res.status === constant.httpCode.OK) {
+          this.trigger({
+            isDisabled: !res.body.registerable
+          });
 
-          }
-        });
+        }
+      });
   }
 });
 

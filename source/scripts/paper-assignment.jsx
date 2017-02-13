@@ -73,31 +73,31 @@ var PaperAssignment = React.createClass({
     var linksHtml = this.state.links.map((link, index) => {
       if (link.delete === true) {
         return (
-            <tr key={index}>
-              <td className="drop-little">
-                <span>{link.phoneNumber}</span>
-              </td>
-              <td className="drop-little">
-                <span>{link.paperName}</span>
-              </td>
-              <td>
-                <span id={index}>已删除</span>
-              </td>
-            </tr>
+          <tr key={index}>
+            <td className="drop-little">
+              <span>{link.phoneNumber}</span>
+            </td>
+            <td className="drop-little">
+              <span>{link.paperName}</span>
+            </td>
+            <td>
+              <span id={index}>已删除</span>
+            </td>
+          </tr>
         );
       } else {
         return (
-            <tr key={index}>
-              <td className="drop-little">
-                <span>{link.phoneNumber}</span>
-              </td>
-              <td className="drop-little">
-                <span>{link.paperName}</span>
-              </td>
-              <td>
-                <i id={index} onClick={this.handleDeleteClick}>删除</i>
-              </td>
-            </tr>
+          <tr key={index}>
+            <td className="drop-little">
+              <span>{link.phoneNumber}</span>
+            </td>
+            <td className="drop-little">
+              <span>{link.paperName}</span>
+            </td>
+            <td>
+              <i id={index} onClick={this.handleDeleteClick}>删除</i>
+            </td>
+          </tr>
         );
       }
     });
@@ -105,50 +105,50 @@ var PaperAssignment = React.createClass({
     var papersHtml = this.state.papers.map((paper, index) => {
       var paperId = paper.uri.split('/')[1];
       return (
-          <option key={index} value={paperId}>{paper.paperName}</option>
+        <option key={index} value={paperId}>{paper.paperName}</option>
       );
     });
 
     return (
-        <div>
-          <header>
-            <Navigation>
-              <Account />
-            </Navigation>
-          </header>
-          <div className="row">
-            <div className="col-md-8 col-md-offset-2 center-content">
-              <table className="table table-bordered">
-                <thead>
-                <tr>
-                  <th>预置手机号码</th>
-                  <th>对应试卷</th>
-                  <th>对应操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                {linksHtml}
-                <tr>
-                  <td>
-                    <input ref="phoneNumber" type="text" className="form-control" onBlur={this.validate}/>
-                    <div
-                        className={'lose' + (this.state.phoneNumberError === '' ? ' hide' : '')}>{this.state.phoneNumberError}
-                    </div>
-                  </td>
-                  <td>
-                    <select className="form-control" ref="papers" name="papers" id="papers">
-                      {papersHtml}
-                    </select>
-                  </td>
-                  <td>
-                    <i onClick={this.handleAddClick}>增加</i>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
+      <div>
+        <header>
+          <Navigation>
+            <Account />
+          </Navigation>
+        </header>
+        <div className="row">
+          <div className="col-md-8 col-md-offset-2 center-content">
+            <table className="table table-bordered">
+              <thead>
+              <tr>
+                <th>预置手机号码</th>
+                <th>对应试卷</th>
+                <th>对应操作</th>
+              </tr>
+              </thead>
+              <tbody>
+              {linksHtml}
+              <tr>
+                <td>
+                  <input ref="phoneNumber" type="text" className="form-control" onBlur={this.validate}/>
+                  <div
+                    className={'lose' + (this.state.phoneNumberError === '' ? ' hide' : '')}>{this.state.phoneNumberError}
+                  </div>
+                </td>
+                <td>
+                  <select className="form-control" ref="papers" name="papers" id="papers">
+                    {papersHtml}
+                  </select>
+                </td>
+                <td>
+                  <i onClick={this.handleAddClick}>增加</i>
+                </td>
+              </tr>
+              </tbody>
+            </table>
           </div>
         </div>
+      </div>
     );
   }
 });

@@ -12,7 +12,7 @@ var tabsConfiguration = [
   {activeStatus: '', value: '所有', tabsLink: '/', icon: 'fa-envelope'}
 ];
 
-var findMessage = [MessageManagementAction.findUnread,MessageManagementAction.findAll];
+var findMessage = [MessageManagementAction.findUnread, MessageManagementAction.findAll];
 
 var Message = React.createClass({
   mixins: [Reflux.connect(UserCenterStore), Reflux.connect(MessageManagementStore)],
@@ -29,14 +29,14 @@ var Message = React.createClass({
   },
 
   getMessageList: function (index) {
-    findMessage.find((fuc,i)=> i === index)();
+    findMessage.find((fuc, i) => i === index)();
   },
 
   componentDidMount: function () {
     this.getMessageList(0);
   },
 
-  onChangeTabsValue:function (index) {
+  onChangeTabsValue: function (index) {
     this.setState({
       tabsValue: index
     });
@@ -45,8 +45,8 @@ var Message = React.createClass({
   render: function () {
     var classString = (this.state.currentState === 'message' ? '' : ' hide');
     return (
-        <div className={"col-md-9 col-sm-9 col-xs-12 container-fluid" + classString}>
-          <div className="content">
+      <div className={"col-md-9 col-sm-9 col-xs-12 container-fluid" + classString}>
+        <div className="content">
           <div id='tabs' className='message-body'>
             <MessageTabs tabsConfiguration={this.state.tabsConfiguration}
                          onChangeTabsValue={this.onChangeTabsValue}
@@ -56,8 +56,8 @@ var Message = React.createClass({
                          messageList={this.state.messageList}
                          getMessageList={this.getMessageList}/>
           </div>
-          </div>
         </div>
+      </div>
     );
   }
 });

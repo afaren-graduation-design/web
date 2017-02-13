@@ -16,14 +16,14 @@ function asyncRenderAction(action, callBack) {
         var GroupIndex = require("../component/group/group-index.component.jsx");
         var GroupSidebar = require("../component/group/group-sidebar.component.jsx");
         element =
-            <div>
-              <GroupSidebar />
-              <div className="col-md-9">
-                <div id="content">
-                  <GroupIndex />
-                </div>
+          <div>
+            <GroupSidebar />
+            <div className="col-md-9">
+              <div id="content">
+                <GroupIndex />
               </div>
-            </div>;
+            </div>
+          </div>;
         callBack(element);
       });
       break;
@@ -35,14 +35,14 @@ function asyncRenderAction(action, callBack) {
         var GroupPapers = require("../component/group/group-papers.component.jsx");
         var GroupSidebar = require("../component/group/group-sidebar.component.jsx");
         element =
-            <div>
-              <GroupSidebar />
-              <div className="col-md-9">
-                <div id="content">
-                  <GroupPapers />
-                </div>
+          <div>
+            <GroupSidebar />
+            <div className="col-md-9">
+              <div id="content">
+                <GroupPapers />
               </div>
-            </div>;
+            </div>
+          </div>;
         callBack(element);
       });
       break;
@@ -54,14 +54,14 @@ function asyncRenderAction(action, callBack) {
         var GroupDiscussion = require("../component/group/group-discussion.component.jsx");
         var GroupSidebar = require("../component/group/group-sidebar.component.jsx");
         element =
-            <div>
-              <GroupSidebar />
-              <div className="col-md-9">
-                <div id="content">
-                  <GroupDiscussion />
-                </div>
+          <div>
+            <GroupSidebar />
+            <div className="col-md-9">
+              <div id="content">
+                <GroupDiscussion />
               </div>
-            </div>;
+            </div>
+          </div>;
         callBack(element);
       });
       break;
@@ -73,14 +73,14 @@ function asyncRenderAction(action, callBack) {
         var GroupMember = require("../component/group/group-member.component.jsx");
         var GroupSidebar = require("../component/group/group-sidebar.component.jsx");
         element =
-            <div>
-              <GroupSidebar />
-              <div className="col-md-9">
-                <div id="content">
-                  <GroupMember />
-                </div>
+          <div>
+            <GroupSidebar />
+            <div className="col-md-9">
+              <div id="content">
+                <GroupMember />
               </div>
-            </div>;
+            </div>
+          </div>;
         callBack(element);
       });
       break;
@@ -92,14 +92,14 @@ function asyncRenderAction(action, callBack) {
         var GroupManage = require("../component/group/group-manage.component.jsx");
         var GroupSidebar = require("../component/group/group-sidebar.component.jsx");
         element =
-            <div>
-              <GroupSidebar />
-              <div className="col-md-9">
-                <div id="content">
-                  <GroupManage />
-                </div>
+          <div>
+            <GroupSidebar />
+            <div className="col-md-9">
+              <div id="content">
+                <GroupManage />
               </div>
-            </div>;
+            </div>
+          </div>;
         callBack(element);
       });
       break;
@@ -118,17 +118,17 @@ function render(action, next) {
 
   asyncRenderAction(action, function (innerElement) {
     var content =
-        <div>
-          <header>
-            <Navigation>
-              <Account />
-            </Navigation>
-          </header>
-          {innerElement}
-        </div>;
+      <div>
+        <header>
+          <Navigation>
+            <Account />
+          </Navigation>
+        </header>
+        {innerElement}
+      </div>;
     ReactDom.render(
-        content,
-        document.getElementById('group')
+      content,
+      document.getElementById('group')
     );
     next();
   });

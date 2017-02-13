@@ -165,165 +165,165 @@ var UserDetail = React.createClass({
 
     var indents = [];
     for (var i = 0; i < 12; i++) {
-      indents.push(<option key={i} value={endEntranceYear-i}>{endEntranceYear - i}</option>);
+      indents.push(<option key={i} value={endEntranceYear - i}>{endEntranceYear - i}</option>);
     }
 
     var entranceYear =
-        <select ref='entranceYear' placeholder='入学年份' name='entranceYear' value={this.state.entranceYear}
-                onChange={this.handleChange}
-                className={'form-control' + (this.state.entranceYearError === '' ? '' : ' select')}>
+      <select ref='entranceYear' placeholder='入学年份' name='entranceYear' value={this.state.entranceYear}
+              onChange={this.handleChange}
+              className={'form-control' + (this.state.entranceYearError === '' ? '' : ' select')}>
 
-          <option value=''>请选择</option>
-          {indents}
-        </select>;
+        <option value=''>请选择</option>
+        {indents}
+      </select>;
 
     return (
-        <div className={'col-md-9 col-sm-9 col-xs-12' + classString}>
-          <div className='content'>
-            <form className='form-horizontal form-top-height' onSubmit={this.update} action='user-center.html'>
-              <div id='account-info'>
-                <label htmlFor='inputSchool' className='col-sm-4 col-md-4 control-label'>学校<span
-                    className="error alert alert-danger">*</span></label>
-                <div className={'form-group has-' + (this.state.schoolError === '' ? '' : 'error')}>
-                  <div className='col-sm-4 col-md-4'>
-                    <input type='text' className='form-control' id='inputSchool' aria-describedby='helpBlock2'
-                           placeholder='学校'
-                           onChange={this.handleChange} ref='school' name='school' value={this.state.school}
-                           onBlur={this.validate}/>
-                  </div>
-                  <div className={'error alert alert-danger' + (this.state.schoolError === '' ? ' hide' : '')}
-                       role='alert'>
-                    <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'/>
-                    {this.state.schoolError}
-                  </div>
+      <div className={'col-md-9 col-sm-9 col-xs-12' + classString}>
+        <div className='content'>
+          <form className='form-horizontal form-top-height' onSubmit={this.update} action='user-center.html'>
+            <div id='account-info'>
+              <label htmlFor='inputSchool' className='col-sm-4 col-md-4 control-label'>学校<span
+                className="error alert alert-danger">*</span></label>
+              <div className={'form-group has-' + (this.state.schoolError === '' ? '' : 'error')}>
+                <div className='col-sm-4 col-md-4'>
+                  <input type='text' className='form-control' id='inputSchool' aria-describedby='helpBlock2'
+                         placeholder='学校'
+                         onChange={this.handleChange} ref='school' name='school' value={this.state.school}
+                         onBlur={this.validate}/>
                 </div>
-
-                <label htmlFor='inputSchoolInfo' className='col-sm-4 col-md-4 control-label'>学校所在地<span
-                    className="error alert alert-danger">*</span></label>
-                <div className='form-group'>
-                  <div id="element_id" className="col-sm-4 col-md-4 school-info" onBlur={this.validate}>
-                    <div className="col-md-6 col-xs-6">
-                      <select
-                          className={"form-control province" + (this.state.schoolProvinceError === '' ? '' : ' select')}
-                          name="schoolProvince"
-                          value={this.state.schoolProvince} onChange={this.handleChange}/>
-                    </div>
-                    <div className="col-md-6 col-xs-6">
-                      <select className={"form-control city" + (this.state.schoolCityError === '' ? '' : ' select')}
-                              name="schoolCity"
-                              value={this.state.schoolCity} onChange={this.handleChange}/>
-                    </div>
-                  </div>
-                  <div
-                      className={'error alert alert-danger' + (this.state.schoolProvinceError === '' && this.state.schoolCityError === '' ? ' hide' : '')}
-                      role='alert'>
-                    <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'/>
-                    {this.state.schoolProvinceError || this.state.schoolCityError}
-                  </div>
-                </div>
-
-                <label htmlFor='inputName' className='col-sm-4 col-md-4 control-label'>姓名<span
-                    className="error alert alert-danger">*</span></label>
-                <div className={'form-group has-' + (this.state.nameError === '' ? '' : 'error')}>
-                  <div className='col-sm-4 col-md-4'>
-                    <input type='text' className='form-control' id='inputName' aria-describedby='helpBlock2'
-                           placeholder='姓名'
-                           onChange={this.handleChange} name='name' ref='name' value={this.state.name}
-                           onBlur={this.validate}/>
-                  </div>
-                  <div className={'error alert alert-danger' + (this.state.nameError === '' ? ' hide' : '')}
-                       role='alert'>
-                    <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'/>
-                    {this.state.nameError}
-                  </div>
-                </div>
-
-                <label htmlFor='inputMobilePhone' className='col-sm-4 col-md-4 control-label'>手机<span
-                    className="error alert alert-success">*</span></label>
-                <div className='form-group'>
-                  <div className='col-sm-4 col-md-4'>
-                    <input type='text' className='form-control' id='inputMobilePhone' placeholder='手机'
-                           disabled="disabled" value={this.state.mobilePhone}/>
-                  </div>
-                </div>
-
-                <label htmlFor='inputEmail' className='col-sm-4 col-md-4 control-label'>邮箱<span
-                    className="error alert alert-success">*</span></label>
-                <div className='form-group'>
-                  <div className='col-sm-4 col-md-4'>
-                    <input type='text' className='form-control' id='inputEmail' placeholder='邮箱'
-                           disabled="disabled" value={this.state.email}/>
-                  </div>
-                </div>
-
-                <label htmlFor='inputGender' className='col-sm-4 col-md-4 control-label'>性别<span
-                    className="error alert alert-danger">*</span></label>
-                <div className='form-group'>
-                  {this.props.children}
-                </div>
-
-                <label htmlFor='inputMajor' className='col-sm-4 col-md-4 control-label'>专业<span
-                    className="error alert alert-danger">*</span></label>
-                <div className={'form-group has-' + (this.state.majorError === '' ? '' : 'error')}>
-                  <div className='col-sm-4 col-md-4'>
-                    <input type='text' className='form-control' id='inputMajor' aria-describedby='helpBlock2'
-                           placeholder='专业'
-                           onChange={this.handleChange} name='major' ref='major' value={this.state.major}
-                           onBlur={this.validate}/>
-                  </div>
-                  <div className={'error alert alert-danger' + (this.state.majorError === '' ? ' hide' : '')}
-                       role='alert'>
-                    <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'/>
-                    {this.state.majorError}
-                  </div>
-                </div>
-
-                <label htmlFor='inputDegree' className='col-sm-4 col-md-4 control-label'>学历学位<span
-                    className="error alert alert-danger">*</span></label>
-                <div className='form-group'>
-                  <div className='col-sm-4 col-md-4' onBlur={this.validate}>
-                    <select ref='degree' placeholder='学历学位' name='degree' value={this.state.degree}
-                            onChange={this.handleChange}
-                            className={'form-control' + (this.state.degreeError === '' ? '' : ' select')}>
-                      <option value=''>请选择</option>
-                      <option value='专科'>专科及以下</option>
-                      <option value='本科'>本科</option>
-                      <option value='硕士'>硕士</option>
-                      <option value='博士'>博士</option>
-                    </select>
-                  </div>
-
-                  <div className={'error alert alert-danger' + (this.state.degreeError === '' ? ' hide' : '')}
-                       role='alert'>
-                    <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'/>
-                    {this.state.degreeError}
-                  </div>
-                </div>
-
-
-                <label htmlFor='inputEntranceYear' className='col-sm-4 col-md-4 control-label'>入学年份<span
-                    className="error alert alert-danger">*</span></label>
-                <div className='form-group'>
-                  <div className='col-sm-4 col-md-4' onBlur={this.validate}>
-                    {entranceYear}
-                  </div>
-
-                  <div className={'error alert alert-danger' + (this.state.entranceYearError === '' ? ' hide' : '')}
-                       role='alert'>
-                    <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'/>
-                    {this.state.entranceYearError}
-                  </div>
-                </div>
-
-                <div className='form-group'>
-                  <div className='col-sm-offset-4 col-sm-4 col-md-offset-4 col-md-4'>
-                    <button type='submit' className='btn btn-default'>保存</button>
-                  </div>
+                <div className={'error alert alert-danger' + (this.state.schoolError === '' ? ' hide' : '')}
+                     role='alert'>
+                  <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'/>
+                  {this.state.schoolError}
                 </div>
               </div>
-            </form>
-          </div>
+
+              <label htmlFor='inputSchoolInfo' className='col-sm-4 col-md-4 control-label'>学校所在地<span
+                className="error alert alert-danger">*</span></label>
+              <div className='form-group'>
+                <div id="element_id" className="col-sm-4 col-md-4 school-info" onBlur={this.validate}>
+                  <div className="col-md-6 col-xs-6">
+                    <select
+                      className={"form-control province" + (this.state.schoolProvinceError === '' ? '' : ' select')}
+                      name="schoolProvince"
+                      value={this.state.schoolProvince} onChange={this.handleChange}/>
+                  </div>
+                  <div className="col-md-6 col-xs-6">
+                    <select className={"form-control city" + (this.state.schoolCityError === '' ? '' : ' select')}
+                            name="schoolCity"
+                            value={this.state.schoolCity} onChange={this.handleChange}/>
+                  </div>
+                </div>
+                <div
+                  className={'error alert alert-danger' + (this.state.schoolProvinceError === '' && this.state.schoolCityError === '' ? ' hide' : '')}
+                  role='alert'>
+                  <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'/>
+                  {this.state.schoolProvinceError || this.state.schoolCityError}
+                </div>
+              </div>
+
+              <label htmlFor='inputName' className='col-sm-4 col-md-4 control-label'>姓名<span
+                className="error alert alert-danger">*</span></label>
+              <div className={'form-group has-' + (this.state.nameError === '' ? '' : 'error')}>
+                <div className='col-sm-4 col-md-4'>
+                  <input type='text' className='form-control' id='inputName' aria-describedby='helpBlock2'
+                         placeholder='姓名'
+                         onChange={this.handleChange} name='name' ref='name' value={this.state.name}
+                         onBlur={this.validate}/>
+                </div>
+                <div className={'error alert alert-danger' + (this.state.nameError === '' ? ' hide' : '')}
+                     role='alert'>
+                  <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'/>
+                  {this.state.nameError}
+                </div>
+              </div>
+
+              <label htmlFor='inputMobilePhone' className='col-sm-4 col-md-4 control-label'>手机<span
+                className="error alert alert-success">*</span></label>
+              <div className='form-group'>
+                <div className='col-sm-4 col-md-4'>
+                  <input type='text' className='form-control' id='inputMobilePhone' placeholder='手机'
+                         disabled="disabled" value={this.state.mobilePhone}/>
+                </div>
+              </div>
+
+              <label htmlFor='inputEmail' className='col-sm-4 col-md-4 control-label'>邮箱<span
+                className="error alert alert-success">*</span></label>
+              <div className='form-group'>
+                <div className='col-sm-4 col-md-4'>
+                  <input type='text' className='form-control' id='inputEmail' placeholder='邮箱'
+                         disabled="disabled" value={this.state.email}/>
+                </div>
+              </div>
+
+              <label htmlFor='inputGender' className='col-sm-4 col-md-4 control-label'>性别<span
+                className="error alert alert-danger">*</span></label>
+              <div className='form-group'>
+                {this.props.children}
+              </div>
+
+              <label htmlFor='inputMajor' className='col-sm-4 col-md-4 control-label'>专业<span
+                className="error alert alert-danger">*</span></label>
+              <div className={'form-group has-' + (this.state.majorError === '' ? '' : 'error')}>
+                <div className='col-sm-4 col-md-4'>
+                  <input type='text' className='form-control' id='inputMajor' aria-describedby='helpBlock2'
+                         placeholder='专业'
+                         onChange={this.handleChange} name='major' ref='major' value={this.state.major}
+                         onBlur={this.validate}/>
+                </div>
+                <div className={'error alert alert-danger' + (this.state.majorError === '' ? ' hide' : '')}
+                     role='alert'>
+                  <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'/>
+                  {this.state.majorError}
+                </div>
+              </div>
+
+              <label htmlFor='inputDegree' className='col-sm-4 col-md-4 control-label'>学历学位<span
+                className="error alert alert-danger">*</span></label>
+              <div className='form-group'>
+                <div className='col-sm-4 col-md-4' onBlur={this.validate}>
+                  <select ref='degree' placeholder='学历学位' name='degree' value={this.state.degree}
+                          onChange={this.handleChange}
+                          className={'form-control' + (this.state.degreeError === '' ? '' : ' select')}>
+                    <option value=''>请选择</option>
+                    <option value='专科'>专科及以下</option>
+                    <option value='本科'>本科</option>
+                    <option value='硕士'>硕士</option>
+                    <option value='博士'>博士</option>
+                  </select>
+                </div>
+
+                <div className={'error alert alert-danger' + (this.state.degreeError === '' ? ' hide' : '')}
+                     role='alert'>
+                  <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'/>
+                  {this.state.degreeError}
+                </div>
+              </div>
+
+
+              <label htmlFor='inputEntranceYear' className='col-sm-4 col-md-4 control-label'>入学年份<span
+                className="error alert alert-danger">*</span></label>
+              <div className='form-group'>
+                <div className='col-sm-4 col-md-4' onBlur={this.validate}>
+                  {entranceYear}
+                </div>
+
+                <div className={'error alert alert-danger' + (this.state.entranceYearError === '' ? ' hide' : '')}
+                     role='alert'>
+                  <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'/>
+                  {this.state.entranceYearError}
+                </div>
+              </div>
+
+              <div className='form-group'>
+                <div className='col-sm-offset-4 col-sm-4 col-md-offset-4 col-md-4'>
+                  <button type='submit' className='btn btn-default'>保存</button>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
+      </div>
     );
 
   }

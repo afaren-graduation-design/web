@@ -16,28 +16,28 @@ var style = {
 var showUnder = 600;
 
 var Index = React.createClass({
-  componentWillMount:function() {
+  componentWillMount: function () {
     var channel;
     var url = location.search;
     var index = 9;
 
-    if(url.indexOf('channel') > 0) {
+    if (url.indexOf('channel') > 0) {
       channel = url.substr(index);
-    }else {
+    } else {
       channel = '';
     }
     document.cookie = 'channel=' + channel;
   },
-  render: function() {
+  render: function () {
     return (
-        <div>
-          <Account state="index" />
-          <ScrollToTop showUnder={showUnder} style={style}>
-            <div id="scroll-button">
-              <i className="fa fa-angle-double-up fa-2x"></i>
-            </div>
-          </ScrollToTop>
-        </div>
+      <div>
+        <Account state="index"/>
+        <ScrollToTop showUnder={showUnder} style={style}>
+          <div id="scroll-button">
+            <i className="fa fa-angle-double-up fa-2x"></i>
+          </div>
+        </ScrollToTop>
+      </div>
     )
   }
 });

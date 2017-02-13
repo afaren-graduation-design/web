@@ -22,9 +22,9 @@ var PaperDetailForm = React.createClass({
 
   render(){
     return (
-        <div>
+      <div>
 
-        </div>
+      </div>
     )
   }
 });

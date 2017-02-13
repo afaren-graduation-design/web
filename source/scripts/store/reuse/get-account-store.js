@@ -10,29 +10,29 @@ var page = require('page');
 var GetAccountStore = Reflux.createStore({
   listenables: [GetAccountActions],
 
-  onLoadAccount:function() {
+  onLoadAccount: function () {
     request.get('/api/reuse/account')
-        .set('Content-Type', 'application/json')
-        .use(errorHandler)
-        .end((err, res) => {
-          if (err) {
-            return;
-          } else if (res.body.status === constant.httpCode.OK) {
-            this.trigger({account: res.body.account, isSuperAdmin:res.body.superAdmin,isLoged: true});
-          } else if(res.body.status === constant.httpCode.ACCEPTED) {
-            this.trigger({account: '', isLoged: false});
-          } else {
-            return;
-          }
-        });
+      .set('Content-Type', 'application/json')
+      .use(errorHandler)
+      .end((err, res) => {
+        if (err) {
+          return;
+        } else if (res.body.status === constant.httpCode.OK) {
+          this.trigger({account: res.body.account, isSuperAdmin: res.body.superAdmin, isLoged: true});
+        } else if (res.body.status === constant.httpCode.ACCEPTED) {
+          this.trigger({account: '', isLoged: false});
+        } else {
+          return;
+        }
+      });
   },
-  onLogout:function() {
+  onLogout: function () {
     request.get('/api/logout')
-        .set('Content-Type', 'application/json')
-        .use(errorHandler)
-        .end((err, res) => {
-          page('register.html');
-        })
+      .set('Content-Type', 'application/json')
+      .use(errorHandler)
+      .end((err, res) => {
+        page('register.html');
+      })
   }
 });
 

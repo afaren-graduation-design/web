@@ -18,13 +18,13 @@ var LogicPuzzleTimer = React.createClass({
     this.countDown();
   },
 
-  countDown: function(){
+  countDown: function () {
 
     setInterval(() => {
-      if(this.state.remainTime){
+      if (this.state.remainTime) {
         var remainTime = this.state.remainTime - 1;
 
-        if(remainTime <= 0){
+        if (remainTime <= 0) {
           this.props.onTimeOver();
         }
 
@@ -32,7 +32,7 @@ var LogicPuzzleTimer = React.createClass({
           remainTime: remainTime
         });
 
-        if(remainTime % (constant.time.SECONDS_PER_MINUTE * 2) === 1){
+        if (remainTime % (constant.time.SECONDS_PER_MINUTE * 2) === 1) {
           TimerActions.getRemainTime(programId, paperId, sectionId);
         }
       }

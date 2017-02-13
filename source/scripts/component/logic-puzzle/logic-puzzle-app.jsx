@@ -25,25 +25,25 @@ var LogicPuzzle = React.createClass({
 
     return (
 
-        <div className="container-fluid">
-          <div className="row">
-            {this.props.children}
-            <Modal
-              show={this.state.showModal}
-              dialogClassName="custom-modal"
-            >
-              <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-lg">提示:</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                时间到,已提交.
-              </Modal.Body>
-              <Modal.Footer>
-                <Button href="dashboard.html">确定</Button>
-              </Modal.Footer>
-            </Modal>
-          </div>
+      <div className="container-fluid">
+        <div className="row">
+          {this.props.children}
+          <Modal
+            show={this.state.showModal}
+            dialogClassName="custom-modal"
+          >
+            <Modal.Header closeButton>
+              <Modal.Title id="contained-modal-title-lg">提示:</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              时间到,已提交.
+            </Modal.Body>
+            <Modal.Footer>
+              <Button href="dashboard.html">确定</Button>
+            </Modal.Footer>
+          </Modal>
         </div>
+      </div>
     );
   }
 });

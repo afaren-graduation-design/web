@@ -10,7 +10,7 @@ page.base('/group');
 
 page('/', groupRouter.render);
 
-page('/:groupHash', function(ctx, next) {
+page('/:groupHash', function (ctx, next) {
   page('/' + ctx.params.groupHash + '/index');
 });
 

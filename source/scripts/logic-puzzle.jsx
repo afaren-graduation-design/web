@@ -23,44 +23,44 @@ var LogicPuzzleStore = require('./store/logic-puzzle/logic-puzzle-store');
 
 $('#submitModal').on('show.bs.modal', function () {
   $('.modal-content')
-      .css('margin-top', '230px');
+    .css('margin-top', '230px');
 });
 
-function handleTimeOver(){
+function handleTimeOver() {
   LogicPuzzleActions.timeOver();
 }
 var LogicPuzzleApp = React.createClass({
   mixins: [Reflux.connect(LogicPuzzleStore)],
 
-  componentDidMount: function() {
+  componentDidMount: function () {
     LogicPuzzleActions.init();
     window.onpopstate = LogicPuzzleActions.init;
   },
 
-  render:function() {
+  render: function () {
     return (
-        <div>
-          <header>
-            <Navigation>
-              <Account />
-            </Navigation>
-          </header>
-          <LogicPuzzle>
-            <div className="col-md-9 col-sm-8">
-              <LogicPuzzleLeft>
-                <LogicPuzzleBoxes/>
-                <LogicPuzzleChart/>
-                <LogicPuzzleDescription/>
-                <LogicPuzzleAnswerSubmit/>
-              </LogicPuzzleLeft>
-            </div>
-            <div className="col-md-3 col-sm-4">
-              <LogicPuzzleSidebar>
-                <LogicPuzzleTimer onTimeOver={handleTimeOver}/>
-              </LogicPuzzleSidebar>
-            </div>
-          </LogicPuzzle>
-        </div>
+      <div>
+        <header>
+          <Navigation>
+            <Account />
+          </Navigation>
+        </header>
+        <LogicPuzzle>
+          <div className="col-md-9 col-sm-8">
+            <LogicPuzzleLeft>
+              <LogicPuzzleBoxes/>
+              <LogicPuzzleChart/>
+              <LogicPuzzleDescription/>
+              <LogicPuzzleAnswerSubmit/>
+            </LogicPuzzleLeft>
+          </div>
+          <div className="col-md-3 col-sm-4">
+            <LogicPuzzleSidebar>
+              <LogicPuzzleTimer onTimeOver={handleTimeOver}/>
+            </LogicPuzzleSidebar>
+          </div>
+        </LogicPuzzle>
+      </div>
     )
   }
 });

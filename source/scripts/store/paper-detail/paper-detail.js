@@ -12,17 +12,17 @@ var paperDetailStore = Reflux.createStore({
 
   onGetPaperDetail(id, programId){
     request.get(`/programs/${programId}/papers/${id}`)
-        .set('Content-Type', 'application/json')
-        .use(errorHandler)
-        .end((err, resp)=> {
-          if (err) {
-            return;
-          }
-          else {
-            resp.send(res.body)
-          }
-        });
-    }
+      .set('Content-Type', 'application/json')
+      .use(errorHandler)
+      .end((err, resp) => {
+        if (err) {
+          return;
+        }
+        else {
+          resp.send(res.body)
+        }
+      });
+  }
 });
 
 module.exports = paperDetailStore;

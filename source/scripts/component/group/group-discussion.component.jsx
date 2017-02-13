@@ -7,12 +7,12 @@ var GroupDiscussion = React.createClass({
 
   render() {
     return (
-        <div>
-          <DiscussSubject />
-          <div className="col-md-10 col-md-offset-1">
-            <DiscussFrame />
-          </div>
+      <div>
+        <DiscussSubject />
+        <div className="col-md-10 col-md-offset-1">
+          <DiscussFrame />
         </div>
+      </div>
     );
   }
 });

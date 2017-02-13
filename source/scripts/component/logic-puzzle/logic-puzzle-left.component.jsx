@@ -1,12 +1,12 @@
 'use strict';
 
 var LogicPuzzleLeft = React.createClass({
-  
+
   render: function () {
     return (
-        <div id="logic-puzzle">
-          {this.props.children}
-        </div>
+      <div id="logic-puzzle">
+        {this.props.children}
+      </div>
     );
   }
 });

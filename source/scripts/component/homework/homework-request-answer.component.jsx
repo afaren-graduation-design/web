@@ -17,7 +17,15 @@ var RequestAnswer = React.createClass({
   },
 
   componentDidMount: function () {
-    MentorManagementAction.getMentors();
+    MentorManagementAction.getMentors(() => {
+      if (this.state.mentorList.length) {
+        MessageActions.getAnswer({
+          from: this.state.mentorList[0].userId,
+          type: 'AGREE_REQUEST_ANSWER',
+          deeplink: this.props.questionId
+        });
+      }
+    });
   },
 
   handleRequest: function () {
@@ -33,7 +41,7 @@ var RequestAnswer = React.createClass({
     const MentorSpan = <span
       className="mentor-span">{this.state.mentorList.length ? 'mentor : ' + this.state.mentorList[0].name : ''}</span>;
     let info = this.state.mentorList.length ? '' : '您当前没有mentor,请先添加mentor.';
-    let result = info || (this.props.answer ? this.props.answer : RequestAnswerBtn);
+    let result = info || (this.state.answer ? this.state.answer : RequestAnswerBtn);
     return (
       <div className="runningResult tab">
         <div className="result">

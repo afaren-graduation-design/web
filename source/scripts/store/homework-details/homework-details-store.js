@@ -16,15 +16,15 @@ var HomeworkDetailsStore = Reflux.createStore({
     var url = '/api/user/' + userId + '/homework-details';
 
     superAgent.get(url)
-        .set('Content-Type', 'application/json')
-        .use(errorHandler)
-        .use(nocache)
-        .end((err, res) => {
-          if (err || res.status !== constant.httpCode.OK) {
-            return;
-          }
-          this.trigger({userDetail: res.body.userInfo});
-        });
+      .set('Content-Type', 'application/json')
+      .use(errorHandler)
+      .use(nocache)
+      .end((err, res) => {
+        if (err || res.status !== constant.httpCode.OK) {
+          return;
+        }
+        this.trigger({userDetail: res.body.userInfo});
+      });
   }
 
 });

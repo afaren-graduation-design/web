@@ -64,7 +64,7 @@ var passwordRetrieveForm = React.createClass({
     }
   },
 
-  back: function() {
+  back: function () {
     page('register.html');
   },
 
@@ -74,42 +74,42 @@ var passwordRetrieveForm = React.createClass({
     var messageClassName = 'message-container ' + (this.state.showMessage ? '' : 'hide');
 
     return (
-        <div>
-          <div id="retrieve" className={retrieveClassName}>
-            <h4 className="welcome">密码找回</h4>
-            <div className={'lose' + (this.state.retrieveFailed === false ? ' hide' : '')} name="retrieveFailed">
-              邮箱不存在
+      <div>
+        <div id="retrieve" className={retrieveClassName}>
+          <h4 className="welcome">密码找回</h4>
+          <div className={'lose' + (this.state.retrieveFailed === false ? ' hide' : '')} name="retrieveFailed">
+            邮箱不存在
+          </div>
+          <form action="" onSubmit={this.retrieve}>
+            <div className="form-group">
+              <input className="form-control" type="text" placeholder="请输入注册时填写的邮箱" name="email"
+                     onBlur={this.validate} onkeypress="if(event.keyCode==13||event.which==13){return false;}"
+                     ref="email" autoComplete="off"/>
+              <div
+                className={'lose' + (this.state.emailError === '' ? ' hide' : '')}>{this.state.emailError}
+              </div>
             </div>
-            <form action="" onSubmit={this.retrieve}>
-              <div className="form-group">
-                <input className="form-control" type="text" placeholder="请输入注册时填写的邮箱" name="email"
-                       onBlur={this.validate} onkeypress="if(event.keyCode==13||event.which==13){return false;}"
-                       ref="email" autoComplete="off"/>
-                <div
-                    className={'lose' + (this.state.emailError === '' ? ' hide' : '')}>{this.state.emailError}
-                </div>
+            <div className="row">
+              <div className="col-md-6 col-sm-6">
+                <button type="submit" id="retrieve-btn"
+                        className="btn btn-block btn-primary col-md-offset-6 col-xs-offset-4"
+                        disabled={this.state.clickable}>确认
+                  <i className={'fa fa-spinner fa-spin loading' + (this.state.clickable ? '' : ' hide')}/>
+                </button>
               </div>
-              <div className="row">
-                <div className="col-md-6 col-sm-6">
-                  <button type="submit" id="retrieve-btn"
-                   className="btn btn-block btn-primary col-md-offset-6 col-xs-offset-4"
-                   disabled={this.state.clickable}>确认
-                    <i className={'fa fa-spinner fa-spin loading' + (this.state.clickable ? '' : ' hide')}/>
-                  </button>
-                </div>
-                <div className="col-md-6 col-sm-6">
-                  <button type="button" id="retrieve-btn"
-                  className="btn btn-block btn-default col-md-offset-2 col-xs-offset-4"
-                  onClick={this.back}>返回登录
-                  </button>
-                </div>
+              <div className="col-md-6 col-sm-6">
+                <button type="button" id="retrieve-btn"
+                        className="btn btn-block btn-default col-md-offset-2 col-xs-offset-4"
+                        onClick={this.back}>返回登录
+                </button>
               </div>
-            </form>
-          </div>
-          <div id="message" className={messageClassName}>
-            <p>您的重置密码链接已经发送至邮箱<strong>{this.state.email}</strong>中,请注意查收!</p>
-          </div>
+            </div>
+          </form>
         </div>
+        <div id="message" className={messageClassName}>
+          <p>您的重置密码链接已经发送至邮箱<strong>{this.state.email}</strong>中,请注意查收!</p>
+        </div>
+      </div>
     );
   }
 });

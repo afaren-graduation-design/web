@@ -8,38 +8,40 @@
  * @site https://github.com/ciaoca/cxSelect
  * @license Released under the MIT license
  */
-(function(factory) {
+(function (factory) {
   if (typeof define === 'function' && define.amd) {
     define(['jquery'], factory);
   } else {
     factory(window.jQuery || window.Zepto || window.$);
-  };
-}(function($) {
-  $.cxSelect = function() {
+  }
+  ;
+}(function ($) {
+  $.cxSelect = function () {
     var cxSelect = {
       dom: {}
     };
 
-    cxSelect.init = function() {
+    cxSelect.init = function () {
       var self = this;
       var _settings;
 
       // 检测是否为 DOM 元素
-      var _isElement = function(o) {
-        if(o && (typeof HTMLElement === 'function' || typeof HTMLElement === 'object') && o instanceof HTMLElement) {
+      var _isElement = function (o) {
+        if (o && (typeof HTMLElement === 'function' || typeof HTMLElement === 'object') && o instanceof HTMLElement) {
           return true;
         } else {
           return (o && o.nodeType && o.nodeType === 1) ? true : false;
-        };
+        }
+        ;
       };
 
       // 检测是否为 jQuery 对象
-      var _isJquery = function(o) {
+      var _isJquery = function (o) {
         return (o && o.length && (typeof jQuery === 'function' || typeof jQuery === 'object') && o instanceof jQuery) ? true : false;
       };
 
       // 检测是否为 Zepto 对象
-      var _isZepto = function(o){
+      var _isZepto = function (o) {
         return (o && o.length && (typeof Zepto === 'function' || typeof Zepto === 'object') && Zepto.zepto.isZ(o)) ? true : false;
       };
 
@@ -51,10 +53,15 @@
           self.dom.box = $(arguments[i]);
         } else if (typeof arguments[i] === 'object') {
           _settings = arguments[i];
-        };
-      };
+        }
+        ;
+      }
+      ;
 
-      if (!self.dom.box.length) {return};
+      if (!self.dom.box.length) {
+        return
+      }
+      ;
 
       self.settings = $.extend({}, $.cxSelect.defaults, _settings, {
         url: self.dom.box.data('url'),
@@ -72,10 +79,14 @@
 
       if (typeof _dataSelects === 'string' && _dataSelects.length) {
         self.settings.selects = _dataSelects.split(',');
-      };
+      }
+      ;
 
       // 未设置选择器组
-      if (!$.isArray(self.settings.selects) || !self.settings.selects.length) {return};
+      if (!$.isArray(self.settings.selects) || !self.settings.selects.length) {
+        return
+      }
+      ;
 
       self.selectArray = [];
 
@@ -84,20 +95,28 @@
       for (var i = 0, l = self.settings.selects.length; i < l; i++) {
         _tempSelect = self.dom.box.find('select.' + self.settings.selects[i]);
 
-        if (!_tempSelect || !_tempSelect.length) {break};
+        if (!_tempSelect || !_tempSelect.length) {
+          break
+        }
+        ;
 
         // 保存默认值
         if (typeof _tempSelect.data('value') === 'undefined' && _tempSelect[0].options.length && typeof _tempSelect.val() === 'string') {
           _tempSelect.attr('data-value', _tempSelect.val());
-        };
+        }
+        ;
 
         self.selectArray.push(_tempSelect);
-      };
+      }
+      ;
 
       // 设置的选择器组不存在
-      if (!self.selectArray.length) {return};
+      if (!self.selectArray.length) {
+        return
+      }
+      ;
 
-      self.dom.box.on('change', 'select', function() {
+      self.dom.box.on('change', 'select', function () {
         self.selectChange(this.className);
       });
 
@@ -107,21 +126,22 @@
 
         // 设置 URL，通过 Ajax 获取数据
       } else if (typeof self.settings.url === 'string' && self.settings.url.length) {
-        $.getJSON(self.settings.url, function(json) {
+        $.getJSON(self.settings.url, function (json) {
           self.start(json);
         });
 
         // 设置自定义数据
       } else if (typeof self.settings.url === 'object') {
         self.start(self.settings.url);
-      };
+      }
+      ;
     };
 
-    cxSelect.getIndex = function(n, required) {
+    cxSelect.getIndex = function (n, required) {
       return required ? n : n - 1;
     };
 
-    cxSelect.start = function(data) {
+    cxSelect.start = function (data) {
       var self = this;
       var _jsonSpace = self.settings.jsonSpace;
 
@@ -135,9 +155,12 @@
 
           for (var i = 0, l = _space.length; i < l; i++) {
             self.dataJson = self.dataJson[_space[i]];
-          };
-        };
-      };
+          }
+          ;
+        }
+        ;
+      }
+      ;
 
       if (self.dataJson || (typeof self.selectArray[0].data('url') === 'string' && self.selectArray[0].data('url').length)) {
         self.getOptionData(0);
@@ -146,12 +169,16 @@
           'display': '',
           'visibility': ''
         });
-      };
+      }
+      ;
     };
 
     // 改变选择时的处理
-    cxSelect.selectChange = function(name) {
-      if (typeof name !== 'string' || !name.length) {return};
+    cxSelect.selectChange = function (name) {
+      if (typeof name !== 'string' || !name.length) {
+        return
+      }
+      ;
 
       var self = this;
       var _index;
@@ -164,20 +191,26 @@
         if (name.indexOf(',' + self.settings.selects[i] + ',') > -1) {
           _index = i;
           break;
-        };
-      };
+        }
+        ;
+      }
+      ;
 
       if (typeof _index === 'number' && _index > -1) {
         _index += 1;
         self.getOptionData(_index);
-      };
+      }
+      ;
     };
 
     // 获取选项数据
-    cxSelect.getOptionData = function(index, opt) {
+    cxSelect.getOptionData = function (index, opt) {
       var self = this;
 
-      if (typeof index !== 'number' || isNaN(index) || index < 0 || index >= self.selectArray.length) {return};
+      if (typeof index !== 'number' || isNaN(index) || index < 0 || index >= self.selectArray.length) {
+        return
+      }
+      ;
 
       var _indexPrev = index - 1;
       var _select = self.selectArray[index];
@@ -198,13 +231,18 @@
 
         } else if (self.settings.nodata === 'hidden') {
           self.selectArray[i].css('visibility', 'hidden');
-        };
-      };
+        }
+        ;
+      }
+      ;
 
       // 使用独立接口
       if (typeof _dataUrl === 'string' && _dataUrl.length) {
         if (_indexPrev >= 0) {
-          if (!self.selectArray[_indexPrev].val().length) {return};
+          if (!self.selectArray[_indexPrev].val().length) {
+            return
+          }
+          ;
 
           _queryName = _select.data('queryName');
           _selectName = self.selectArray[_indexPrev].attr('name');
@@ -213,11 +251,13 @@
             _query[_queryName] = self.selectArray[_indexPrev].val();
           } else if (typeof _selectName === 'string' && _selectName.length) {
             _query[_selectName] = self.selectArray[_indexPrev].val();
-          };
+          }
+          ;
 
-        };
+        }
+        ;
 
-        $.getJSON(_dataUrl, _query, function(json) {
+        $.getJSON(_dataUrl, _query, function (json) {
           _selectData = json;
 
           if (typeof _jsonSpace === 'string' && _jsonSpace.length) {
@@ -225,8 +265,10 @@
 
             for (var i = 0, l = _space.length; i < l; i++) {
               _selectData = _selectData[_space[i]];
-            };
-          };
+            }
+            ;
+          }
+          ;
 
           self.buildOption(_select, _selectData);
         });
@@ -243,15 +285,17 @@
           } else {
             _selectData = null;
             break;
-          };
-        };
+          }
+          ;
+        }
+        ;
 
         self.buildOption(_select, _selectData);
       }
     };
 
     // 构建选项列表
-    cxSelect.buildOption = function(select, data) {
+    cxSelect.buildOption = function (select, data) {
       var self = this;
       var _required = typeof select.data('required') === 'boolean' ? select.data('required') : self.settings.required;
       var _firstTitle = typeof select.data('firstTitle') === 'undefined' ? self.settings.firstTitle : select.data('firstTitle');
@@ -259,7 +303,10 @@
       var _jsonName = typeof select.data('jsonName') === 'undefined' ? self.settings.jsonName : select.data('jsonName');
       var _jsonValue = typeof select.data('jsonValue') === 'undefined' ? self.settings.jsonValue : select.data('jsonValue');
 
-      if (!$.isArray(data)) {return};
+      if (!$.isArray(data)) {
+        return
+      }
+      ;
 
       var _html = !_required ? '<option value="' + String(_firstValue) + '">' + String(_firstTitle) + '</option>' : '';
 
@@ -268,18 +315,22 @@
         // 无值字段时使用标题作为值
         if (typeof _jsonValue !== 'string' || !_jsonValue.length) {
           _jsonValue = _jsonName;
-        };
+        }
+        ;
 
         for (var i = 0, l = data.length; i < l; i++) {
           _html += '<option value="' + String(data[i][_jsonValue]) + '">' + String(data[i][_jsonName]) + '</option>';
-        };
+        }
+        ;
 
         // 数组即为值的数据
       } else {
         for (var i = 0, l = data.length; i < l; i++) {
           _html += '<option value="' + String(data[i]) + '">' + String(data[i]) + '</option>';
-        };
-      };
+        }
+        ;
+      }
+      ;
 
       select.html(_html).prop('disabled', false).css({
         'display': '',
@@ -292,8 +343,10 @@
 
         if (select[0].selectedIndex < 0) {
           select[0].options[0].selected = true;
-        };
-      };
+        }
+        ;
+      }
+      ;
 
       select.trigger('change');
     };
@@ -317,8 +370,8 @@
     jsonSub: 's'            // 子集数据字段名称
   };
 
-  $.fn.cxSelect = function(settings, callback) {
-    this.each(function(i) {
+  $.fn.cxSelect = function (settings, callback) {
+    this.each(function (i) {
       $.cxSelect(this, settings, callback);
     });
     return this;

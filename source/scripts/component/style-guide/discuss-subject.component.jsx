@@ -1,7 +1,7 @@
 'use strict';
 
 var DiscussSubject = React.createClass({
-  getInitialState: function() {
+  getInitialState: function () {
     return ({
       subjectList: [
         {

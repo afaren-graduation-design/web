@@ -136,34 +136,34 @@ var LoginForm = React.createClass({
   render: function () {
     var classString = 'col-md-7 logon-form-container';
     return (
-        <div id="logon" className={classString}>
-          <h4 className="welcome">欢迎登录思沃学院</h4>
-          <div className={'lose' + (this.state.loginFailed === false ? ' hide' : '')} name="loginFailed">用户名或密码错误</div>
-          <form action="dashboard.html" onSubmit={this.login}>
-            <div className="form-group">
-              <input className="form-control" type="text" placeholder="请输入邮箱或手机号" name="email"
-                     onBlur={this.validate}
-                     ref="email"/>
-              <div
-                  className={'lose' + (this.state.emailError === '' ? ' hide' : '')}>{this.state.emailError}
-              </div>
+      <div id="logon" className={classString}>
+        <h4 className="welcome">欢迎登录思沃学院</h4>
+        <div className={'lose' + (this.state.loginFailed === false ? ' hide' : '')} name="loginFailed">用户名或密码错误</div>
+        <form action="dashboard.html" onSubmit={this.login}>
+          <div className="form-group">
+            <input className="form-control" type="text" placeholder="请输入邮箱或手机号" name="email"
+                   onBlur={this.validate}
+                   ref="email"/>
+            <div
+              className={'lose' + (this.state.emailError === '' ? ' hide' : '')}>{this.state.emailError}
             </div>
-            <div className="form-group">
-              <input className="form-control" type="password" placeholder="请输入密码" name="loginPassword"
-                     ref="loginPassword" onBlur={this.validate}/>
-              <div
-                  className={'lose' + (this.state.loginPasswordError === '' ? ' hide' : '')}>{this.state.loginPasswordError}
-              </div>
+          </div>
+          <div className="form-group">
+            <input className="form-control" type="password" placeholder="请输入密码" name="loginPassword"
+                   ref="loginPassword" onBlur={this.validate}/>
+            <div
+              className={'lose' + (this.state.loginPasswordError === '' ? ' hide' : '')}>{this.state.loginPasswordError}
             </div>
-            <div className="form-group">
-              {this.props.children}
-            </div>
-            <button type="submit" id="login-btn" disabled={this.state.clickable}
-                    className="btn btn-lg btn-block btn-primary">登录
-              <i className={'fa fa-spinner fa-spin loading' + (this.state.clickable ? '' : ' hide')}/>
-            </button>
-          </form>
-        </div>
+          </div>
+          <div className="form-group">
+            {this.props.children}
+          </div>
+          <button type="submit" id="login-btn" disabled={this.state.clickable}
+                  className="btn btn-lg btn-block btn-primary">登录
+            <i className={'fa fa-spinner fa-spin loading' + (this.state.clickable ? '' : ' hide')}/>
+          </button>
+        </form>
+      </div>
     );
   }
 });

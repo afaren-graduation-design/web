@@ -2,7 +2,7 @@
 
 var GroupTitle = React.createClass({
 
-  getInitialState: function() {
+  getInitialState: function () {
     return ({
       titleName: this.props.titleName || '群组首页'
     })

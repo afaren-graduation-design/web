@@ -91,47 +91,47 @@ var ChangePassword = React.createClass({
   render: function () {
     var classString = (this.state.currentState === 'password' ? '' : ' hide');
     return (
-        <div className={'col-md-9 col-sm-9 col-xs-12' + classString}>
-          <div className="content">
-            <form className="form-horizontal form-top-height col-sm-8 col-md-8 col-sm-offset-3 col-md-offset-3">
-              <div className="col-sm-3 col-md-3 col-md-offset-4 col-sm-offset-4">
-                <div className={'success-prompt alert alert-success' + (this.state.success ? '' : ' visibility')}>
-                  <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"/>
-                  修改成功
-                </div>
+      <div className={'col-md-9 col-sm-9 col-xs-12' + classString}>
+        <div className="content">
+          <form className="form-horizontal form-top-height col-sm-8 col-md-8 col-sm-offset-3 col-md-offset-3">
+            <div className="col-sm-3 col-md-3 col-md-offset-4 col-sm-offset-4">
+              <div className={'success-prompt alert alert-success' + (this.state.success ? '' : ' visibility')}>
+                <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"/>
+                修改成功
               </div>
+            </div>
 
-              <div id="change-password">
-                <div className="oldPassword col-sm-12 col-md-12">
-                  <label htmlFor="oldPassword" className="col-sm-3 col-md-3 control-label">旧密码</label>
-                  <div
-                      className={'form-group col-sm-6 col-md-6 has-' + (this.state.oldPasswordError === '' ? '' : 'error')}>
-                    <input type="password" className="form-control" aria-describedby="helpBlock2"
-                           name="oldPassword" id="oldPassword"
-                           placeholder="请输入旧密码" onBlur={this.validate}
-                           onChange={this.handleChange} value={this.state.oldPassword}/>
-                  </div>
-                  <span
-                      className={'col-sm-3 col-md-3 error alert alert-danger' + (this.state.oldPasswordError === '' ? ' hide' : '')}
-                      aria-hidden="true" role="alert">
+            <div id="change-password">
+              <div className="oldPassword col-sm-12 col-md-12">
+                <label htmlFor="oldPassword" className="col-sm-3 col-md-3 control-label">旧密码</label>
+                <div
+                  className={'form-group col-sm-6 col-md-6 has-' + (this.state.oldPasswordError === '' ? '' : 'error')}>
+                  <input type="password" className="form-control" aria-describedby="helpBlock2"
+                         name="oldPassword" id="oldPassword"
+                         placeholder="请输入旧密码" onBlur={this.validate}
+                         onChange={this.handleChange} value={this.state.oldPassword}/>
+                </div>
+                <span
+                  className={'col-sm-3 col-md-3 error alert alert-danger' + (this.state.oldPasswordError === '' ? ' hide' : '')}
+                  aria-hidden="true" role="alert">
                     <i className="glyphicon glyphicon-exclamation-sign"/>
-                    {this.state.oldPasswordError}
+                  {this.state.oldPasswordError}
                   </span>
-                </div>
+              </div>
 
-                {this.props.children}
+              {this.props.children}
 
-                <div className="form-group">
-                  <div className="col-sm-offset-4 col-sm-4 col-md-offset-4 col-md-4">
-                    <button type="button" className="btn btn-default" onClick={this.savePassword}
-                            disabled={this.state.isRespond}>保存
-                    </button>
-                  </div>
+              <div className="form-group">
+                <div className="col-sm-offset-4 col-sm-4 col-md-offset-4 col-md-4">
+                  <button type="button" className="btn btn-default" onClick={this.savePassword}
+                          disabled={this.state.isRespond}>保存
+                  </button>
                 </div>
               </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
+      </div>
     );
   }
 });

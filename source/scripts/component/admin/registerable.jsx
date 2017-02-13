@@ -13,7 +13,7 @@ var Registerable = React.createClass({
 
   getInitialState: function () {
     return {
-      registerable:null
+      registerable: null
     };
   },
 
@@ -21,20 +21,21 @@ var Registerable = React.createClass({
     RegisterableAction.loadRegisterableState();
   },
 
-  switchValue: function() {
+  switchValue: function () {
     var value = this.refs.registerable.value();
     RegisterableAction.changeRegisterableState(value);
   },
 
   render: function () {
     return (
-        <div>
-          <div className="page-header">
-            <h3>开放/关闭注册</h3>
-            <hr/>
-          </div>
-          <Switch size="normal" state={this.state.registerable} ref="registerable" name="registerable" onChange={this.switchValue} />
+      <div>
+        <div className="page-header">
+          <h3>开放/关闭注册</h3>
+          <hr/>
         </div>
+        <Switch size="normal" state={this.state.registerable} ref="registerable" name="registerable"
+                onChange={this.switchValue}/>
+      </div>
     );
   }
 });

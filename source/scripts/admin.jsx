@@ -10,20 +10,20 @@ var QAPageUpdate = require('./component/admin/qa-page-update.jsx');
 var ExportGrades = require('./component/admin/export-grades.jsx');
 
 ReactDOM.render(
-    <div>
-      <header>
-        <Navigation>
-          <Account />
-        </Navigation>
-      </header>
-      <div className="row">
-        <div className="col-md-8 col-md-offset-2 center-content">
-          <Registerable/>
-          <Channel/>
-          <QAPageUpdate/>
-          <ExportGrades/>
-        </div>
+  <div>
+    <header>
+      <Navigation>
+        <Account />
+      </Navigation>
+    </header>
+    <div className="row">
+      <div className="col-md-8 col-md-offset-2 center-content">
+        <Registerable/>
+        <Channel/>
+        <QAPageUpdate/>
+        <ExportGrades/>
       </div>
-    </div>,
-    document.getElementById('admin-container')
+    </div>
+  </div>,
+  document.getElementById('admin-container')
 );

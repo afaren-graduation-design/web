@@ -15,13 +15,14 @@ marked.setOptions({
 var HomeworkIntroduction = React.createClass({
 
   componentWillUpdate: function (prev) {
-    if(this.props.quiz.id !== prev.quiz.id) {
+    if (this.props.quiz.id !== prev.quiz.id) {
       this.refs.container.scrollTop = 0;
     }
   },
 
   render() {
     var desc = this.props.quiz.desc || "";
+
     function content() {
       var pattern = /a href=/g;
       desc = marked(desc);

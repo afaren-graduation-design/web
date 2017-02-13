@@ -51,7 +51,7 @@ var PapersListStore = Reflux.createStore({
         }
         console.log(res);
         if (res.statusCode === 200) {
-          page('dashboard.html?programId='+programId + '&paperId='+res.body.data.id);
+          page('dashboard.html?programId=' + programId + '&paperId=' + res.body.data.id);
         }
       })
   }

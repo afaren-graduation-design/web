@@ -14,29 +14,29 @@ var submissionIntroductionStore = Reflux.createStore({
       url = 'https://' + url;
     }
     superAgent.get('/api/homework/get-branches')
-        .set('Content-Type', 'application/json')
-        .query({url: url})
-        .use(errorHandler)
-        .end((err, res)=> {
-          if (res.body.message === 'Not Found') {
-            this.trigger({githubUrlError: '仓库不存在', branches: [], showIcon: false});
-          } else {
-            var branches = res.body.data.map((branch)=> {
-              return branch.name;
-            });
-            if (branches.indexOf('master') !== -1) {
-              var index = branches.indexOf('master');
-              branches.splice(index, 1);
-              branches.unshift('master');
-            }
-            this.trigger({
-              branches: branches,
-              defaultBranch: branches[0],
-              showIcon: false,
-              branchesDetail: res.body.data
-            });
+      .set('Content-Type', 'application/json')
+      .query({url: url})
+      .use(errorHandler)
+      .end((err, res) => {
+        if (res.body.message === 'Not Found') {
+          this.trigger({githubUrlError: '仓库不存在', branches: [], showIcon: false});
+        } else {
+          var branches = res.body.data.map((branch) => {
+            return branch.name;
+          });
+          if (branches.indexOf('master') !== -1) {
+            var index = branches.indexOf('master');
+            branches.splice(index, 1);
+            branches.unshift('master');
           }
-        });
+          this.trigger({
+            branches: branches,
+            defaultBranch: branches[0],
+            showIcon: false,
+            branchesDetail: res.body.data
+          });
+        }
+      });
   }
 });
 

@@ -16,23 +16,23 @@ var MentorManagement = require('./component/user-center/user-center-mentor-mange
 
 
 ReactDom.render(
-    <div>
-      <header>
-        <Navigation>
-          <Account />
-        </Navigation>
-      </header>
-      <UserCenterApp>
-        <UserCenterSidebar/>
-        <UserDetail>
-          <UserCenterGender/>
-        </UserDetail>
-        <ChangePassword>
-          <NewPassword initialStatus="userDetail"/>
-        </ChangePassword>
-        <Message/>
-        <MentorManagement/>
-      </UserCenterApp>
-    </div>,
-    document.getElementById('user-center')
+  <div>
+    <header>
+      <Navigation>
+        <Account />
+      </Navigation>
+    </header>
+    <UserCenterApp>
+      <UserCenterSidebar/>
+      <UserDetail>
+        <UserCenterGender/>
+      </UserDetail>
+      <ChangePassword>
+        <NewPassword initialStatus="userDetail"/>
+      </ChangePassword>
+      <Message/>
+      <MentorManagement/>
+    </UserCenterApp>
+  </div>,
+  document.getElementById('user-center')
 );

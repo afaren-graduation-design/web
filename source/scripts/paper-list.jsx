@@ -8,16 +8,16 @@ var PaperForm = require('./component/paper-list/PaperList.jsx');
 var PaperList = React.createClass({
   render: function () {
     return (
+      <div>
+        <header>
+          <Navigation>
+            <Account/>
+          </Navigation>
+        </header>
         <div>
-          <header>
-            <Navigation>
-              <Account/>
-            </Navigation>
-          </header>
-          <div>
-            <PaperForm/>
-          </div>
+          <PaperForm/>
         </div>
+      </div>
     );
   }
 });

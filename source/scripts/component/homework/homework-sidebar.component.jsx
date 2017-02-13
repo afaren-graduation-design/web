@@ -32,7 +32,7 @@ var HomeworkSidebar = React.createClass({
 
   handleClick: function (orderId, questionId) {
     if (orderId !== this.props.orderId) {
-      var sectionId =getQueryString('sectionId');
+      var sectionId = getQueryString('sectionId');
       page(`homework.html?sectionId=${sectionId}&questionId=${questionId}#${orderId}`);
       this.props.onOrderIdChange(orderId);
     }

@@ -14,32 +14,32 @@ var ChangePasswordStore = Reflux.createStore({
   onChangePassword: function (passwordInfo) {
     this.trigger({isRespond: true});
     request.put('/api/user-detail/change-password')
-        .set('Content-Type', 'application/json')
-        .send({
-          data: passwordInfo
-        })
-        .use(errorHandler)
-        .end((err, res) => {
-          if (!res) {
-            return;
-          }
-          if (res.body.status === constant.httpCode.OK) {
-            this.trigger({
-              success: true,
-              isRespond: false
-            });
-          } else if (res.body.status === constant.httpCode.BAD_REQUEST) {
-            this.trigger({
-              isRespond: false,
-              oldPasswordError: lang.ERROR
-            });
-          }else {
-            this.trigger({
-              isRespond: false,
-              confirmPasswordError: lang.CONFIRM_ERROR
-            });
-          }
-        });
+      .set('Content-Type', 'application/json')
+      .send({
+        data: passwordInfo
+      })
+      .use(errorHandler)
+      .end((err, res) => {
+        if (!res) {
+          return;
+        }
+        if (res.body.status === constant.httpCode.OK) {
+          this.trigger({
+            success: true,
+            isRespond: false
+          });
+        } else if (res.body.status === constant.httpCode.BAD_REQUEST) {
+          this.trigger({
+            isRespond: false,
+            oldPasswordError: lang.ERROR
+          });
+        } else {
+          this.trigger({
+            isRespond: false,
+            confirmPasswordError: lang.CONFIRM_ERROR
+          });
+        }
+      });
   }
 });
 

@@ -82,24 +82,24 @@ var Captcha = React.createClass({
 
   render: function () {
     return (
-        <div>
-          <div className="captcha-input">
-            <input className="form-control" type="text" placeholder="请输入验证码" name="captcha"
-                   ref="captcha" disabled={this.props.isDisabled}
-                   onBlur={this.validate}/>
-            <div className={'lose' + (this.state.captchaError === '' ? ' hide' : '')}>{this.state.captchaError}
-            </div>
+      <div>
+        <div className="captcha-input">
+          <input className="form-control" type="text" placeholder="请输入验证码" name="captcha"
+                 ref="captcha" disabled={this.props.isDisabled}
+                 onBlur={this.validate}/>
+          <div className={'lose' + (this.state.captchaError === '' ? ' hide' : '')}>{this.state.captchaError}
           </div>
-          <div className="pull-right captcha-img">
-
-            <img ref="img" title="点击刷新验证码"
-                 className={(this.state.isLoding ? ' hide' : '')}
-                 onClick={this.reloadCaptcha}
-            />
-            <i className={'fa fa-spinner fa-spin loading captcha-loading' + (this.state.isLoding ? '' : ' hide')}/>
-          </div>
-
         </div>
+        <div className="pull-right captcha-img">
+
+          <img ref="img" title="点击刷新验证码"
+               className={(this.state.isLoding ? ' hide' : '')}
+               onClick={this.reloadCaptcha}
+          />
+          <i className={'fa fa-spinner fa-spin loading captcha-loading' + (this.state.isLoding ? '' : ' hide')}/>
+        </div>
+
+      </div>
     );
   }
 });

@@ -44,7 +44,7 @@ var passwordResetForm = React.createClass({
 
     if (newPasswordError === '' && this.state.confirmPasswordError === '') {
       return true;
-    }else {
+    } else {
       this.setState(stateObj);
       return false;
     }
@@ -54,9 +54,9 @@ var passwordResetForm = React.createClass({
     evt.preventDefault();
     PasswordActions.submitEvent('submit');
 
-    if(!this.checkInfo()) {
-      return ;
-    }else {
+    if (!this.checkInfo()) {
+      return;
+    } else {
       this.setState({
         clickable: true
       });
@@ -64,7 +64,7 @@ var passwordResetForm = React.createClass({
       var currentUrl = window.location.href;
       var token = currentUrl.split('=')[1];
 
-      PasswordResetActions.reset(newPassword,token);
+      PasswordResetActions.reset(newPassword, token);
     }
   },
 
@@ -73,31 +73,31 @@ var passwordResetForm = React.createClass({
     var retrieveClassName = 'password-reset-form-container ' + (this.state.showMessage ? 'hide' : '');
     var messageClassName = 'message-container ' + (this.state.showMessage ? '' : 'hide');
     return (
-        <div>
-          <div id="retrieve" className={retrieveClassName}>
-            <h4 className="welcome">重置密码</h4>
-            <div className={'lose' + (this.state.resetFailed === 'wrongUrl' ? '' : ' hide')} name="resetFailed">
-              你的链接有误!
-            </div>
-            <div className={'lose' + (this.state.resetFailed === 'timeOut' ? '' : ' hide')} name="resetFailed">
-              你的链接已过期!
-            </div>
-            <form action="" onSubmit={this.reset}>
-              <div className="form-group">
-                {this.props.children}
-              </div>
-              <button type="submit" id="reset-btn" className="btn btn-lg btn-block btn-primary col-md-offset-4"
-                      disabled={this.state.clickable}>确认
-                <i className={'fa fa-spinner fa-spin loading' + (this.state.clickable ? '' : ' hide')}/>
-              </button>
-            </form>
+      <div>
+        <div id="retrieve" className={retrieveClassName}>
+          <h4 className="welcome">重置密码</h4>
+          <div className={'lose' + (this.state.resetFailed === 'wrongUrl' ? '' : ' hide')} name="resetFailed">
+            你的链接有误!
           </div>
-          <div id="message" className={messageClassName}>
-            <p>您的密码已经成功重置!再别忘了!</p>
-            <p><strong>你可长点儿心吧!</strong></p>
-            <a href="register.html#login">回去登录</a>
+          <div className={'lose' + (this.state.resetFailed === 'timeOut' ? '' : ' hide')} name="resetFailed">
+            你的链接已过期!
           </div>
+          <form action="" onSubmit={this.reset}>
+            <div className="form-group">
+              {this.props.children}
+            </div>
+            <button type="submit" id="reset-btn" className="btn btn-lg btn-block btn-primary col-md-offset-4"
+                    disabled={this.state.clickable}>确认
+              <i className={'fa fa-spinner fa-spin loading' + (this.state.clickable ? '' : ' hide')}/>
+            </button>
+          </form>
         </div>
+        <div id="message" className={messageClassName}>
+          <p>您的密码已经成功重置!再别忘了!</p>
+          <p><strong>你可长点儿心吧!</strong></p>
+          <a href="register.html#login">回去登录</a>
+        </div>
+      </div>
     );
   }
 });

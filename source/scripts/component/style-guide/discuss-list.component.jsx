@@ -1,7 +1,7 @@
 'use strict';
 
 var DiscussList = React.createClass({
-  getInitialState: function() {
+  getInitialState: function () {
     return ({
       discussionList: [
         {
@@ -26,8 +26,8 @@ var DiscussList = React.createClass({
           <h5>
             <div className="user-avatar">
               {item.avatar !== '' ?
-                <img src={item.avatar} />:
-                <span><i className="fa fa-user" /></span>
+                <img src={item.avatar}/> :
+                <span><i className="fa fa-user"/></span>
               }
             </div>
             <div className="event-info">
@@ -38,11 +38,11 @@ var DiscussList = React.createClass({
           <p className="col-md-2 col-sm-4 col-xs-6 discuss">
             {item.discussion}
           </p>
-          <hr className="col-md-12 col-sm-12 col-xs-12" />
+          <hr className="col-md-12 col-sm-12 col-xs-12"/>
         </div>
       );
     });
-    return(
+    return (
       <div>
         {discussionList}
       </div>

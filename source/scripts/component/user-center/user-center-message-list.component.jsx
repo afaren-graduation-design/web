@@ -24,10 +24,10 @@ var ButtonLine = React.createClass({
 
   render() {
     return (
-        <button type='button' className={'btn btn-xs ' + this.props.item.buttonType}
-                onClick={this.handleRequest.bind(this, this.props.messageId, this.props.item.operation, this.props.index)}>
-          <i className={'ace-icon ' + this.props.item.icon}> </i>{this.props.item.text}
-        </button>
+      <button type='button' className={'btn btn-xs ' + this.props.item.buttonType}
+              onClick={this.handleRequest.bind(this, this.props.messageId, this.props.item.operation, this.props.index)}>
+        <i className={'ace-icon ' + this.props.item.icon}> </i>{this.props.item.text}
+      </button>
     );
 
   }
@@ -35,28 +35,28 @@ var ButtonLine = React.createClass({
 var MessageLine = React.createClass({
   render() {
     var da = new Date(this.props.message.updatedAt);
-    var year = da.getFullYear()+'年';
-    var month = da.getMonth()+1+'月';
-    var date = da.getDate()+'日';
-    var data = [year,month,date].join('');
+    var year = da.getFullYear() + '年';
+    var month = da.getMonth() + 1 + '月';
+    var date = da.getDate() + '日';
+    var data = [year, month, date].join('');
     return (
-        <tr key={this.props.message._id}>
-          <td>
-            {data}
-            &nbsp;&nbsp;教练{this.props.message.fromDetail.name}{this.props.messageType.text}
-            <div className={'pull-right ' + this.props.isShowButton}>
-              {
-                buttonConfiguration.map((item, i) => {
-                  var index = this.props.tabsValue;
-                  return (
-                      <ButtonLine key={i} messageId={this.props.message._id}
-                                  index={index} item={item}/>
-                  )
-                })
-              }
-            </div>
-          </td>
-        </tr>
+      <tr key={this.props.message._id}>
+        <td>
+          {data}
+          &nbsp;&nbsp;教练{this.props.message.fromDetail.name}{this.props.messageType.text}
+          <div className={'pull-right ' + this.props.isShowButton}>
+            {
+              buttonConfiguration.map((item, i) => {
+                var index = this.props.tabsValue;
+                return (
+                  <ButtonLine key={i} messageId={this.props.message._id}
+                              index={index} item={item}/>
+                )
+              })
+            }
+          </div>
+        </td>
+      </tr>
     );
   }
 });
@@ -75,30 +75,30 @@ var MessageList = React.createClass({
   render: function () {
     var messageList = this.props.messageList || [];
     return (
-        <div id='myTabContent' className='row tab-content'>
-          <div className='tab-pane fade in active unread' id='unread'>
-            <table className='table table-bordered table-striped table-hover'>
-              <tbody className='table-body'>
-              {
-                messageList.map((message,i) => {
-                  let isShowButton = '';
-                  let messageType = messageTypes.find(messageType => {
-                    return messageType.type == message.type;
-                  });
-                  if (!messageType || message.state === 1) {
-                    isShowButton = 'hidden';
-                  }
-                  return (
-                      <MessageLine key={i} isShowButton={isShowButton} messageType={messageType}
-                                   message={message} tabsValue={this.props.tabsValue}/>
-                  )
+      <div id='myTabContent' className='row tab-content'>
+        <div className='tab-pane fade in active unread' id='unread'>
+          <table className='table table-bordered table-striped table-hover'>
+            <tbody className='table-body'>
+            {
+              messageList.map((message, i) => {
+                let isShowButton = '';
+                let messageType = messageTypes.find(messageType => {
+                  return messageType.type == message.type;
+                });
+                if (!messageType || message.state === 1) {
+                  isShowButton = 'hidden';
+                }
+                return (
+                  <MessageLine key={i} isShowButton={isShowButton} messageType={messageType}
+                               message={message} tabsValue={this.props.tabsValue}/>
+                )
 
-                })
-              }
-              </tbody>
-            </table>
-          </div>
+              })
+            }
+            </tbody>
+          </table>
         </div>
+      </div>
     );
   }
 });

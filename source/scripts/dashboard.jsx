@@ -1,7 +1,6 @@
 'use strict';
 
 
-
 require('./libs/outdatedBrowserCheck');
 require('../less/dashboard.less');
 
@@ -17,37 +16,37 @@ var Reflux = require('reflux');
 var DashboardApp = React.createClass({
   mixins: [Reflux.connect(DashboardStore)],
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       isGetStatus: false
     }
   },
 
-  componentDidMount: function() {
+  componentDidMount: function () {
     DashboardActions.init();
     window.onpopstate = DashboardActions.init;
   },
 
-  render: function() {
+  render: function () {
     return (
-        <div>
-          <header>
-            <Navigation>
-              <Account />
-            </Navigation>
-          </header>
-          <Dashboard isGetStatus={this.state.isGetStatus}>
-            <h3 className="tip">请更新并使用最新版本的 Firefox 或 Chrome 浏览器，否则可能导致答题失败！</h3>
-            <Row>
-              {/*<DashboardIcon name="logic"/>*/}
-              <DashboardIcon/>
-              {/*<Arrow/>*/}
-              {/*<DashboardIcon name="homework"/>*/}
-            </Row>
-          </Dashboard>
-        </div>
+      <div>
+        <header>
+          <Navigation>
+            <Account />
+          </Navigation>
+        </header>
+        <Dashboard isGetStatus={this.state.isGetStatus}>
+          <h3 className="tip">请更新并使用最新版本的 Firefox 或 Chrome 浏览器，否则可能导致答题失败！</h3>
+          <Row>
+            {/*<DashboardIcon name="logic"/>*/}
+            <DashboardIcon/>
+            {/*<Arrow/>*/}
+            {/*<DashboardIcon name="homework"/>*/}
+          </Row>
+        </Dashboard>
+      </div>
     )
   }
 });
 
-ReactDom.render(<DashboardApp />,document.getElementById('dashboard-container'));
+ReactDom.render(<DashboardApp />, document.getElementById('dashboard-container'));

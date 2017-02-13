@@ -7,16 +7,16 @@ var PaperDetailForm = require('./component/paper-detail/PaperDetail.jsx');
 var PaperDetail = React.createClass({
   render: function () {
     return (
+      <div>
+        <header>
+          <Navigation>
+            <Account/>
+          </Navigation>
+        </header>
         <div>
-          <header>
-            <Navigation>
-              <Account/>
-            </Navigation>
-          </header>
-          <div>
-            <PaperDetailForm/>
-          </div>
+          <PaperDetailForm/>
         </div>
+      </div>
     );
   }
 });

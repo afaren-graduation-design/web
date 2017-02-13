@@ -36,7 +36,7 @@ var DashboardIcon = React.createClass({
     };
     var sectionList = this.state.sections.map((section, index) => {
       var arrow = (this.state.sections.indexOf(section) === this.state.sections.length - 1) ? (<div></div>) : (
-          <Arrow/>);
+        <Arrow/>);
       let preSection = this.state.sections[index - 1] || {status: 1};
       let preStatus = preSection.status;
 

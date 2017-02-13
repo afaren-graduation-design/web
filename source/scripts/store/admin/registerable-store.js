@@ -8,31 +8,31 @@ var errorHandler = require('../../../../tools/error-handler.jsx');
 var RegisterableStore = Reflux.createStore({
   listenables: RegisterableAction,
 
-  onLoadRegisterableState: function() {
+  onLoadRegisterableState: function () {
     request.get('/api/admin/registerable')
-        .set('Content-Type', 'application/json')
-        .use(errorHandler)
-        .end((err, res) => {
-          if(!err){
-            this.trigger({
-              registerable: res.body.configuration.registerable
-            });
-          }
-        });
+      .set('Content-Type', 'application/json')
+      .use(errorHandler)
+      .end((err, res) => {
+        if (!err) {
+          this.trigger({
+            registerable: res.body.configuration.registerable
+          });
+        }
+      });
   },
 
-  onChangeRegisterableState: function(value) {
+  onChangeRegisterableState: function (value) {
     request.post('/api/admin/registerable')
-        .set('Content-Type', 'application/json')
-        .send({value:value})
-        .use(errorHandler)
-        .end((err, res) => {
-          if(!err){
-            this.trigger({
-              registerable: res.body.configuration.registerable
-            });
-          }
-        });
+      .set('Content-Type', 'application/json')
+      .send({value: value})
+      .use(errorHandler)
+      .end((err, res) => {
+        if (!err) {
+          this.trigger({
+            registerable: res.body.configuration.registerable
+          });
+        }
+      });
   }
 
 });

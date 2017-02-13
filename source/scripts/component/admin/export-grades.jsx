@@ -3,8 +3,7 @@
 var ExportGrades = React.createClass({
 
   getInitialState: function () {
-    return {
-    };
+    return {};
   },
 
   componentDidMount: function () {
@@ -13,13 +12,14 @@ var ExportGrades = React.createClass({
   render: function () {
 
     return (
-        <div>
-          <div className="page-header">
-            <h3>导出成绩</h3>
-            <hr/>
-          </div>
-          <a type="button" className="btn btn-primary btn-lg" href="/api/report/paper/1/scoresheet" target="_blank">点我导出</a>
+      <div>
+        <div className="page-header">
+          <h3>导出成绩</h3>
+          <hr/>
         </div>
+        <a type="button" className="btn btn-primary btn-lg" href="/api/report/paper/1/scoresheet"
+           target="_blank">点我导出</a>
+      </div>
     );
   }
 });

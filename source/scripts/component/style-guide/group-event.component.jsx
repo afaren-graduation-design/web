@@ -44,14 +44,14 @@ var GroupEvent = React.createClass({
   render() {
 
     var eventList = this.state.items.map((item, index) => {
-      return(
+      return (
         <div className="col-md-12 col-sm-12 col-xs-12 group-event" key={index}>
           <h5>
             <div className="user-avatar">
               <img src={item.avatar}/>
             </div>
             <div className="event-info">
-                <em>{item.type === 'admin'? '管理员:' : ''}</em>{item.name}
+              <em>{item.type === 'admin' ? '管理员:' : ''}</em>{item.name}
               <small>{item.time}</small>
               <span>{item.action}</span>
             </div>

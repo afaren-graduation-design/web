@@ -4,8 +4,6 @@ var Reflux = require('reflux');
 var QAPageActions = require('../../actions/qa-page/qa-page-actions');
 var request = require('superagent');
 var errorHandler = require('../../../../tools/error-handler.jsx');
-var constant = require('../../../../mixin/constant');
-
 
 var GetAccountStore = Reflux.createStore({
   listenables: [QAPageActions],

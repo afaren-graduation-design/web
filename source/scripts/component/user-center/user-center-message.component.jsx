@@ -20,7 +20,7 @@ var Message = React.createClass({
 
   getInitialState: function () {
     return {
-      currentState: window.location.hash.substr(1),
+      currentState: this.props.currentState,
       tabsConfiguration: tabsConfiguration,
       tabsValue: 0,
       totalCount: 0,

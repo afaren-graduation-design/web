@@ -3,7 +3,6 @@
 
 var Reflux = require('reflux');
 var superAgent = require('superagent');
-var constant = require('../../../../mixin/constant');
 var errorHandler = require('../../../../tools/error-handler.jsx');
 
 var submissionIntroductionStore = Reflux.createStore({

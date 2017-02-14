@@ -6,7 +6,6 @@ var request = require('superagent');
 var nocache = require('superagent-no-cache');
 var errorHandler = require('../../../../tools/error-handler.jsx');
 var page = require('page');
-var async = require('async');
 var getQueryString = require('../../../../tools/getQueryString');
 var programId = getQueryString('programId');
 var paperId = getQueryString('paperId');
@@ -23,13 +22,13 @@ var DashboardStore = Reflux.createStore({
           page('user-center.html#userDetail');
           this.trigger({
             isGetStatus: false
-          })
+          });
         } else {
           this.trigger({
             isGetStatus: true
           });
         }
-      })
+      });
   },
 
   onGetStatus: function () {
@@ -41,7 +40,7 @@ var DashboardStore = Reflux.createStore({
         }
         this.trigger({
           sections: res.body.data
-        })
+        });
       });
   },
 

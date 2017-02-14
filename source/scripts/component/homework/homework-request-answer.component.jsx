@@ -3,6 +3,7 @@
 var Reflux = require('reflux');
 var superAgent = require('superagent');
 var noCache = require('superagent-no-cache');
+var constant = require('../../../../mixin/constant');
 var MentorManagementStore = require('../../store/user-center/mentor-management-store');
 var MentorManagementAction = require('../../actions/user-center/mentor-management-action');
 var MessageActions = require('../../actions/messages/message-actions');
@@ -30,9 +31,7 @@ var RequestAnswer = React.createClass({
           .use(noCache)
           .end((err, res) => {
             if (res.statusCode === constant.httpCode.OK) {
-              this.trigger({
-                answer: res.body.answerPath
-              });
+              this.setState({answer: res.body.answerPath});
             }
           });
       }

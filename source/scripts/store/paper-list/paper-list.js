@@ -15,12 +15,11 @@ var PapersListStore = Reflux.createStore({
           .set('Content-Type', 'application/json')
           .use(errorHandler)
           .end((err, res) => {
-              if (err) {
-                return;
-              }
-              done(null, res.body.programIds);
+            if (err) {
+              return;
             }
-          )
+            done(null, res.body.programIds);
+          });
       },
       (data, done) => {
         async.map(data, (programId, callback) => {
@@ -32,13 +31,13 @@ var PapersListStore = Reflux.createStore({
                 return;
               }
               callback(null, {data: resp.body.data, programId});
-            })
+            });
         }, (err, result) => {
           if (err) {
             return;
           }
           this.trigger({papers: result});
-        })
+        });
       }
     ]);
   },
@@ -53,7 +52,7 @@ var PapersListStore = Reflux.createStore({
         if (res.statusCode === 200) {
           page('dashboard.html?programId=' + programId + '&paperId=' + res.body.data.id);
         }
-      })
+      });
   }
 });
 

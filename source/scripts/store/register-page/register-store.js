@@ -3,10 +3,8 @@
 var Reflux = require('reflux');
 var RegisterActions = require('../../actions/register-page/register-actions');
 var page = require('page');
-var validate = require('validate.js');
 var request = require('superagent');
 var constant = require('../../../../mixin/constant');
-var constraint = require('../../../../mixin/register-constraint');
 var async = require('async');
 var errorHandler = require('../../../../tools/error-handler.jsx');
 
@@ -82,7 +80,6 @@ var RegisterStore = Reflux.createStore({
       });
   },
 
-
   onInitialUserQuiz: function () {
     async.series({
       initializeQuizzes: (done) => {
@@ -137,7 +134,6 @@ var RegisterStore = Reflux.createStore({
           this.trigger({
             isDisabled: !res.body.registerable
           });
-
         }
       });
   }

@@ -7,12 +7,10 @@ var nocache = require('superagent-no-cache');
 var constant = require('../../../../mixin/constant');
 var errorHandler = require('../../../../tools/error-handler.jsx');
 
-
 var HomeworkDetailsStore = Reflux.createStore({
   listenables: [HomeworkDetailsActions],
 
   onLoadUserDetail: function (userId) {
-
     var url = '/api/user/' + userId + '/homework-details';
 
     superAgent.get(url)

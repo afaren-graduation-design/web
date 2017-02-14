@@ -23,7 +23,7 @@ var ChangePassword = React.createClass({
       confirmPasswordError: '',
       success: false,
       isRespond: false,
-      currentState: window.location.hash.substr(1)
+      currentState: this.props.currentState
     };
   },
 

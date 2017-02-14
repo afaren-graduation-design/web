@@ -32,7 +32,7 @@ var GetAccountStore = Reflux.createStore({
       .use(errorHandler)
       .end((err, res) => {
         page('register.html');
-      })
+      });
   }
 });
 

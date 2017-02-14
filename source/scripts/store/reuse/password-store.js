@@ -3,7 +3,6 @@
 var Reflux = require('reflux');
 var PasswordActions = require('../../actions/reuse/password-actions');
 
-
 var UserDetailStore = Reflux.createStore({
   listenables: [PasswordActions],
 
@@ -19,6 +18,5 @@ var UserDetailStore = Reflux.createStore({
     this.trigger({event: evt});
   }
 });
-
 
 module.exports = UserDetailStore;

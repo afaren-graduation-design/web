@@ -17,7 +17,7 @@ var GetAccountStore = Reflux.createStore({
         if (resp.body.data === false) {
           page('user-center.html#userDetail');
         }
-      })
+      });
   }
 });
 

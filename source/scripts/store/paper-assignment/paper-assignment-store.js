@@ -6,7 +6,6 @@ var request = require('superagent');
 var constant = require('../../../../mixin/constant');
 var errorHandler = require('../../../../tools/error-handler.jsx');
 
-
 var PaperAssignmentStore = Reflux.createStore({
   listenables: [PaperAssignmentAction],
 
@@ -28,7 +27,7 @@ var PaperAssignmentStore = Reflux.createStore({
       .set('Content-Type', 'application/json')
       .use(errorHandler)
       .end((err, res) => {
-        this.trigger({links: res.body.links})
+        this.trigger({links: res.body.links});
       });
   },
 
@@ -50,7 +49,7 @@ var PaperAssignmentStore = Reflux.createStore({
       .set('Content-Type', 'application/json')
       .use(errorHandler)
       .end((err, res) => {
-        this.trigger({papers: res.body.papers})
+        this.trigger({papers: res.body.papers});
       });
   }
 });

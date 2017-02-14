@@ -5,13 +5,15 @@ var Nav = require('react-bootstrap/lib/Nav');
 var NavItem = require('react-bootstrap/lib/NavItem');
 var UserCenterActions = require('../../actions/user-center/user-center-actions');
 var UserCenterStore = require('../../store/user-center/user-center-store');
+var page = require('page');
 
 var UserCenterSide = React.createClass({
   mixins: [Reflux.connect(UserCenterStore)],
 
   getInitialState: function () {
+
     return {
-      currentState: window.location.hash.substr(1)
+      currentState: this.props.currentState
     };
   },
 
@@ -32,6 +34,7 @@ var UserCenterSide = React.createClass({
   },
 
   render() {
+
     var tags = [
       {mark: 'userDetail', value: '个人信息'},
       {mark: 'password', value: '修改密码'},

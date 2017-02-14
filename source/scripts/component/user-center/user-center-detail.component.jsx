@@ -38,7 +38,7 @@ var UserDetail = React.createClass({
       majorError: '',
       degreeError: '',
       entranceYearError: '',
-      currentState: window.location.hash.substr(1)
+      currentState: this.props.currentState
     };
   },
 

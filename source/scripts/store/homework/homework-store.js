@@ -24,7 +24,7 @@ var HomeworkSidebarStore = Reflux.createStore({
     this.data = {};
   },
 
-  hasTaskProcess() {
+  hasTaskProcess () {
     return this.data.homeworkQuizzes.some((item) => {
       return item.status === homeworkQuizzesStatus.PROGRESS;
     });
@@ -132,7 +132,6 @@ var HomeworkSidebarStore = Reflux.createStore({
   onChangeOrderId: function (orderId) {
     async.waterfall([
       (done) => {
-
         var orderId = location.hash.substr(1);
         orderId = parseInt(orderId) || 1;
         orderId = Math.max(orderId, 1);
@@ -164,5 +163,3 @@ var HomeworkSidebarStore = Reflux.createStore({
 });
 
 module.exports = HomeworkSidebarStore;
-
-

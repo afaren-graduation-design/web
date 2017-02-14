@@ -10,6 +10,10 @@ var errorHandler = require('../../../../tools/error-handler.jsx');
 var UserDetailStore = Reflux.createStore({
   listenables: [UserCenterActions],
 
+  onPathChange: function (ctx, next) {
+    this.trigger({currentState: ctx.hash});
+  },
+
   onLoadUserDetail: function () {
     request.get('/api/user-detail')
       .set('Content-Type', 'application/json')

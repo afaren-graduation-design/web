@@ -43,7 +43,6 @@ var LogicPuzzleStore = Reflux.createStore({
               questionIds = resp.body;
               done(null, null);
             }
-
           });
       }
     ], (err) => {
@@ -166,6 +165,5 @@ var LogicPuzzleStore = Reflux.createStore({
   }
 
 });
-
 
 module.exports = LogicPuzzleStore;

@@ -6,7 +6,6 @@ var request = require('superagent');
 var constant = require('../../../../mixin/constant');
 var errorHandler = require('../../../../tools/error-handler.jsx');
 
-
 var passwordResetStore = Reflux.createStore({
   listenables: passwordResetActions,
 

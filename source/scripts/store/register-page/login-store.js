@@ -11,7 +11,6 @@ var LoginStore = Reflux.createStore({
   listenables: LoginActions,
 
   onLogin: function (phoneEmail, loginPassword, captcha) {
-
     request.post('/api/login')
       .set('Content-Type', 'application/json')
       .send({
@@ -21,7 +20,6 @@ var LoginStore = Reflux.createStore({
       })
       .use(errorHandler)
       .end((err, req) => {
-
         var data = JSON.parse(req.text);
         if (data.status === constant.httpCode.OK) {
           this.trigger({
@@ -39,21 +37,19 @@ var LoginStore = Reflux.createStore({
             clickable: false,
             captchaError: '验证码输入错误'
           });
-        }
-        else {
+        } else {
           this.trigger({
             clickable: false,
             loginFailed: true
           });
         }
-
       });
   },
 
   onSetCaptchaError: function (error) {
     this.trigger({
       captchaError: error
-    })
+    });
   }
 
 });

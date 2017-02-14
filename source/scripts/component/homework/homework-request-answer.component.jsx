@@ -15,7 +15,7 @@ var RequestAnswer = React.createClass({
   getInitialState: function () {
     return {
       mentorList: [],
-      answer: ''
+      answer: '',
     };
   },
 
@@ -52,7 +52,8 @@ var RequestAnswer = React.createClass({
     const MentorSpan = <span
       className="mentor-span">{this.state.mentorList.length ? 'mentor : ' + this.state.mentorList[0].name : ''}</span>;
     let info = this.state.mentorList.length ? '' : AddMentor;
-    let result = info || (this.state.answer ? this.state.answer : RequestAnswerBtn);
+    let result = info || (this.state.answer ? <a target="_blank" href={'/api/files/'+this.state.answer}>{this.props.homeworkQuizzes[this.props.orderId-1].homeworkName} </a> : RequestAnswerBtn);
+
     return (
       <div className="runningResult tab">
         <div className="result">

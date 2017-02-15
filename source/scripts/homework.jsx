@@ -82,7 +82,6 @@ var Homework = React.createClass({
   },
 
   render: function () {
-    console.log(this.state.currentQuiz);
     const ids = Object.assign({}, this.state.currentQuiz.info);
     return (
       <div>

@@ -11,7 +11,10 @@ var PaperList = React.createClass({
     PaperListAction.loadPapers();
   },
 
-  clickPaper: function (id, programId) {
+  clickPaper: function (id, programId, operationType) {
+    if (operationType === 'UNDISTRIBUTION') {
+      return;
+    }
     return () => {
       PaperListAction.getOnePaper(id, programId);
     }
@@ -32,20 +35,20 @@ var PaperList = React.createClass({
           <div>
             <ul className="list row">
               {paper.data.map((item, index) => {
-
                 var randomNumber = Math.floor(Math.random() * 5);
                 return (
-                  <li className="list-item col-sm-2" onClick={this.clickPaper(item.id, item.programId)} key={index}>
-                    <div className="icon-box col-sm-5">
+                  <li className="list-item col-sm-2"
+                      onClick={this.clickPaper(item.id, item.programId, item.operationType)} key={index}>
+                    <div className="icon-box col-sm-4">
                           <span>
                             <i className={"fa " + icons[randomNumber]}> </i>
                           </span>
                     </div>
-                    <div className="paper-box col-sm-7">
+                    <div className="paper-box col-sm-8">
                       <div>
                         <a href="#">
                             <span className="paper-name">
-                            {item.paperName}
+                              {item.paperName}{item.operationType === 'DISTRIBUTION' ? '' : '(未发布)'}
                             </span>
                         </a>
                       </div>

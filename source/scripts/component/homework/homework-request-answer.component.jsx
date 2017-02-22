@@ -47,12 +47,14 @@ var RequestAnswer = React.createClass({
   },
 
   render() {
+    const answerDownload = this.props.homeworkQuizzes.length ? this.props.homeworkQuizzes[this.props.orderId - 1].homeworkName : '';
     const AddMentor = <a href='user-center.html#mentorManagement'>您当前没有mentor,请先添加mentor.</a>;
     const RequestAnswerBtn = <button className="btn btn-primary" onClick={this.handleRequest}>请求答案</button>;
     const MentorSpan = <span
       className="mentor-span">{this.state.mentorList.length ? 'mentor : ' + this.state.mentorList[0].name : ''}</span>;
     let info = this.state.mentorList.length ? '' : AddMentor;
-    let result = info || (this.state.answer ? <a target="_blank" href={'/api/files/'+this.state.answer}>{this.props.homeworkQuizzes[this.props.orderId-1].homeworkName} </a> : RequestAnswerBtn);
+    let result = info || (this.state.answer ?
+        <a target="_blank" href={'/api/files/' + this.state.answer}>{answerDownload} </a> : RequestAnswerBtn);
 
     return (
       <div className="runningResult tab">

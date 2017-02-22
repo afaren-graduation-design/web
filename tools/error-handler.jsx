@@ -13,8 +13,6 @@ var errorHandler = function (req) {
       addErrorMessage();
     } else if (res.statusCode === constant.httpCode.FORBIDDEN || res.status === constant.httpCode.FORBIDDEN) {
       page('403.html');
-    } else if (res.statusCode === constant.httpCode.BAD_REQUEST || res.status === constant.httpCode.BAD_REQUEST) {
-      page('404.html')
     }
   });
 
@@ -27,13 +25,13 @@ function addErrorMessage() {
   document.body.appendChild(errorMessageBlock);
 
   ReactDom.render(
-      <div className="alert alert-danger alert-dismissible text-center fade in" id="alert" role="alert">
-        <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span
-            aria-hidden="true">&times;</span></button>
-        <span>哦!糟了!</span>
-        <span>看起来我们的服务器出了一些问题!</span>
-      </div>,
-      document.getElementById('alert')
+    <div className="alert alert-danger alert-dismissible text-center fade in" id="alert" role="alert">
+      <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span
+        aria-hidden="true">&times;</span></button>
+      <span>哦!糟了!</span>
+      <span>看起来我们的服务器出了一些问题!</span>
+    </div>,
+    document.getElementById('alert')
   );
 }
 

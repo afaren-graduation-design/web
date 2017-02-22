@@ -13,6 +13,8 @@ var errorHandler = function (req) {
       addErrorMessage();
     } else if (res.statusCode === constant.httpCode.FORBIDDEN || res.status === constant.httpCode.FORBIDDEN) {
       page('403.html');
+    } else if (res.statusCode === constant.httpCode.BAD_REQUEST || res.status === constant.httpCode.BAD_REQUEST) {
+      page('404.html')
     }
   });
 

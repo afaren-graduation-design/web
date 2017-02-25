@@ -19,27 +19,15 @@ var showUnder = 600;
 var Index = React.createClass({
   componentWillMount: function () {
     var channel = getQueryString('channel');
-    if(channel){
+    if (channel) {
       document.cookie = `channel=` + channel;
-    }else{
+    } else {
       document.cookie = `channel=` + '';
     }
     var program = getQueryString('program');
-    if(program){
+    if (program) {
       document.cookie = `program=` + program;
     }
-    // var channel;
-    // var url = location.search;
-    // var index = 9;
-    //
-    // if (url.indexOf('channel') > 0) {
-    //   channel = url.substr(index);
-    // } else {
-    //   channel = '';
-    // }
-    // document.cookie = 'channel=' + channel;
-    // var program = (document.location+'').split('program=')[1];
-    // document.cookie=`program=`+program;
   },
   render: function () {
     return (
